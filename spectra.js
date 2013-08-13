@@ -25,28 +25,32 @@
   /** Conversion functions between formats. */
   var rgbToHsv = function(rgb) {
     var hsv = {};
-
-    var r = Number(rgb.r || rgb.red || 0);
-    var g = Number(rgb.g || rgb.green || 0);
-    var b = Number(rgb.b || rgb.blue || 0);
+    var r = Number(rgb.r || rgb.red || 0) / 255;
+    var g = Number(rgb.g || rgb.green || 0) / 255;
+    var b = Number(rgb.b || rgb.blue || 0) / 255;
     var max = Math.max(r, g, b);
     var min = Math.min(r, g, b);
+    var delta = max - min;
 
     hsv.v = max;
     if (hsv.v === 0) {
       hsv.h = 0;
       hsv.s = 0;
     } else {
-      hsv.s = 255 * (max - min) / hsv.v;
+      hsv.s = (max - min) / max;
       if (hsv.s === 0) {
         hsv.h = 0;
       } else {
-        if (max === hsv.r) {
-          hsv.h = 0 + 43 * (hsv.g - hsv.b) / (max - min);
-        } else if (max === rgb.g) {
-          hsv.h = 85 + 43 * (hsv.b - hsv.r) / (max - min);
+        if (max === r) {
+          hsv.h = (g - b) / delta;
+        } else if (max === g) {
+          hsv.h = 2 + (b - r) / delta;
         } else {
-          hsv.h = 171 + 43 * (hsv.r - hsv.g) / (max - min);
+          hsv.h = 4 + (r - g) / delta;
+        }
+        hsv.h *= 60;
+        if (hsv.h < 0) {
+          hsv.h += 360;
         }
       }
     }
@@ -132,8 +136,30 @@
     var color = this.color;
     if (arg) {
       color.rgb.r = arg;
+      this.color = normalize({rgb: color.rgb});
+      return this;
     } else {
       return color.rgb.r;
+    }
+  };
+  Spectra.prototype.green = function(arg) {
+    var color = this.color;
+    if (arg) {
+      color.rgb.g = arg;
+      this.color = normalize({rgb: color.rgb});
+      return this;
+    } else {
+      return color.rgb.g;
+    }
+  };
+  Spectra.prototype.blue = function(arg) {
+    var color = this.color;
+    if (arg) {
+      color.rgb.b = arg;
+      this.color = normalize({rgb: color.rgb});
+      return this;
+    } else {
+      return color.rgb.b;
     }
   };
 
