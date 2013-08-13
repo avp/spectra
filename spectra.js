@@ -1,8 +1,8 @@
 /**
  * Spectra.js
- * 
+ *
  * Wrapping a value with Spectra() returns a Spectra object.
- * 
+ *
  * The object's color value is as follows:
  * {
  *   rgb: {
@@ -22,6 +22,7 @@
  (function() {
   var root = this;
   var oldSpectra = root.Spectra;
+
   /** Conversion functions between formats. */
   var rgbToHsv = function(rgb) {
     var hsv = {};
@@ -161,6 +162,45 @@
     } else {
       return color.rgb.b;
     }
+  };
+
+  Spectra.prototype.hue = function(arg) {
+    var color = this.color;
+    if (arg) {
+      color.hsv.h = arg;
+      this.color = normalize({hsv: color.hsv});
+      return this;
+    } else {
+      return color.hsv.h;
+    }
+  };
+  Spectra.prototype.saturation = function(arg) {
+    var color = this.color;
+    if (arg) {
+      color.hsv.s = arg;
+      this.color = normalize({hsv: color.hsv});
+      return this;
+    } else {
+      return color.hsv.s;
+    }
+  };
+  Spectra.prototype.value = function(arg) {
+    var color = this.color;
+    if (arg) {
+      color.hsv.v = arg;
+      this.color = normalize({hsv: color.hsv});
+      return this;
+    } else {
+      return color.hsv.v;
+    }
+  };
+
+  /** Complement function */
+  Spectra.prototype.complement = function() {
+    var hsv = this.color.hsv;
+    var newHsv = {s: hsv.s, v: hsv.v};
+    newHsv.h = (hsv.h - 180) % 360;
+    return normalize({hsv: newHsv});
   };
 
   /** Wrapper */
