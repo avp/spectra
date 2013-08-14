@@ -1,0 +1,17 @@
+{
+  "name": "Spectra",
+  "description": "Javascript color library.",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/aakpat6/spectra.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aakpat6/spectra/issues"
+  },
+  "devDependencies": {
+    "grunt-contrib-jasmine": "~0.4.0",
+    "grunt-contrib-watch": "~0.5.1",
+    "grunt": "~0.4.1"
+  }
+}
