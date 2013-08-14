@@ -6,16 +6,16 @@
  * The object's color value is as follows:
  * {
  *   rgb: {
- *     r: 0 to 255,
- *     g: 0 to 255,
- *     b: 0 to 255,
- *   }
+ *     r: 0 to 255 [int],
+ *     g: 0 to 255 [int],
+ *     b: 0 to 255 [int],
+ *   },
  *   hsv: {
- *     h: 0 to 360,
- *     s: 0 to 1,
- *     v: 0 to 1
- *   }
- *   a: 0 to 1 // Alpha
+ *     h: 0 to 360 [int],
+ *     s: 0 to 1 [float],
+ *     v: 0 to 1 [float]
+ *   },
+ *   a: 0 to 1 [float] // Alpha
  * }
  */
 
