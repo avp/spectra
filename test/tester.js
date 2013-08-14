@@ -23,7 +23,7 @@ describe('Spectra', function() {
       expect(color.blue()).toBe(75);
     });
 
-    it('CSS wrapper', function() {
+    it('shorthand CSS wrapper', function() {
       color = Spectra('#4Af');
       expect(color.red()).toBe(68);
       expect(color.green()).toBe(170);
@@ -31,8 +31,18 @@ describe('Spectra', function() {
       expect(color.hue()).toBe(207);
       expect(color.saturation()).toBeCloseTo(0.73, 1);
       expect(color.value()).toBeCloseTo(1.000, 1);
-
+    });
+    it('longhand CSS wrapper', function() {
       color = Spectra('#FF194b');
+      expect(color.red()).toBe(255);
+      expect(color.green()).toBe(25);
+      expect(color.blue()).toBe(75);
+      expect(color.hue()).toBe(347, 1);
+      expect(color.saturation()).toBeCloseTo(0.9020, 1);
+      expect(color.value()).toBeCloseTo(1.000, 1);
+    });
+    it('rgb CSS wrapper', function() {
+      color = Spectra('rgb(255,25, 75)');
       expect(color.red()).toBe(255);
       expect(color.green()).toBe(25);
       expect(color.blue()).toBe(75);

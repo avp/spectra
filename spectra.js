@@ -124,6 +124,16 @@
       };
       return normalize(color);
     }
+    var rgbRegex = /^rgb\(\s*([0-9]+),\s*([0-9]+),\s*([0-9]+)\s*\)$/i;
+    var rgbMatch = css.match(rgbRegex);
+    if (rgbMatch) {
+      color.rgb = {
+        r: parseInt(rgbMatch[1], 10),
+        g: parseInt(rgbMatch[2], 10),
+        b: parseInt(rgbMatch[3], 10)
+      };
+      return normalize(color);
+    }
   };
 
   /** Normalization functions */
