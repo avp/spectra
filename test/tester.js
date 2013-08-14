@@ -31,6 +31,14 @@ describe('Spectra', function() {
       expect(color.hue()).toBe(207);
       expect(color.saturation()).toBeCloseTo(0.73, 1);
       expect(color.value()).toBeCloseTo(1.000, 1);
+
+      color = Spectra('#FF194b');
+      expect(color.red()).toBe(255);
+      expect(color.green()).toBe(25);
+      expect(color.blue()).toBe(75);
+      expect(color.hue()).toBe(347, 1);
+      expect(color.saturation()).toBeCloseTo(0.9020, 1);
+      expect(color.value()).toBeCloseTo(1.000, 1);
     });
   });
 

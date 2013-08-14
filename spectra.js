@@ -114,6 +114,16 @@
       };
       return normalize(color);
     }
+    var longhandRegex = /^#[0-9a-f]{6}$/i;
+    var longhandMatch = css.match(longhandRegex);
+    if (longhandMatch) {
+      color.rgb = {
+        r: parseInt(css.slice(1,3), 16),
+        g: parseInt(css.slice(3,5), 16),
+        b: parseInt(css.slice(5,7), 16)
+      };
+      return normalize(color);
+    }
   };
 
   /** Normalization functions */
