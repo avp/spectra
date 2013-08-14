@@ -62,29 +62,29 @@
   var hsvToRgb = function(hsv) {
     var rgb = {r: 0, g: 0, b: 0};
 
-    var h = Number(hsv.r || hsv.red || 0);
-    var s = Number(hsv.g || hsv.green || 0);
-    var v = Number(hsv.b || hsv.blue || 0);
+    var h = Number(hsv.h || 0);
+    var s = Number(hsv.s || 0);
+    var v = Number(hsv.v || 0);
     var chroma = s * v;
     var hDash = h / 60;
-    var x = chroma * (1 - abs((hDash % 2) - 1));
+    var x = chroma * (1 - Math.abs((hDash % 2) - 1));
 
-    if(Hdash < 1.0) {
+    if(hDash < 1.0) {
       rgb.r = chroma;
       rgb.g = x;
-    } else if(hDash < 2) {
+    } else if (hDash < 2) {
       rgb.r = x;
       rgb.g = chroma;
-    } else if(hDash < 3) {
+    } else if (hDash < 3) {
       rgb.g = chroma;
       rgb.b = x;
-    } else if(hDash < 4) {
+    } else if (hDash < 4) {
       rgb.g= x;
       rgb.b = chroma;
-    } else if(hDash < 5) {
+    } else if (hDash < 5) {
       rgb.r = x;
       rgb.b = chroma;
-    } else if(hDash <= 6) {
+    } else if (hDash <= 6) {
       rgb.r = chroma;
       rgb.b = x;
     }
@@ -94,6 +94,10 @@
     rgb.r += min;
     rgb.g += min;
     rgb.b += min;
+
+    rgb.r *= 255;
+    rgb.g *= 255;
+    rgb.b *= 255;
 
     return rgb;
   };
@@ -128,6 +132,9 @@
       if (arg.r !== undefined || arg.red !== undefined) {
         this.color = normalize({rgb: arg});
       }
+      if (arg.v !== undefined || arg.value !== undefined) {
+        this.color = normalize({hsv: arg});
+      }
     }
     return this;
   };
@@ -140,7 +147,7 @@
       this.color = normalize({rgb: color.rgb});
       return this;
     } else {
-      return color.rgb.r;
+      return Math.round(color.rgb.r);
     }
   };
   Spectra.prototype.green = function(arg) {
@@ -150,7 +157,7 @@
       this.color = normalize({rgb: color.rgb});
       return this;
     } else {
-      return color.rgb.g;
+      return Math.round(color.rgb.g);
     }
   };
   Spectra.prototype.blue = function(arg) {
@@ -160,7 +167,7 @@
       this.color = normalize({rgb: color.rgb});
       return this;
     } else {
-      return color.rgb.b;
+      return Math.round(color.rgb.b);
     }
   };
 
@@ -199,8 +206,8 @@
   Spectra.prototype.complement = function() {
     var hsv = this.color.hsv;
     var newHsv = {s: hsv.s, v: hsv.v};
-    newHsv.h = (hsv.h - 180) % 360;
-    return normalize({hsv: newHsv});
+    newHsv.h = (hsv.h + 180) % 360;
+    return new Spectra(newHsv);
   };
 
   /** Wrapper */
