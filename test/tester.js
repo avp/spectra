@@ -50,6 +50,16 @@ describe('Spectra', function() {
       expect(color.saturation()).toBeCloseTo(0.9020, 1);
       expect(color.value()).toBeCloseTo(1.000, 1);
     });
+    it('rgba CSS wrapper', function() {
+      color = Spectra('rgba(255,25, 75, 0.6)');
+      expect(color.red()).toBe(255);
+      expect(color.green()).toBe(25);
+      expect(color.blue()).toBe(75);
+      expect(color.hue()).toBe(347, 1);
+      expect(color.saturation()).toBeCloseTo(0.9020, 1);
+      expect(color.value()).toBeCloseTo(1.000, 1);
+      expect(color.alpha()).toBeCloseTo(0.6, 1);
+    });
   });
 
   describe('Get and set', function() {

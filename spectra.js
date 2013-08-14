@@ -134,6 +134,17 @@
       };
       return normalize(color);
     }
+    var rgbaRegex = /^rgba\(\s*([0-9]+),\s*([0-9]+),\s*([0-9]+),\s*([0-9\.]+)\s*\)$/i;
+    var rgbaMatch = css.match(rgbaRegex);
+    if (rgbaMatch) {
+      color.rgb = {
+        r: parseInt(rgbaMatch[1], 10),
+        g: parseInt(rgbaMatch[2], 10),
+        b: parseInt(rgbaMatch[3], 10)
+      };
+      color.a = parseFloat(rgbaMatch[4], 10);
+      return normalize(color);
+    }
   };
 
   /** Normalization functions */
@@ -166,10 +177,10 @@
   var Spectra = function(arg) {
     if (typeof arg == 'object') {
       if (arg.r !== undefined || arg.red !== undefined) {
-        this.color = normalize({rgb: arg});
+        this.color = normalize({rgb: arg, a: arg.a});
       }
       if (arg.v !== undefined || arg.value !== undefined) {
-        this.color = normalize({hsv: arg});
+        this.color = normalize({hsv: arg, a: arg.a});
       }
     } else if (typeof arg == 'string') {
       this.color = normalize({css: arg});
@@ -237,6 +248,16 @@
       return this;
     } else {
       return color.hsv.v;
+    }
+  };
+
+  Spectra.prototype.alpha = function(arg) {
+    var color = this.color;
+    if (arg) {
+      color.a = arg;
+      return this;
+    } else {
+      return color.a;
     }
   };
 
