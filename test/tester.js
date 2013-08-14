@@ -3,7 +3,7 @@ describe('Spectra', function() {
   var color;
 
   describe('Wrapper tests', function() {
-    describe('RGB Wrappers', function() {
+    describe('RGB wrappers', function() {
       it('basic RGB wrappers', function() {
         color = Spectra({r: 255, g: 25, b: 76});
         expect(color.red()).toBe(255);
@@ -15,6 +15,21 @@ describe('Spectra', function() {
         expect(color.hue()).toBeCloseTo(346.7, 1);
         expect(color.saturation()).toBeCloseTo(0.9020, 1);
         expect(color.value()).toBeCloseTo(1.000, 1);
+      });
+    });
+
+    describe('HSV wrappers', function() {
+      it('basic HSV wrappers', function() {
+        color = Spectra({h: 346.7, s: 0.9020, v: 1.000});
+        expect(color.hue()).toBeCloseTo(346.7, 2);
+        expect(color.saturation()).toBeCloseTo(0.9020, 2);
+        expect(color.value()).toBeCloseTo(1.000, 2);
+      });
+      it('basic RGB conversion', function() {
+        color = Spectra({h: 346.7, s: 0.9020, v: 1.000});
+        expect(color.red()).toBe(255);
+        expect(color.green()).toBe(25);
+        expect(color.blue()).toBe(76);
       });
     });
   });
@@ -37,9 +52,9 @@ describe('Spectra', function() {
       color.hue(346.7);
       color.saturation(0.9020);
       color.value(1.000);
-      expect(color.red()).toBeCloseTo(255, 1);
-      expect(color.green()).toBeCloseTo(25, 1);
-      expect(color.blue()).toBeCloseTo(76, 1);
+      expect(color.red()).toBe(255);
+      expect(color.green()).toBe(25);
+      expect(color.blue()).toBe(76);
       expect(color.hue()).toBeCloseTo(346.7, 1);
       expect(color.saturation()).toBeCloseTo(0.9020, 1);
       expect(color.value()).toBeCloseTo(1.000, 1);
