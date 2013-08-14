@@ -102,6 +102,20 @@
     return rgb;
   };
 
+  var parseCss = function(css) {
+    var color = {};
+    var shorthandRegex = /^#[0-9a-f]{3}$/i;
+    var shorthandMatch = css.match(shorthandRegex);
+    if (shorthandMatch) {
+      color.rgb = {
+        r: parseInt(css.charAt(1), 16) * 0x11,
+        g: parseInt(css.charAt(2), 16) * 0x11,
+        b: parseInt(css.charAt(3), 16) * 0x11
+      };
+      return normalize(color);
+    }
+  };
+
   /** Normalization functions */
   var normalize = function(arg) {
     var color = arg;
@@ -111,6 +125,8 @@
       color.hsv = rgbToHsv(color.rgb);
     } else if (color.hsv !== undefined) {
       color.rgb = hsvToRgb(color.hsv);
+    } else if (color.css !== undefined) {
+      return parseCss(color.css);
     }
 
     if (color.rgb.red !== undefined) {
@@ -135,6 +151,8 @@
       if (arg.v !== undefined || arg.value !== undefined) {
         this.color = normalize({hsv: arg});
       }
+    } else if (typeof arg == 'string') {
+      this.color = normalize({css: arg});
     }
     return this;
   };
@@ -178,7 +196,7 @@
       this.color = normalize({hsv: color.hsv});
       return this;
     } else {
-      return color.hsv.h;
+      return Math.round(color.hsv.h);
     }
   };
   Spectra.prototype.saturation = function(arg) {

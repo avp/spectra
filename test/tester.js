@@ -3,34 +3,34 @@ describe('Spectra', function() {
   var color;
 
   describe('Wrapper tests', function() {
-    describe('RGB wrappers', function() {
-      it('basic RGB wrappers', function() {
-        color = Spectra({r: 255, g: 25, b: 76});
-        expect(color.red()).toBe(255);
-        expect(color.green()).toBe(25);
-        expect(color.blue()).toBe(76);
-      });
-      it('basic HSV conversion', function() {
-        color = Spectra({r: 255, g: 25, b: 76});
-        expect(color.hue()).toBeCloseTo(346.7, 1);
-        expect(color.saturation()).toBeCloseTo(0.9020, 1);
-        expect(color.value()).toBeCloseTo(1.000, 1);
-      });
+    it('RGB wrapper', function() {
+      color = Spectra({r: 255, g: 25, b: 75});
+      expect(color.red()).toBe(255);
+      expect(color.green()).toBe(25);
+      expect(color.blue()).toBe(75);
+      expect(color.hue()).toBe(347, 1);
+      expect(color.saturation()).toBeCloseTo(0.9020, 1);
+      expect(color.value()).toBeCloseTo(1.000, 1);
     });
 
-    describe('HSV wrappers', function() {
-      it('basic HSV wrappers', function() {
-        color = Spectra({h: 346.7, s: 0.9020, v: 1.000});
-        expect(color.hue()).toBeCloseTo(346.7, 2);
-        expect(color.saturation()).toBeCloseTo(0.9020, 2);
-        expect(color.value()).toBeCloseTo(1.000, 2);
-      });
-      it('basic RGB conversion', function() {
-        color = Spectra({h: 346.7, s: 0.9020, v: 1.000});
-        expect(color.red()).toBe(255);
-        expect(color.green()).toBe(25);
-        expect(color.blue()).toBe(76);
-      });
+    it('HSV wrapper', function() {
+      color = Spectra({h: 347, s: 0.9020, v: 1.000});
+      expect(color.hue()).toBe(347);
+      expect(color.saturation()).toBeCloseTo(0.9020, 2);
+      expect(color.value()).toBeCloseTo(1.000, 2);
+      expect(color.red()).toBe(255);
+      expect(color.green()).toBe(25);
+      expect(color.blue()).toBe(75);
+    });
+
+    it('CSS wrapper', function() {
+      color = Spectra('#4Af');
+      expect(color.red()).toBe(68);
+      expect(color.green()).toBe(170);
+      expect(color.blue()).toBe(255);
+      expect(color.hue()).toBe(207);
+      expect(color.saturation()).toBeCloseTo(0.73, 1);
+      expect(color.value()).toBeCloseTo(1.000, 1);
     });
   });
 
@@ -43,7 +43,7 @@ describe('Spectra', function() {
       expect(color.red()).toBe(255);
       expect(color.green()).toBe(25);
       expect(color.blue()).toBe(76);
-      expect(color.hue()).toBeCloseTo(346.7, 1);
+      expect(color.hue()).toBe(347, 1);
       expect(color.saturation()).toBeCloseTo(0.9020, 1);
       expect(color.value()).toBeCloseTo(1.000, 1);
     });
@@ -55,7 +55,7 @@ describe('Spectra', function() {
       expect(color.red()).toBe(255);
       expect(color.green()).toBe(25);
       expect(color.blue()).toBe(76);
-      expect(color.hue()).toBeCloseTo(346.7, 1);
+      expect(color.hue()).toBe(347, 1);
       expect(color.saturation()).toBeCloseTo(0.9020, 1);
       expect(color.value()).toBeCloseTo(1.000, 1);
     });
