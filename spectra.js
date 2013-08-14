@@ -20,10 +20,15 @@
  */
 
  (function() {
+  // Keep track of the global object (generally window).
   var root = this;
+
+  // Store the old value of Spectra to reassign in case of noConflict.
   var oldSpectra = root.Spectra;
 
-  /** Conversion functions between formats. */
+  /**
+   * Conversion functions between different formats.
+   */
   var rgbToHsv = function(rgb) {
     var hsv = {};
     var r = Number(rgb.r || rgb.red || 0) / 255;
@@ -170,10 +175,23 @@
       color.rgb.b = color.rgb.blue;
     }
 
+    if (color.hsv.hue !== undefined) {
+      color.hsv.h = color.hsv.hue;
+    }
+    if (color.hsv.saturation !== undefined) {
+      color.hsv.s = color.hsv.saturation;
+    }
+    if (color.hsv.value !== undefined) {
+      color.hsv.v = color.hsv.value;
+    }
+
+
     return color;
   };
 
-  /** Wrapper */
+  /**
+   * Constructor
+   */
   var Spectra = function(arg) {
     if (typeof arg == 'object') {
       if (arg.r !== undefined || arg.red !== undefined) {
@@ -188,7 +206,12 @@
     return this;
   };
 
-  /** Getters and Setters */
+  /**
+   * Get and set.
+   * These functions take an optional argument.
+   * If it is specified, the property is changed and the object is returned.
+   * Otherwise, the property value is returned.
+   */
   Spectra.prototype.red = function(arg) {
     var color = this.color;
     if (arg) {
@@ -219,7 +242,6 @@
       return Math.round(color.rgb.b);
     }
   };
-
   Spectra.prototype.hue = function(arg) {
     var color = this.color;
     if (arg) {
@@ -250,7 +272,6 @@
       return color.hsv.v;
     }
   };
-
   Spectra.prototype.alpha = function(arg) {
     var color = this.color;
     if (arg) {
@@ -260,8 +281,25 @@
       return color.a;
     }
   };
+  Spectra.prototype.hex = function(arg) {
+    if (arg) {
+      this.color = normalize({css: arg});
+    } else {
+      var r = this.red();
+      var g = this.green();
+      var b = this.blue();
 
-  /** Complement function */
+      // Pad the strings so that they are all 2 digits long, and concatenate.
+      var rString = ('00' + r.toString(16)).slice(-2);
+      var gString = ('00' + g.toString(16)).slice(-2);
+      var bString = ('00' + b.toString(16)).slice(-2);
+      return '#' + rString + gString + bString;
+    }
+  };
+
+  /**
+   * Returns the complement of this color.
+   */
   Spectra.prototype.complement = function() {
     var hsv = this.color.hsv;
     var newHsv = {s: hsv.s, v: hsv.v};
@@ -269,15 +307,35 @@
     return new Spectra(newHsv);
   };
 
-  /** Wrapper */
+  /**
+   * Tests to see if this color is equal to other.
+   * Because other is also a color, it follows that we can simply compare red, green, and blue
+   * to see if the colors are equal.
+   */
+  Spectra.prototype.equals = function(other) {
+    color1 = this.color;
+    color2 = other.color;
+
+    return color1.red() === color2.red() &&
+           color1.green() === color2.green() &&
+           color1.blue() === color3.blue();
+  };
+
+  /**
+   * Wrapper
+   */
   var spectraWrapper = function(arg) {
     return new Spectra(arg);
   };
 
+  /**
+   * Restores the old value of Spectra and returns the wrapper function.
+   */
   Spectra.noConflict = function() {
     root.Spectra = oldSpectra;
-    return this;
+    return spectraWrapper;
   };
 
+  // Set the global variable Spectra to the wrapper that we have defined.
   root.Spectra = spectraWrapper;
 }).call(this);
