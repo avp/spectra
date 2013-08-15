@@ -20,6 +20,13 @@ color.hex(); // Returns '#ff194b'
 color.hex('#0123f4');
 color.red(); // Returns 1.
 
+// Equality
+// --------
+// You can compare colors by using `.equals()`.
+var color1 = Spectra({r: 255, g: 25, b: 75});
+var color2 = Spectra('#ff194b');
+color1.equals(color2); // Returns true.
+
 // Color Operations
 // ----------------
 // You can call many operations on the Spectra object.
