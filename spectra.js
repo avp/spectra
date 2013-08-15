@@ -311,10 +311,9 @@
    * Returns the complement of this color.
    */
   Spectra.prototype.complement = function() {
-    var hsv = rgbToHsv(this.color);
-    var newHsv = {s: hsv.s, v: hsv.v};
-    newHsv.h = (hsv.h + 180) % 360;
-    return new Spectra(newHsv);
+    var newColor = new Spectra(this.color);
+    newColor.hue((newColor.hue() + 180) % 360);
+    return newColor;
   };
 
   /**
