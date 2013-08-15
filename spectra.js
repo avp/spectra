@@ -148,10 +148,12 @@
 
   /** Normalization functions */
   var normalize = function(arg) {
+    console.log(arg);
     var color = arg;
 
     if (color.hsv !== undefined) {
       color = hsvToRgb(color.hsv);
+      color.a = arg.a || 1;
     } else if (color.css !== undefined) {
       color = parseCss(color.css);
     }
@@ -164,6 +166,9 @@
     }
     if (color.blue !== undefined) {
       color.b = color.blue;
+    }
+    if (color.alpha !== undefined) {
+      color.a = color.alpha;
     }
 
     if (color.r > 255) {
@@ -192,7 +197,7 @@
       color.a = 0;
     }
 
-    color.a = color.a || 1;
+    console.log(color);
     return color;
   };
 

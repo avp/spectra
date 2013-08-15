@@ -3,7 +3,7 @@ describe('Spectra', function() {
   var color;
 
   beforeEach(function() {
-    color = Spectra({r: 255, g: 25, b: 75});
+    color = Spectra({r: 255, g: 25, b: 75, a: 0.6});
   });
 
   describe('Wrapper tests', function() {
@@ -15,10 +15,11 @@ describe('Spectra', function() {
       expect(color.saturation()).toBeCloseTo(0.9020, 1);
       expect(color.value()).toBeCloseTo(1.000, 1);
       expect(color.hex()).toBe('#ff194b');
+      expect(color.alpha()).toBe(0.6);
     });
 
     it('HSV wrapper', function() {
-      color = Spectra({h: 347, s: 0.9020, v: 1.000});
+      color = Spectra({h: 347, s: 0.9020, v: 1.000, a: 0.6});
       expect(color.hue()).toBe(347);
       expect(color.saturation()).toBeCloseTo(0.9020, 2);
       expect(color.value()).toBeCloseTo(1.000, 2);
@@ -26,7 +27,8 @@ describe('Spectra', function() {
       expect(color.green()).toBe(25);
       expect(color.blue()).toBe(75);
       expect(color.hex()).toBe('#ff194b');
-      expect(color.equals(Spectra({r: 255, g: 25, b: 75}))).toBe(true);
+      expect(color.alpha()).toBe(0.6);
+      expect(color.equals(Spectra({r: 255, g: 25, b: 75, a: 0.6}))).toBe(true);
     });
 
     it('shorthand CSS wrapper', function() {
@@ -66,7 +68,7 @@ describe('Spectra', function() {
       expect(color.hue()).toBe(347, 1);
       expect(color.saturation()).toBeCloseTo(0.9020, 1);
       expect(color.value()).toBeCloseTo(1.000, 1);
-      expect(color.alpha()).toBeCloseTo(0.6, 1);
+      expect(color.alpha()).toBe(0.6);
       expect(color.equals(Spectra({r: 255, g: 25, b: 75, a: 0.6}))).toBe(true);
     });
   });
