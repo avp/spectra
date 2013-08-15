@@ -322,17 +322,12 @@
    * Percentage should be passed in as an integer, so 40 would lighten the color 40%.
    */
   Spectra.prototype.shade = function(percentage) {
-    var result = {
-      r: this.color.r,
-      g: this.color.g,
-      b: this.color.b,
-      a: this.color.a
-    };
-    var amount = Math.round(2.55 * percent);
-    result.r += amount;
-    result.g += amount;
-    result.b += amount;
-    return normalize(result);
+    var newColor = new Spectra(this.color);
+    var amount = Math.round(2.55 * percentage);
+    newColor.red(newColor.red() + amount);
+    newColor.green(newColor.green() + amount);
+    newColor.blue(newColor.blue() + amount);
+    return newColor;
   };
 
   /**

@@ -103,5 +103,10 @@ describe('Spectra', function() {
       var complement = color.complement();
       expect(complement.red()).toBe(25);
     });
+
+    xit('lighten', function() {
+      var light = color.lighten(10);
+      expect(light.hex()).toBe('#ff6083');
+    });
   });
 });
