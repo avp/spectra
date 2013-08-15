@@ -5,16 +5,9 @@
  *
  * The object's color value is as follows:
  * {
- *   rgb: {
- *     r: 0 to 255 [int],
- *     g: 0 to 255 [int],
- *     b: 0 to 255 [int],
- *   },
- *   hsv: {
- *     h: 0 to 360 [int],
- *     s: 0 to 1 [float],
- *     v: 0 to 1 [float]
- *   },
+ *   r: 0 to 255 [int],
+ *   g: 0 to 255 [int],
+ *   b: 0 to 255 [int],
  *   a: 0 to 1 [float] // Alpha
  * }
  */
@@ -29,9 +22,9 @@
   // Conversion functions between different formats.
   var rgbToHsv = function(rgb) {
     var hsv = {};
-    var r = Number(rgb.r || rgb.red || 0) / 255;
-    var g = Number(rgb.g || rgb.green || 0) / 255;
-    var b = Number(rgb.b || rgb.blue || 0) / 255;
+    var r = Number(rgb.r || 0) / 255;
+    var g = Number(rgb.g || 0) / 255;
+    var b = Number(rgb.b || 0) / 255;
     var max = Math.max(r, g, b);
     var min = Math.min(r, g, b);
     var delta = max - min;
@@ -110,7 +103,7 @@
     var shorthandRegex = /^#[0-9a-f]{3}$/i;
     var shorthandMatch = css.match(shorthandRegex);
     if (shorthandMatch) {
-      color.rgb = {
+      color = {
         r: parseInt(css.charAt(1), 16) * 0x11,
         g: parseInt(css.charAt(2), 16) * 0x11,
         b: parseInt(css.charAt(3), 16) * 0x11
@@ -120,7 +113,7 @@
     var longhandRegex = /^#[0-9a-f]{6}$/i;
     var longhandMatch = css.match(longhandRegex);
     if (longhandMatch) {
-      color.rgb = {
+      color = {
         r: parseInt(css.slice(1,3), 16),
         g: parseInt(css.slice(3,5), 16),
         b: parseInt(css.slice(5,7), 16)
@@ -130,7 +123,7 @@
     var rgbRegex = /^rgb\(\s*([0-9]+),\s*([0-9]+),\s*([0-9]+)\s*\)$/i;
     var rgbMatch = css.match(rgbRegex);
     if (rgbMatch) {
-      color.rgb = {
+      color = {
         r: parseInt(rgbMatch[1], 10),
         g: parseInt(rgbMatch[2], 10),
         b: parseInt(rgbMatch[3], 10)
@@ -140,12 +133,12 @@
     var rgbaRegex = /^rgba\(\s*([0-9]+),\s*([0-9]+),\s*([0-9]+),\s*([0-9\.]+)\s*\)$/i;
     var rgbaMatch = css.match(rgbaRegex);
     if (rgbaMatch) {
-      color.rgb = {
+      color = {
         r: parseInt(rgbaMatch[1], 10),
         g: parseInt(rgbaMatch[2], 10),
-        b: parseInt(rgbaMatch[3], 10)
+        b: parseInt(rgbaMatch[3], 10),
+        a: parseFloat(rgbaMatch[4], 10)
       };
-      color.a = parseFloat(rgbaMatch[4], 10);
       return normalize(color);
     }
 
@@ -156,37 +149,50 @@
   /** Normalization functions */
   var normalize = function(arg) {
     var color = arg;
-    color.a = color.a || 1;
 
-    if (color.rgb !== undefined) {
-      color.hsv = rgbToHsv(color.rgb);
-    } else if (color.hsv !== undefined) {
-      color.rgb = hsvToRgb(color.hsv);
+    if (color.hsv !== undefined) {
+      color = hsvToRgb(color.hsv);
     } else if (color.css !== undefined) {
-      return parseCss(color.css);
+      color = parseCss(color.css);
     }
 
-    if (color.rgb.red !== undefined) {
-      color.rgb.r = color.rgb.red;
+    if (color.red !== undefined) {
+      color.r = color.red;
     }
-    if (color.rgb.green !== undefined) {
-      color.rgb.g = color.rgb.green;
+    if (color.green !== undefined) {
+      color.g = color.green;
     }
-    if (color.rgb.blue !== undefined) {
-      color.rgb.b = color.rgb.blue;
-    }
-
-    if (color.hsv.hue !== undefined) {
-      color.hsv.h = color.hsv.hue;
-    }
-    if (color.hsv.saturation !== undefined) {
-      color.hsv.s = color.hsv.saturation;
-    }
-    if (color.hsv.value !== undefined) {
-      color.hsv.v = color.hsv.value;
+    if (color.blue !== undefined) {
+      color.b = color.blue;
     }
 
+    if (color.r > 255) {
+      color.r = 255;
+    }
+    if (color.g > 255) {
+      color.g = 255;
+    }
+    if (color.b > 255) {
+      color.b = 255;
+    }
+    if (color.a > 1) {
+      color.a = 1;
+    }
 
+    if (color.r < 0) {
+      color.r = 0;
+    }
+    if (color.g < 0) {
+      color.g = 0;
+    }
+    if (color.b < 0) {
+      color.b = 0;
+    }
+    if (color.a < 0) {
+      color.a = 0;
+    }
+
+    color.a = color.a || 1;
     return color;
   };
 
@@ -199,7 +205,7 @@
     }
     if (typeof arg == 'object') {
       if (arg.r !== undefined || arg.red !== undefined) {
-        this.color = normalize({rgb: arg, a: arg.a});
+        this.color = normalize({r: arg.r, g: arg.g, b: arg.b, a: arg.a});
       }
       if (arg.v !== undefined || arg.value !== undefined) {
         this.color = normalize({hsv: arg, a: arg.a});
@@ -219,61 +225,61 @@
   Spectra.prototype.red = function(arg) {
     var color = this.color;
     if (arg) {
-      color.rgb.r = arg;
-      this.color = normalize({rgb: color.rgb});
+      color.r = arg;
+      this.color = normalize(color);
       return this;
     } else {
-      return Math.round(color.rgb.r);
+      return Math.round(color.r);
     }
   };
   Spectra.prototype.green = function(arg) {
     var color = this.color;
     if (arg) {
-      color.rgb.g = arg;
-      this.color = normalize({rgb: color.rgb});
+      color.g = arg;
+      this.color = normalize(color);
       return this;
     } else {
-      return Math.round(color.rgb.g);
+      return Math.round(color.g);
     }
   };
   Spectra.prototype.blue = function(arg) {
     var color = this.color;
     if (arg) {
-      color.rgb.b = arg;
-      this.color = normalize({rgb: color.rgb});
+      color.b = arg;
+      this.color = normalize(color);
       return this;
     } else {
-      return Math.round(color.rgb.b);
+      return Math.round(color.b);
     }
   };
   Spectra.prototype.hue = function(arg) {
-    var color = this.color;
+    var color = rgbToHsv(this.color);
     if (arg) {
-      color.hsv.h = arg;
-      this.color = normalize({hsv: color.hsv});
+      color.h = arg;
+      this.color = normalize({hsv: color});
       return this;
     } else {
-      return Math.round(color.hsv.h);
+      return Math.round(color.h);
     }
   };
   Spectra.prototype.saturation = function(arg) {
-    var color = this.color;
+    var color = rgbToHsv(this.color);
     if (arg) {
-      color.hsv.s = arg;
-      this.color = normalize({hsv: color.hsv});
+      color.s = arg;
+      this.color = normalize({hsv: color});
       return this;
     } else {
-      return color.hsv.s;
+      return color.s;
     }
   };
   Spectra.prototype.value = function(arg) {
-    var color = this.color;
+    var color = rgbToHsv(this.color);
     if (arg) {
-      color.hsv.v = arg;
-      this.color = normalize({hsv: color.hsv});
+      color.v = arg;
+      this.color = normalize({hsv: color});
       return this;
     } else {
-      return color.hsv.v;
+      return color.v;
     }
   };
   Spectra.prototype.alpha = function(arg) {
@@ -305,10 +311,42 @@
    * Returns the complement of this color.
    */
   Spectra.prototype.complement = function() {
-    var hsv = this.color.hsv;
+    var hsv = rgbToHsv(this.color);
     var newHsv = {s: hsv.s, v: hsv.v};
     newHsv.h = (hsv.h + 180) % 360;
     return new Spectra(newHsv);
+  };
+
+  /**
+   * Lightens or darkens a color based on a percentage value.
+   * Percentage should be passed in as an integer, so 40 would lighten the color 40%.
+   */
+  Spectra.prototype.shade = function(percentage) {
+    var result = {
+      r: this.color.r,
+      g: this.color.g,
+      b: this.color.b,
+      a: this.color.a
+    };
+    var amount = Math.round(2.55 * percent);
+    result.r += amount;
+    result.g += amount;
+    result.b += amount;
+    return normalize(result);
+  };
+
+  /**
+   * Lightens a color based on percentage value.
+   */
+  Spectra.prototype.lighten = function(percentage) {
+    return this.shade(percentage);
+  };
+
+  /**
+   * Darkens a color based on percentage value.
+   */
+  Spectra.prototype.darken = function(percentage) {
+    return this.shade(-percentage);
   };
 
   /**
