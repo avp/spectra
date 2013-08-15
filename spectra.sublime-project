@@ -1,0 +1,24 @@
+{
+	"folders": [
+  {
+    "path": ".",
+    "folder_exclude_patterns":
+    [
+      "node_modules",
+      ".grunt"
+    ],
+    "file_exclude_patterns":
+    [
+      "*.sublime-workspace",
+      "_SpecRunner.html",
+      "LICENSE"
+    ]
+  }
+  ],
+  "settings": {
+    "tab_size": 2,
+    "translate_tabs_to_spaces": true,
+    "ensure_newline_at_eof_on_save": true,
+    "trim_trailing_white_space_on_save": true
+  }
+}
