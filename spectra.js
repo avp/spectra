@@ -20,7 +20,9 @@
   var oldSpectra = root.Spectra;
 
   // Conversion functions between different formats.
-  var rgbToHsv = function(rgb) {
+  var Util = {};
+
+  Util.rgbToHsv = function(rgb) {
     var hsv = {};
     var r = Number(rgb.r || 0) / 255;
     var g = Number(rgb.g || 0) / 255;
@@ -55,7 +57,7 @@
     return hsv;
   };
 
-  var hsvToRgb = function(hsv) {
+  Util.hsvToRgb = function(hsv) {
     var rgb = {r: 0, g: 0, b: 0};
 
     var h = Number(hsv.h || 0);
@@ -98,7 +100,7 @@
     return rgb;
   };
 
-  var parseCss = function(css) {
+  Util.parseCss = function(css) {
     var color = {};
     var shorthandRegex = /^#[0-9a-f]{3}$/i;
     var shorthandMatch = css.match(shorthandRegex);
@@ -108,7 +110,7 @@
         g: parseInt(css.charAt(2), 16) * 0x11,
         b: parseInt(css.charAt(3), 16) * 0x11
       };
-      return normalize(color);
+      return Util.normalize(color);
     }
     var longhandRegex = /^#[0-9a-f]{6}$/i;
     var longhandMatch = css.match(longhandRegex);
@@ -118,7 +120,7 @@
         g: parseInt(css.slice(3,5), 16),
         b: parseInt(css.slice(5,7), 16)
       };
-      return normalize(color);
+      return Util.normalize(color);
     }
     var rgbRegex = /^rgb\(\s*([0-9]+),\s*([0-9]+),\s*([0-9]+)\s*\)$/i;
     var rgbMatch = css.match(rgbRegex);
@@ -128,7 +130,7 @@
         g: parseInt(rgbMatch[2], 10),
         b: parseInt(rgbMatch[3], 10)
       };
-      return normalize(color);
+      return Util.normalize(color);
     }
     var rgbaRegex = /^rgba\(\s*([0-9]+),\s*([0-9]+),\s*([0-9]+),\s*([0-9\.]+)\s*\)$/i;
     var rgbaMatch = css.match(rgbaRegex);
@@ -139,23 +141,22 @@
         b: parseInt(rgbaMatch[3], 10),
         a: parseFloat(rgbaMatch[4], 10)
       };
-      return normalize(color);
+      return Util.normalize(color);
     }
 
-    // If we can't parse it, we throw a `TypeError`.
+    // If we can't parse it, we throw a TypeError.
     throw TypeError(css + ' is not a valid CSS string for Spectra.');
   };
 
-  /** Normalization functions */
-  var normalize = function(arg) {
-    console.log(arg);
+  /** Normalization of the Spectra object. */
+  Util.normalize = function(arg) {
     var color = arg;
 
     if (color.hsv !== undefined) {
-      color = hsvToRgb(color.hsv);
+      color = Util.hsvToRgb(color.hsv);
       color.a = arg.a || 1;
     } else if (color.css !== undefined) {
-      color = parseCss(color.css);
+      color = Util.parseCss(color.css);
     }
 
     if (color.red !== undefined) {
@@ -197,7 +198,6 @@
       color.a = 0;
     }
 
-    console.log(color);
     return color;
   };
 
@@ -210,13 +210,13 @@
     }
     if (typeof arg == 'object') {
       if (arg.r !== undefined || arg.red !== undefined) {
-        this.color = normalize({r: arg.r, g: arg.g, b: arg.b, a: arg.a});
+        this.color = Util.normalize({r: arg.r, g: arg.g, b: arg.b, a: arg.a});
       }
       if (arg.v !== undefined || arg.value !== undefined) {
-        this.color = normalize({hsv: arg, a: arg.a});
+        this.color = Util.normalize({hsv: arg, a: arg.a});
       }
     } else if (typeof arg == 'string') {
-      this.color = normalize({css: arg});
+      this.color = Util.normalize({css: arg});
     }
     return this;
   };
@@ -231,7 +231,7 @@
     var color = this.color;
     if (arg) {
       color.r = arg;
-      this.color = normalize(color);
+      this.color = Util.normalize(color);
       return this;
     } else {
       return Math.round(color.r);
@@ -241,7 +241,7 @@
     var color = this.color;
     if (arg) {
       color.g = arg;
-      this.color = normalize(color);
+      this.color = Util.normalize(color);
       return this;
     } else {
       return Math.round(color.g);
@@ -251,37 +251,37 @@
     var color = this.color;
     if (arg) {
       color.b = arg;
-      this.color = normalize(color);
+      this.color = Util.normalize(color);
       return this;
     } else {
       return Math.round(color.b);
     }
   };
   Spectra.prototype.hue = function(arg) {
-    var color = rgbToHsv(this.color);
+    var color = Util.rgbToHsv(this.color);
     if (arg) {
       color.h = arg;
-      this.color = normalize({hsv: color});
+      this.color = Util.normalize({hsv: color});
       return this;
     } else {
       return Math.round(color.h);
     }
   };
   Spectra.prototype.saturation = function(arg) {
-    var color = rgbToHsv(this.color);
+    var color = Util.rgbToHsv(this.color);
     if (arg) {
       color.s = arg;
-      this.color = normalize({hsv: color});
+      this.color = Util.normalize({hsv: color});
       return this;
     } else {
       return color.s;
     }
   };
   Spectra.prototype.value = function(arg) {
-    var color = rgbToHsv(this.color);
+    var color = Util.rgbToHsv(this.color);
     if (arg) {
       color.v = arg;
-      this.color = normalize({hsv: color});
+      this.color = Util.normalize({hsv: color});
       return this;
     } else {
       return color.v;
@@ -298,7 +298,7 @@
   };
   Spectra.prototype.hex = function(arg) {
     if (arg) {
-      this.color = normalize({css: arg});
+      this.color = Util.normalize({css: arg});
     } else {
       var r = this.red();
       var g = this.green();
