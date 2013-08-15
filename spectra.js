@@ -100,6 +100,25 @@
     return rgb;
   };
 
+  Util.rgbToHsl = function(rgb) {
+    var hsv = Util.rgbToHsv(rgb);
+    var hsl = {};
+    hsl.h = hsv.h;
+    hsl.l = (2 - hsv.s) * hsv.v;
+    hsl.s = hsv.s * hsv.v;
+    hsl.s /= (hsl.l <= 1) ? (hsl.l) : (2 - hsl.l);
+    hsl.l /= 2;
+    return hsl;
+  };
+
+  Util.hslToRgb = function(hsl) {
+    var hsv = {};
+    hsv.h = hsl.h;
+    hsv.s = 2 * hsl.s / (hsl.l + hsl.s);
+    hsv.v = hsl.l + hsl.s;
+    return Util.hsvToRgb(hsv);
+  };
+
   Util.parseCss = function(css) {
     var color = {};
     var shorthandRegex = /^#[0-9a-f]{3}$/i;
@@ -313,6 +332,21 @@
   };
 
   /**
+   * Tests to see if this color is equal to other.
+   * Because other is also a color, it follows that we can simply compare red, green, and blue
+   * to see if the colors are equal.
+   */
+  Spectra.prototype.equals = function(other) {
+    color1 = this;
+    color2 = other;
+
+    return color1.red() === color2.red() &&
+           color1.green() === color2.green() &&
+           color1.blue() === color2.blue() &&
+           color1.alpha() === color2.alpha();
+  };
+
+  /**
    * Returns the complement of this color.
    */
   Spectra.prototype.complement = function() {
@@ -349,18 +383,35 @@
   };
 
   /**
-   * Tests to see if this color is equal to other.
-   * Because other is also a color, it follows that we can simply compare red, green, and blue
-   * to see if the colors are equal.
+   * Calculates the luminosity of the color, i.e. how it appears on screen.
    */
-  Spectra.prototype.equals = function(other) {
-    color1 = this;
-    color2 = other;
+  Spectra.prototype.luminosity = function() {
+    return (2 * this.red()) + (5 * this.green()) + (1 * this.blue());
+  };
 
-    return color1.red() === color2.red() &&
-           color1.green() === color2.green() &&
-           color1.blue() === color2.blue() &&
-           color1.alpha() === color2.alpha();
+  /**
+   * Returns a Spectra object, which is the grayscale of the current color.
+   */
+  Spectra.prototype.grayscale = function() {
+    return new Spectra({
+      r: this.luminosity(),
+      g: this.luminosity(),
+      b: this.luminosity(),
+      a: this.alpha()
+    });
+  };
+
+  /**
+   * Returns the color that results from mixing percent of the other color into this color.
+   */
+  Spectra.prototype.mix = function(other, percentage) {
+    var p = percentage / 100 || 0.5;
+    return new Spectra({
+      r: this.red() * (1 - p) + other.red() * p,
+      g: this.green() * (1 - p) + other.green() * p,
+      b: this.blue() * (1 - p) + other.blue() * p,
+      a: this.alpha() * (1 - p) + other.alpha() * p
+    });
   };
 
   /**
@@ -373,7 +424,7 @@
   /**
    * Restores the old value of Spectra and returns the wrapper function.
    */
-  Spectra.noConflict = function() {
+  spectraWrapper.noConflict = function() {
     root.Spectra = oldSpectra;
     return spectraWrapper;
   };
