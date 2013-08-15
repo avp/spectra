@@ -26,9 +26,7 @@
   // Store the old value of Spectra to reassign in case of noConflict.
   var oldSpectra = root.Spectra;
 
-  /**
-   * Conversion functions between different formats.
-   */
+  // Conversion functions between different formats.
   var rgbToHsv = function(rgb) {
     var hsv = {};
     var r = Number(rgb.r || rgb.red || 0) / 255;
@@ -150,6 +148,9 @@
       color.a = parseFloat(rgbaMatch[4], 10);
       return normalize(color);
     }
+
+    // If we can't parse it, we throw a `TypeError`.
+    throw TypeError(css + ' is not a valid CSS string for Spectra.');
   };
 
   /** Normalization functions */
@@ -193,6 +194,9 @@
    * Constructor
    */
   var Spectra = function(arg) {
+    if (arg === null || arg === undefined) {
+      throw new TypeError('Spectra argument must be defined.');
+    }
     if (typeof arg == 'object') {
       if (arg.r !== undefined || arg.red !== undefined) {
         this.color = normalize({rgb: arg, a: arg.a});
@@ -313,12 +317,13 @@
    * to see if the colors are equal.
    */
   Spectra.prototype.equals = function(other) {
-    color1 = this.color;
-    color2 = other.color;
+    color1 = this;
+    color2 = other;
 
     return color1.red() === color2.red() &&
            color1.green() === color2.green() &&
-           color1.blue() === color3.blue();
+           color1.blue() === color2.blue() &&
+           color1.alpha() === color2.alpha();
   };
 
   /**
