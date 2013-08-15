@@ -73,6 +73,13 @@ describe('Spectra', function() {
     });
   });
 
+  describe('Invalid inputs', function() {
+    it('Invalid CSS', function() {
+      expect(function() {Spectra('not a real color');}).toThrow();
+      expect(function() {Spectra('#deadbeef');}).toThrow();
+    });
+  });
+
   describe('Get and set', function() {
     it('RGB get and set', function() {
       color = Spectra({r: 123, g: 192, b: 70});
