@@ -4,6 +4,7 @@
 var color = Spectra({r: 255, g: 25, b: 75});
 var color = Spectra({r: 255, g: 25, b: 75, a: 0.6});
 var color = Spectra({h: 235, s: 0.632, v: 0.85});
+var color = Spectra({h: 235, s: 1.000, l: 0.545});
 var color = Spectra('#ff194b');
 var color = Spectra('rgb(255, 25, 75)');
 var color = Spectra('rgba(255, 25, 75, 0.6)');
