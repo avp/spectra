@@ -112,10 +112,15 @@
   };
 
   Util.hslToRgb = function(hsl) {
+    var h = hsl.h;
+    var s = hsl.s;
+    var l = hsl.l;
     var hsv = {};
-    hsv.h = hsl.h;
-    hsv.s = 2 * hsl.s / (hsl.l + hsl.s);
-    hsv.v = hsl.l + hsl.s;
+    hsv.h = h;
+    s *= (l < 0.5) ? l : 1 - l;
+    hsv.s = 2 * s / (l + s);
+    hsv.v = l + s;
+    console.log(hsv);
     return Util.hsvToRgb(hsv);
   };
 
@@ -169,10 +174,15 @@
 
   /** Normalization of the Spectra object. */
   Util.normalize = function(arg) {
+    arg.a = arg.a || 1;
+
     var color = arg;
 
     if (color.hsv !== undefined) {
       color = Util.hsvToRgb(color.hsv);
+      color.a = arg.a || 1;
+    } else if (color.hsl !== undefined) {
+      color = Util.hslToRgb(color.hsl);
       color.a = arg.a || 1;
     } else if (color.css !== undefined) {
       color = Util.parseCss(color.css);
@@ -234,6 +244,9 @@
       if (arg.v !== undefined || arg.value !== undefined) {
         this.color = Util.normalize({hsv: arg, a: arg.a});
       }
+      if (arg.l !== undefined || arg.lightness !== undefined) {
+        this.color = Util.normalize({hsl: arg, a: arg.a});
+      }
     } else if (typeof arg == 'string') {
       this.color = Util.normalize({css: arg});
     }
@@ -286,7 +299,7 @@
       return Math.round(color.h);
     }
   };
-  Spectra.prototype.saturation = function(arg) {
+  Spectra.prototype.saturationv = function(arg) {
     var color = Util.rgbToHsv(this.color);
     if (arg) {
       color.s = arg;
@@ -305,6 +318,9 @@
     } else {
       return color.v;
     }
+  };
+  Spectra.prototype.saturation = function(arg) {
+    var color = Util.rgbToHsl(this.color);
   };
   Spectra.prototype.alpha = function(arg) {
     var color = this.color;
@@ -360,11 +376,11 @@
    * Percentage should be passed in as an integer, so 40 would lighten the color 40%.
    */
   Spectra.prototype.shade = function(percentage) {
-    var newColor = new Spectra(this.color);
+    var newColor = new Spectra(this.color).color;
     var amount = Math.round(2.55 * percentage);
-    newColor.red(newColor.red() + amount);
-    newColor.green(newColor.green() + amount);
-    newColor.blue(newColor.blue() + amount);
+    newColor.red(newColor.r + amount);
+    newColor.green(newColor.g + amount);
+    newColor.blue(newColor.b + amount);
     return newColor;
   };
 
