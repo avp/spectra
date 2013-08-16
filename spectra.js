@@ -118,7 +118,7 @@
     var hsv = {};
     hsv.h = h;
     s *= (l < 0.5) ? l : 1 - l;
-    hsv.s = 2 * s / (l + s);
+    hsv.s = (2 * s) / (l + s);
     hsv.v = l + s;
     console.log(hsv);
     return Util.hsvToRgb(hsv);
@@ -293,7 +293,7 @@
     var color = Util.rgbToHsv(this.color);
     if (arg) {
       color.h = arg;
-      this.color = Util.normalize({hsv: color});
+      this.color = Util.normalize({hsv: color, a: this.color.a});
       return this;
     } else {
       return Math.round(color.h);
@@ -303,7 +303,7 @@
     var color = Util.rgbToHsv(this.color);
     if (arg) {
       color.s = arg;
-      this.color = Util.normalize({hsv: color});
+      this.color = Util.normalize({hsv: color, a: this.color.a});
       return this;
     } else {
       return color.s;
@@ -313,7 +313,7 @@
     var color = Util.rgbToHsv(this.color);
     if (arg) {
       color.v = arg;
-      this.color = Util.normalize({hsv: color});
+      this.color = Util.normalize({hsv: color, a: this.color.a});
       return this;
     } else {
       return color.v;
@@ -321,6 +321,23 @@
   };
   Spectra.prototype.saturation = function(arg) {
     var color = Util.rgbToHsl(this.color);
+    if (arg) {
+      color.s = arg;
+      this.color = Util.normalize({hsl: color, a: this.color.a});
+      return this;
+    } else {
+      return color.s;
+    }
+  };
+  Spectra.prototype.lightness = function(arg) {
+    var color = Util.rgbToHsl(this.color);
+    if (arg) {
+      color.l = arg;
+      this.color = Util.normalize({hsl: color, a: this.color.a});
+      return this;
+    } else {
+      return color.l;
+    }
   };
   Spectra.prototype.alpha = function(arg) {
     var color = this.color;
@@ -349,7 +366,7 @@
 
   /**
    * Tests to see if this color is equal to other.
-   * Because other is also a color, it follows that we can simply compare red, green, and blue
+   * Because other is also a color, it follows that we can simply compare red, green, blue, and alpha
    * to see if the colors are equal.
    */
   Spectra.prototype.equals = function(other) {
