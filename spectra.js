@@ -33,6 +33,11 @@
     return Math.max(lower, Math.min(upper, x));
   };
 
+  /**
+   * Converts from RGB to HSV.
+   * RGB should have keys r, g, b.
+   * HSV will have keys h, s, v.
+   */
   Util.rgbToHsv = function(rgb) {
     var hsv = {};
     var r = Number(rgb.r || 0) / 255;
@@ -68,6 +73,11 @@
     return hsv;
   };
 
+  /**
+   * Converts from HSV to RGB.
+   * HSV should have keys h, s, v.
+   * RGB will have keys r, g, b.
+   */
   Util.hsvToRgb = function(hsv) {
     var rgb = {r: 0, g: 0, b: 0};
 
@@ -111,6 +121,11 @@
     return rgb;
   };
 
+  /**
+   * Converts from RGB to HSL.
+   * RGB should have keys r, g, b.
+   * HSL will have keys h, s, l.
+   */
   Util.rgbToHsl = function(rgb) {
     var hsv = Util.rgbToHsv(rgb);
     var hsl = {};
@@ -122,6 +137,11 @@
     return hsl;
   };
 
+  /**
+   * Converts from HSL to RGB.
+   * HSL should have keys h, s, l.
+   * RGB will have keys r, g, b.
+   */
   Util.hslToRgb = function(hsl) {
     var h = Util.clamp(hsl.h, 0, 360);
     var s = Util.clamp(hsl.s);
@@ -134,6 +154,9 @@
     return Util.hsvToRgb(hsv);
   };
 
+  /**
+   * Converts from CSS to RGB.
+   */
   Util.parseCss = function(css) {
     var color = {};
     var shorthandRegex = /^#[0-9a-f]{3}$/i;
