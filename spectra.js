@@ -5,22 +5,33 @@
  *
  * The object's color value is as follows:
  * {
- *   r: 0 to 255 [int],
- *   g: 0 to 255 [int],
- *   b: 0 to 255 [int],
+ *   r: 0 to 255 [int], // Red
+ *   g: 0 to 255 [int], // Green
+ *   b: 0 to 255 [int], // Blue
  *   a: 0 to 1 [float] // Alpha
  * }
  */
 
  (function() {
-  // Keep track of the global object (generally window).
+  // Keep track of the global object.
   var root = this;
 
   // Store the old value of Spectra to reassign in case of noConflict.
   var oldSpectra = root.Spectra;
 
-  // Conversion functions between different formats.
+  // Utility functions for use in Spectra.
   var Util = {};
+
+  /**
+   * Clamps x to be between lower and upper.
+   * If not specified, lower and upper are 0 and 1 respectively.
+   * If x is outside the range lower to upper, the closest of lower or upper is used.
+   */
+  Util.clamp = function(x, lower, upper) {
+    lower = lower || 0;
+    upper = upper || 1;
+    return Math.max(lower, Math.min(upper, x));
+  };
 
   Util.rgbToHsv = function(rgb) {
     var hsv = {};
@@ -60,9 +71,9 @@
   Util.hsvToRgb = function(hsv) {
     var rgb = {r: 0, g: 0, b: 0};
 
-    var h = Number(hsv.h || 0);
-    var s = Number(hsv.s || 0);
-    var v = Number(hsv.v || 0);
+    var h = Util.clamp(Number(hsv.h || 0), 0, 360);
+    var s = Util.clamp(Number(hsv.s || 0));
+    var v = Util.clamp(Number(hsv.v || 0));
     var chroma = s * v;
     var hDash = h / 60;
     var x = chroma * (1 - Math.abs((hDash % 2) - 1));
@@ -112,15 +123,14 @@
   };
 
   Util.hslToRgb = function(hsl) {
-    var h = hsl.h;
-    var s = hsl.s;
-    var l = hsl.l;
+    var h = Util.clamp(hsl.h, 0, 360);
+    var s = Util.clamp(hsl.s);
+    var l = Util.clamp(hsl.l);
     var hsv = {};
     hsv.h = h;
     s *= (l < 0.5) ? l : 1 - l;
     hsv.s = (2 * s) / (l + s);
     hsv.v = l + s;
-    console.log(hsv);
     return Util.hsvToRgb(hsv);
   };
 
@@ -172,12 +182,15 @@
     throw TypeError(css + ' is not a valid CSS string for Spectra.');
   };
 
-  /** Normalization of the Spectra object. */
+  /**
+   * Performs any conversions necessary to turn the arg into a Spectra object.
+   */
   Util.normalize = function(arg) {
     arg.a = arg.a || 1;
 
     var color = arg;
 
+    // Perform conversions if necessary.
     if (color.hsv !== undefined) {
       color = Util.hsvToRgb(color.hsv);
       color.a = arg.a || 1;
@@ -188,50 +201,24 @@
       color = Util.parseCss(color.css);
     }
 
-    if (color.red !== undefined) {
-      color.r = color.red;
-    }
-    if (color.green !== undefined) {
-      color.g = color.green;
-    }
-    if (color.blue !== undefined) {
-      color.b = color.blue;
-    }
-    if (color.alpha !== undefined) {
-      color.a = color.alpha;
-    }
+    // Convert any full words into the abbreviated versions.
+    color.r = color.red || color.r;
+    color.g = color.green || color.g;
+    color.b = color.blue || color.b;
+    color.a = color.alpha || color.a;
 
-    if (color.r > 255) {
-      color.r = 255;
-    }
-    if (color.g > 255) {
-      color.g = 255;
-    }
-    if (color.b > 255) {
-      color.b = 255;
-    }
-    if (color.a > 1) {
-      color.a = 1;
-    }
-
-    if (color.r < 0) {
-      color.r = 0;
-    }
-    if (color.g < 0) {
-      color.g = 0;
-    }
-    if (color.b < 0) {
-      color.b = 0;
-    }
-    if (color.a < 0) {
-      color.a = 0;
-    }
+    // Place all values in a valid range.
+    color.r = Util.clamp(color.r, 0, 255);
+    color.g = Util.clamp(color.g, 0, 255);
+    color.b = Util.clamp(color.b, 0, 255);
+    color.a = Util.clamp(color.a, 0, 1);
 
     return color;
   };
 
   /**
-   * Constructor
+   * Constructor for Spectra object.
+   * @constructor
    */
   var Spectra = function(arg) {
     if (arg === null || arg === undefined) {
@@ -365,6 +352,14 @@
   };
 
   /**
+   * API Functions
+   * =============
+   *
+   * Below are any API functions that do not modify the current color, but return values based
+   * on the current color. As such, use red(), green(), etc. instead of actually accessing this.color.
+   */
+
+  /**
    * Tests to see if this color is equal to other.
    * Because other is also a color, it follows that we can simply compare red, green, blue, and alpha
    * to see if the colors are equal.
@@ -393,11 +388,8 @@
    * Percentage should be passed in as an integer, so 40 would lighten the color 40%.
    */
   Spectra.prototype.shade = function(percentage) {
-    var newColor = new Spectra(this.color).color;
-    var amount = Math.round(2.55 * percentage);
-    newColor.red(newColor.r + amount);
-    newColor.green(newColor.g + amount);
-    newColor.blue(newColor.b + amount);
+    var newColor = new Spectra(this.color);
+    newColor.lightness(newColor.lightness() + (percentage / 100));
     return newColor;
   };
 

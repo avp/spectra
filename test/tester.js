@@ -54,6 +54,8 @@ describe('Spectra', function() {
     it('Invalid CSS', function() {
       expect(function() {Spectra('not a real color');}).toThrow();
       expect(function() {Spectra('#deadbeef');}).toThrow();
+      expect(function() {Spectra(null);}).toThrow();
+      expect(function() {Spectra(undefined);}).toThrow();
     });
   });
 
@@ -81,9 +83,14 @@ describe('Spectra', function() {
       expect(complement.hex()).toBe('#19ffcd');
     });
 
-    xit('lighten', function() {
+    it('lighten', function() {
       var light = color.lighten(10);
-      expect(light.hex()).toBe('#ff6083');
+      expect(light.hex()).toBe('#ff4c73');
+    });
+
+    it('darken', function() {
+      var dark = color.darken(10);
+      expect(dark.hex()).toBe('#e50032');
     });
   });
 });
