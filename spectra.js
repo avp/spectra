@@ -49,3 +49,10 @@ var complement = color.complement();
 var lighter = color.lighten(20); // Lightens color by 20%.
 var darker = color.darken(25); // Darkens color by 25%.
 
+
+// Utility Functions
+// -----------------
+// You can reset the value of Spectra to what it used to be by using `noConflict`, which returns
+// the Spectra object itself. This is useful for renaming Spectra.
+var newSpectra = Spectra.noConflict();
+
