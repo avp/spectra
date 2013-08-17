@@ -47,6 +47,7 @@
             <div class="content"><div class='highlight'><pre><span class="keyword">var</span> color = Spectra({r: <span class="number">255</span>, g: <span class="number">25</span>, b: <span class="number">75</span>});
 <span class="keyword">var</span> color = Spectra({r: <span class="number">255</span>, g: <span class="number">25</span>, b: <span class="number">75</span>, a: <span class="number">0.6</span>});
 <span class="keyword">var</span> color = Spectra({h: <span class="number">235</span>, s: <span class="number">0.632</span>, v: <span class="number">0.85</span>});
+<span class="keyword">var</span> color = Spectra({h: <span class="number">235</span>, s: <span class="number">1.000</span>, l: <span class="number">0.545</span>});
 <span class="keyword">var</span> color = Spectra(<span class="string">'#ff194b'</span>);
 <span class="keyword">var</span> color = Spectra(<span class="string">'rgb(255, 25, 75)'</span>);
 <span class="keyword">var</span> color = Spectra(<span class="string">'rgba(255, 25, 75, 0.6)'</span>);</pre></div></div>
@@ -105,12 +106,16 @@ color.red(); <span class="comment">// Returns 1.</span></pre></div></div>
         <li id="section-6">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <h2>Color Operations</h2>
+              <p>Get and set RGB values.</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre>color.red([arg]);
+color.green([arg]);
+color.blue([arg]);</pre></div></div>
             
         </li>
         
@@ -120,6 +125,83 @@ color.red(); <span class="comment">// Returns 1.</span></pre></div></div>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Get and set HSV values.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>color.hue([arg]);
+color.saturationv([arg]);
+color.value([arg]);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Get and set HSL values.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>color.hue([arg]);
+color.saturation([arg]);
+color.lightness([arg]);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <h2>Equality</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>You can compare colors by using <code>equals</code>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> color1 = Spectra({r: <span class="number">255</span>, g: <span class="number">25</span>, b: <span class="number">75</span>});
+<span class="keyword">var</span> color2 = Spectra(<span class="string">'#ff194b'</span>);
+color1.equals(color2); <span class="comment">// Returns true.</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <h2>Color Operations</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <p>You can call many operations on the Spectra object.</p>
 

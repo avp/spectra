@@ -1,3 +1,4 @@
 #!/bin/bash
 
 docco -o . spectra.js
+cp spectra.html index.html

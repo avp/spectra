@@ -21,9 +21,22 @@ color.hex(); // Returns '#ff194b'
 color.hex('#0123f4');
 color.red(); // Returns 1.
 
+// Get and set RGB values.
+color.red([arg]);
+color.green([arg]);
+color.blue([arg]);
+// Get and set HSV values.
+color.hue([arg]);
+color.saturationv([arg]);
+color.value([arg]);
+// Get and set HSL values.
+color.hue([arg]);
+color.saturation([arg]);
+color.lightness([arg]);
+
 // Equality
 // --------
-// You can compare colors by using `.equals()`.
+// You can compare colors by using `equals`.
 var color1 = Spectra({r: 255, g: 25, b: 75});
 var color2 = Spectra('#ff194b');
 color1.equals(color2); // Returns true.
