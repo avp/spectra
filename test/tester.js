@@ -92,5 +92,17 @@ describe('Spectra', function() {
       var dark = color.darken(10);
       expect(dark.hex()).toBe('#e50032');
     });
+
+    it('luminosity', function() {
+      expect(color.luminosity()).toBe(710);
+    });
+  });
+
+  describe('Utility functions', function() {
+    it('noConflict', function() {
+      var s = Spectra.noConflict();
+      expect(Spectra).toBe(undefined);
+      expect(s('#ff194b').red()).toBe(255);
+    });
   });
 });

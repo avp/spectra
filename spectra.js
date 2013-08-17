@@ -244,6 +244,10 @@
    * @constructor
    */
   var Spectra = function(arg) {
+    return new Spectra.fn(arg);
+  };
+
+  Spectra.fn = function(arg) {
     if (arg === null || arg === undefined) {
       throw new TypeError('Spectra argument must be defined.');
     }
@@ -269,7 +273,7 @@
    * If it is specified, the property is changed and the object is returned.
    * Otherwise, the property value is returned.
    */
-  Spectra.prototype.red = function(arg) {
+  Spectra.fn.prototype.red = function(arg) {
     var color = this.color;
     if (arg) {
       color.r = arg;
@@ -279,7 +283,7 @@
       return Math.round(color.r);
     }
   };
-  Spectra.prototype.green = function(arg) {
+  Spectra.fn.prototype.green = function(arg) {
     var color = this.color;
     if (arg) {
       color.g = arg;
@@ -289,7 +293,7 @@
       return Math.round(color.g);
     }
   };
-  Spectra.prototype.blue = function(arg) {
+  Spectra.fn.prototype.blue = function(arg) {
     var color = this.color;
     if (arg) {
       color.b = arg;
@@ -299,7 +303,7 @@
       return Math.round(color.b);
     }
   };
-  Spectra.prototype.hue = function(arg) {
+  Spectra.fn.prototype.hue = function(arg) {
     var color = Util.rgbToHsv(this.color);
     if (arg) {
       color.h = arg;
@@ -309,7 +313,7 @@
       return Math.round(color.h);
     }
   };
-  Spectra.prototype.saturationv = function(arg) {
+  Spectra.fn.prototype.saturationv = function(arg) {
     var color = Util.rgbToHsv(this.color);
     if (arg) {
       color.s = arg;
@@ -319,7 +323,7 @@
       return color.s;
     }
   };
-  Spectra.prototype.value = function(arg) {
+  Spectra.fn.prototype.value = function(arg) {
     var color = Util.rgbToHsv(this.color);
     if (arg) {
       color.v = arg;
@@ -329,7 +333,7 @@
       return color.v;
     }
   };
-  Spectra.prototype.saturation = function(arg) {
+  Spectra.fn.prototype.saturation = function(arg) {
     var color = Util.rgbToHsl(this.color);
     if (arg) {
       color.s = arg;
@@ -339,7 +343,7 @@
       return color.s;
     }
   };
-  Spectra.prototype.lightness = function(arg) {
+  Spectra.fn.prototype.lightness = function(arg) {
     var color = Util.rgbToHsl(this.color);
     if (arg) {
       color.l = arg;
@@ -349,7 +353,7 @@
       return color.l;
     }
   };
-  Spectra.prototype.alpha = function(arg) {
+  Spectra.fn.prototype.alpha = function(arg) {
     var color = this.color;
     if (arg) {
       color.a = arg;
@@ -358,7 +362,7 @@
       return color.a;
     }
   };
-  Spectra.prototype.hex = function(arg) {
+  Spectra.fn.prototype.hex = function(arg) {
     if (arg) {
       this.color = Util.normalize({css: arg});
     } else {
@@ -387,7 +391,7 @@
    * Because other is also a color, it follows that we can simply compare red, green, blue, and alpha
    * to see if the colors are equal.
    */
-  Spectra.prototype.equals = function(other) {
+  Spectra.fn.prototype.equals = function(other) {
     color1 = this;
     color2 = other;
 
@@ -400,7 +404,7 @@
   /**
    * Returns the complement of this color.
    */
-  Spectra.prototype.complement = function() {
+  Spectra.fn.prototype.complement = function() {
     var newColor = new Spectra(this.color);
     newColor.hue((newColor.hue() + 180) % 360);
     return newColor;
@@ -410,7 +414,7 @@
    * Lightens or darkens a color based on a percentage value.
    * Percentage should be passed in as an integer, so 40 would lighten the color 40%.
    */
-  Spectra.prototype.shade = function(percentage) {
+  Spectra.fn.prototype.shade = function(percentage) {
     var newColor = new Spectra(this.color);
     newColor.lightness(newColor.lightness() + (percentage / 100));
     return newColor;
@@ -419,40 +423,55 @@
   /**
    * Lightens a color based on percentage value.
    */
-  Spectra.prototype.lighten = function(percentage) {
+  Spectra.fn.prototype.lighten = function(percentage) {
     return this.shade(percentage);
   };
 
   /**
    * Darkens a color based on percentage value.
    */
-  Spectra.prototype.darken = function(percentage) {
+  Spectra.fn.prototype.darken = function(percentage) {
     return this.shade(-percentage);
+  };
+
+  /**
+   * Adds saturation to the color based on a percentage value.
+   */
+  Spectra.fn.prototype.saturate = function(percentage) {
+    var p = percentage / 100;
+    var newColor = new Spectra(this.color);
+    newColor.saturation(newColor.saturation + p);
+    return newColor;
+  };
+
+  /**
+   * Desaturates the color based on a percentage value.
+   */
+  Spectra.fn.prototype.saturate = function(percentage) {
+    var p = percentage / 100;
+    var newColor = new Spectra(this.color);
+    newColor.saturation(newColor.saturation - p);
+    return newColor;
   };
 
   /**
    * Calculates the luminosity of the color, i.e. how it appears on screen.
    */
-  Spectra.prototype.luminosity = function() {
+  Spectra.fn.prototype.luminosity = function() {
     return (2 * this.red()) + (5 * this.green()) + (1 * this.blue());
   };
 
   /**
    * Returns a Spectra object, which is the grayscale of the current color.
    */
-  Spectra.prototype.grayscale = function() {
-    return new Spectra({
-      r: this.luminosity(),
-      g: this.luminosity(),
-      b: this.luminosity(),
-      a: this.alpha()
-    });
+  Spectra.fn.prototype.grayscale = function() {
+    return this.desaturate(100);
   };
 
   /**
    * Returns the color that results from mixing percent of the other color into this color.
    */
-  Spectra.prototype.mix = function(other, percentage) {
+  Spectra.fn.prototype.mix = function(other, percentage) {
     var p = percentage / 100 || 0.5;
     return new Spectra({
       r: this.red() * (1 - p) + other.red() * p,
@@ -463,20 +482,13 @@
   };
 
   /**
-   * Wrapper
-   */
-  var spectraWrapper = function(arg) {
-    return new Spectra(arg);
-  };
-
-  /**
    * Restores the old value of Spectra and returns the wrapper function.
    */
-  spectraWrapper.noConflict = function() {
+  Spectra.noConflict = function() {
     root.Spectra = oldSpectra;
-    return spectraWrapper;
+    return Spectra;
   };
 
   // Set the global variable Spectra to the wrapper that we have defined.
-  root.Spectra = spectraWrapper;
+  root.Spectra = Spectra;
 }).call(this);
