@@ -210,7 +210,10 @@ color1.equals(color2); <span class="comment">// Returns true.</span></pre></div>
             <div class="content"><div class='highlight'><pre><span class="keyword">var</span> color = Spectra({r: <span class="number">255</span>, g: <span class="number">25</span>, b: <span class="number">75</span>});
 <span class="keyword">var</span> complement = color.complement();
 <span class="keyword">var</span> lighter = color.lighten(<span class="number">20</span>); <span class="comment">// Lightens color by 20%.</span>
-<span class="keyword">var</span> darker = color.darken(<span class="number">25</span>); <span class="comment">// Darkens color by 25%.</span></pre></div></div>
+<span class="keyword">var</span> darker = color.darken(<span class="number">25</span>); <span class="comment">// Darkens color by 25%.</span>
+<span class="keyword">var</span> saturated = color.saturate(<span class="number">8</span>); <span class="comment">// Saturates color by 8%.</span>
+<span class="keyword">var</span> desaturated = color.desaturate(<span class="number">10</span>); <span class="comment">// Desaturates color by 10%.</span>
+<span class="keyword">var</span> grayscale = color.grayscale(); <span class="comment">// Returns the grayscale version of the color.</span></pre></div></div>
             
         </li>
         

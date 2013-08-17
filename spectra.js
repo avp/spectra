@@ -48,7 +48,9 @@ var color = Spectra({r: 255, g: 25, b: 75});
 var complement = color.complement();
 var lighter = color.lighten(20); // Lightens color by 20%.
 var darker = color.darken(25); // Darkens color by 25%.
-
+var saturated = color.saturate(8); // Saturates color by 8%.
+var desaturated = color.desaturate(10); // Desaturates color by 10%.
+var grayscale = color.grayscale(); // Returns the grayscale version of the color.
 
 // Utility Functions
 // -----------------
