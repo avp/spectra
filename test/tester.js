@@ -93,8 +93,8 @@ describe('Spectra', function() {
       expect(dark.hex()).toBe('#e50032');
     });
 
-    it('luminosity', function() {
-      expect(color.luminosity()).toBe(710);
+    it('luma', function() {
+      expect(color.luma()).toBeCloseTo(77.5, 1);
     });
   });
 

@@ -455,10 +455,10 @@
   };
 
   /**
-   * Calculates the luminosity of the color, i.e. how it appears on screen.
+   * Calculates the luma of the color, i.e. how it appears on screen.
    */
-  Spectra.fn.prototype.luminosity = function() {
-    return (2 * this.red()) + (5 * this.green()) + (1 * this.blue());
+  Spectra.fn.prototype.luma = function() {
+    return (0.2126 * this.red()) + (0.7152 * this.green()) + (0.0722 * this.blue());
   };
 
   /**
