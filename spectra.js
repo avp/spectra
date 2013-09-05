@@ -442,7 +442,7 @@
   Spectra.fn.prototype.saturate = function(percentage) {
     var p = percentage / 100;
     var newColor = new Spectra(this.color);
-    newColor.saturation(newColor.saturation + p);
+    newColor.saturation(newColor.saturation() + p);
     return newColor;
   };
 
@@ -452,7 +452,7 @@
   Spectra.fn.prototype.saturate = function(percentage) {
     var p = percentage / 100;
     var newColor = new Spectra(this.color);
-    newColor.saturation(newColor.saturation - p);
+    newColor.saturation(newColor.saturation() - p);
     return newColor;
   };
 
