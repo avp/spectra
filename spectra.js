@@ -457,6 +457,26 @@
   };
 
   /**
+   * Fades in the current color based on a percentage value, making it less transparent.
+   */
+  Spectra.fn.prototype.fadeIn = function(percentage) {
+    var p = percentage / 100;
+    var newColor = new Spectra(this.color);
+    newColor.alpha(newColor.alpha() + p);
+    return newColor;
+  };
+
+  /**
+   * Fades out the current color based on a percentage value, making it less transparent.
+   */
+  Spectra.fn.prototype.fadeOut = function(percentage) {
+    var p = percentage / 100;
+    var newColor = new Spectra(this.color);
+    newColor.alpha(newColor.alpha() - p);
+    return newColor;
+  };
+
+  /**
    * Calculates the luma of the color, i.e. how it appears on screen.
    */
   Spectra.fn.prototype.luma = function() {
