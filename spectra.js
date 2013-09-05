@@ -13,6 +13,8 @@
  */
 
  (function() {
+  'use strict';
+
   // Keep track of the global object.
   var root = this;
 
@@ -392,8 +394,8 @@
    * to see if the colors are equal.
    */
   Spectra.fn.prototype.equals = function(other) {
-    color1 = this;
-    color2 = other;
+    var color1 = this;
+    var color2 = other;
 
     return color1.red() === color2.red() &&
            color1.green() === color2.green() &&
