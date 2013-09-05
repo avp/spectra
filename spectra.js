@@ -449,7 +449,7 @@
   /**
    * Desaturates the color based on a percentage value.
    */
-  Spectra.fn.prototype.saturate = function(percentage) {
+  Spectra.fn.prototype.desaturate = function(percentage) {
     var p = percentage / 100;
     var newColor = new Spectra(this.color);
     newColor.saturation(newColor.saturation() - p);
