@@ -380,6 +380,10 @@
     }
   };
 
+  Spectra.fn.prototype.rgba = function() {
+    return 'rgba(' + this.red() + ',' + this.green() + ',' + this.blue() + ',' + this.alpha() + ')';
+  };
+
   /**
    * API Functions
    * =============
@@ -396,6 +400,10 @@
   Spectra.fn.prototype.equals = function(other) {
     var color1 = this;
     var color2 = other;
+
+    if (!color2) {
+      return color1 === color2;
+    }
 
     return color1.red() === color2.red() &&
            color1.green() === color2.green() &&
@@ -423,14 +431,14 @@
   };
 
   /**
-   * Lightens a color based on percentage value.
+   * Lightens a color based on percentage value from 1 to 100.
    */
   Spectra.fn.prototype.lighten = function(percentage) {
     return this.shade(percentage);
   };
 
   /**
-   * Darkens a color based on percentage value.
+   * Darkens a color based on percentage value from 1 to 100.
    */
   Spectra.fn.prototype.darken = function(percentage) {
     return this.shade(-percentage);

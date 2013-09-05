@@ -4,6 +4,19 @@ describe('Spectra', function() {
 
   beforeEach(function() {
     color = Spectra({r: 255, g: 25, b: 75, a: 0.6});
+
+    this.addMatchers({
+      toEqualColor: function(expected) {
+        var actual = this.actual;
+        var notText = this.isNot ? ' not' : '';
+
+        this.message = function() {
+          return 'Expected ' + actual.rgba() + notText + ' to be equal to color ' + expected.rgba();
+        };
+
+        return actual.equals(expected);
+      }
+    });
   });
 
   describe('Wrapper tests', function() {
@@ -19,12 +32,12 @@ describe('Spectra', function() {
 
     it('HSV wrapper', function() {
       color = Spectra({h: 347, s: 0.9020, v: 1.000, a: 0.6});
-      expect(color.equals(Spectra({r: 255, g: 25, b: 75, a: 0.6}))).toBe(true);
+      expect(color).toEqualColor(Spectra({r: 255, g: 25, b: 75, a: 0.6}));
     });
 
     it('HSL wrapper', function() {
       color = Spectra({h: 347, s: 1.000, l: 0.549, a: 0.6});
-      expect(color.equals(Spectra({r: 255, g: 25, b: 75, a: 0.6}))).toBe(true);
+      expect(color).toEqualColor(Spectra({r: 255, g: 25, b: 75, a: 0.6}));
     });
 
     it('shorthand CSS wrapper', function() {
@@ -38,15 +51,15 @@ describe('Spectra', function() {
     });
     it('longhand CSS wrapper', function() {
       color = Spectra('#FF194b');
-      expect(color.equals(Spectra({r: 255, g: 25, b: 75}))).toBe(true);
+      expect(color).toEqualColor(Spectra({r: 255, g: 25, b: 75}));
     });
     it('rgb CSS wrapper', function() {
       color = Spectra('rgb(255,25, 75)');
-      expect(color.equals(Spectra({r: 255, g: 25, b: 75}))).toBe(true);
+      expect(color).toEqualColor(Spectra({r: 255, g: 25, b: 75}));
     });
     it('rgba CSS wrapper', function() {
       color = Spectra('rgba(255,25, 75, 0.6)');
-      expect(color.equals(Spectra({r: 255, g: 25, b: 75, a: 0.6}))).toBe(true);
+      expect(color).toEqualColor(Spectra({r: 255, g: 25, b: 75, a: 0.6}));
     });
   });
 
@@ -65,36 +78,44 @@ describe('Spectra', function() {
       color.red(255);
       color.green(25);
       color.blue(75);
-      expect(color.equals(Spectra({r: 255, g: 25, b: 75, a: 0.6}))).toBe(true);
+      expect(color).toEqualColor(Spectra({r: 255, g: 25, b: 75, a: 0.6}));
     });
     it('HSV get and set', function() {
       color = Spectra({r: 123, g: 192, b: 72, a: 0.6});
       color.hue(347);
       color.saturationv(0.9020);
       color.value(1.000);
-      expect(color.equals(Spectra({r: 255, g: 25, b: 75, a: 0.6}))).toBe(true);
+      expect(color).toEqualColor(Spectra({r: 255, g: 25, b: 75, a: 0.6}));
     });
   });
 
   describe('Color operations', function() {
     it('complement', function() {
-      color = Spectra({r: 255, g: 25, b: 75});
-      var complement = color.complement();
-      expect(complement.hex()).toBe('#19ffcd');
+      expect(color.complement().hex()).toBe('#19ffcd');
     });
 
     it('lighten', function() {
-      var light = color.lighten(10);
-      expect(light.hex()).toBe('#ff4c73');
+      expect(color.lighten(10).hex()).toBe('#ff4c73');
     });
 
     it('darken', function() {
-      var dark = color.darken(10);
-      expect(dark.hex()).toBe('#e50032');
+      expect(color.darken(10).hex()).toBe('#e50032');
+    });
+
+    it('saturate', function() {
+      expect(color.saturate(10).hex()).toBe('#ff194b');
+    });
+
+    it('desaturate', function() {
+      expect(color.desaturate(10).hex()).toBe('#f42552');
     });
 
     it('luma', function() {
       expect(color.luma()).toBeCloseTo(77.5, 1);
+    });
+
+    it('grayscale', function() {
+      expect(color.grayscale().hex()).toBe('#8c8c8c');
     });
   });
 
