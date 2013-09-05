@@ -26,7 +26,7 @@ Simply download [spectra.js](https://github.com/aakpat6/spectra/blob/master/spec
 API Reference
 -------------
 
-Refer to https://github.com/aakpat6/spectra/blob/master/spectra.js for reference on how to use Spectra.
+Refer to http://aakpat6.github.io/spectra for reference on how to use Spectra.
 
 Tests
 -----
