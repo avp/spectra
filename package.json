@@ -10,7 +10,6 @@
     "url": "https://github.com/aakpat6/spectra/issues"
   },
   "devDependencies": {
-    "grunt-lib-phantomjs": "~0.4.0",
     "grunt-contrib-jasmine": "~0.4.0",
     "grunt-contrib-watch": "~0.5.1",
     "grunt": "~0.4.1"
