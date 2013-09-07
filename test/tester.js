@@ -60,6 +60,8 @@ describe('Spectra', function() {
     it('rgba CSS wrapper', function() {
       color = Spectra('rgba(255,25, 75, 0.6)');
       expect(color).toEqualColor(Spectra({r: 255, g: 25, b: 75, a: 0.6}));
+      color = Spectra('rgba(255,25, 75, .6)');
+      expect(color).toEqualColor(Spectra({r: 255, g: 25, b: 75, a: 0.6}));
     });
   });
 
