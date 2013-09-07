@@ -50,7 +50,9 @@ var lighter = color.lighten(20); // Lightens color by 20%.
 var darker = color.darken(25); // Darkens color by 25%.
 var saturated = color.saturate(8); // Saturates color by 8%.
 var desaturated = color.desaturate(10); // Desaturates color by 10%.
-var luma = color.luma() // Returns the luma of the color, how bright it is on a screen.
+var fadedIn = color.fadeIn(10); // Makes color 10% more opaque.
+var fadedOut = color.fadeOut(10); // Makes color 10% less opaque.
+var luma = color.luma(); // Returns the luma of the color, how bright it is on a screen.
 var grayscale = color.grayscale(); // Returns the grayscale version of the color.
 
 // Utility Functions
