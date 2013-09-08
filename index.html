@@ -203,20 +203,11 @@ color1.equals(color2); <span class="comment">// Returns true.</span></pre></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
-              <p>You can call many operations on the Spectra object.</p>
+              <p>Find the complement of a color.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> color = Spectra({r: <span class="number">255</span>, g: <span class="number">25</span>, b: <span class="number">75</span>});
-<span class="keyword">var</span> complement = color.complement();
-<span class="keyword">var</span> lighter = color.lighten(<span class="number">20</span>); <span class="comment">// Lightens color by 20%.</span>
-<span class="keyword">var</span> darker = color.darken(<span class="number">25</span>); <span class="comment">// Darkens color by 25%.</span>
-<span class="keyword">var</span> saturated = color.saturate(<span class="number">8</span>); <span class="comment">// Saturates color by 8%.</span>
-<span class="keyword">var</span> desaturated = color.desaturate(<span class="number">10</span>); <span class="comment">// Desaturates color by 10%.</span>
-<span class="keyword">var</span> fadedIn = color.fadeIn(<span class="number">10</span>); <span class="comment">// Makes color 10% more opaque.</span>
-<span class="keyword">var</span> fadedOut = color.fadeOut(<span class="number">10</span>); <span class="comment">// Makes color 10% less opaque.</span>
-<span class="keyword">var</span> luma = color.luma(); <span class="comment">// Returns the luma of the color, how bright it is on a screen.</span>
-<span class="keyword">var</span> grayscale = color.grayscale(); <span class="comment">// Returns the grayscale version of the color.</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> complement = color.complement();</pre></div></div>
             
         </li>
         
@@ -224,12 +215,14 @@ color1.equals(color2); <span class="comment">// Returns true.</span></pre></div>
         <li id="section-13">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
-              <h2>Utility Functions</h2>
+              <p>Lightens color by 20%.</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> lighter = color.lighten(<span class="number">20</span>);</pre></div></div>
             
         </li>
         
@@ -239,6 +232,152 @@ color1.equals(color2); <span class="comment">// Returns true.</span></pre></div>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>Darkens color by 25%.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> darker = color.darken(<span class="number">25</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>Saturates color by 8%.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> saturated = color.saturate(<span class="number">8</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>Desaturates color by 10%.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> desaturated = color.desaturate(<span class="number">10</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>Makes color 10% more opaque.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> fadedIn = color.fadeIn(<span class="number">10</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>Makes color 10% less opaque.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> fadedOut = color.fadeOut(<span class="number">10</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>Returns the luma of the color, how bright it is on a screen.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> luma = color.luma();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>Returns the grayscale version of the color.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> grayscale = color.grayscale();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <h2>Chaining</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>You can chain together function calls.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> chained = color.complement().lighten(<span class="number">10</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <h2>Utility Functions</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <p>You can reset the value of Spectra to what it used to be by using <code>noConflict</code>, which returns
 the Spectra object itself. This is useful for renaming Spectra.</p>

@@ -43,17 +43,29 @@ color1.equals(color2); // Returns true.
 
 // Color Operations
 // ----------------
-// You can call many operations on the Spectra object.
-var color = Spectra({r: 255, g: 25, b: 75});
+// Find the complement of a color.
 var complement = color.complement();
-var lighter = color.lighten(20); // Lightens color by 20%.
-var darker = color.darken(25); // Darkens color by 25%.
-var saturated = color.saturate(8); // Saturates color by 8%.
-var desaturated = color.desaturate(10); // Desaturates color by 10%.
-var fadedIn = color.fadeIn(10); // Makes color 10% more opaque.
-var fadedOut = color.fadeOut(10); // Makes color 10% less opaque.
-var luma = color.luma(); // Returns the luma of the color, how bright it is on a screen.
-var grayscale = color.grayscale(); // Returns the grayscale version of the color.
+// Lightens color by 20%.
+var lighter = color.lighten(20);
+// Darkens color by 25%.
+var darker = color.darken(25);
+// Saturates color by 8%.
+var saturated = color.saturate(8);
+// Desaturates color by 10%.
+var desaturated = color.desaturate(10);
+// Makes color 10% more opaque.
+var fadedIn = color.fadeIn(10);
+// Makes color 10% less opaque.
+var fadedOut = color.fadeOut(10);
+// Returns the luma of the color, how bright it is on a screen.
+var luma = color.luma();
+// Returns the grayscale version of the color.
+var grayscale = color.grayscale();
+
+// Chaining
+// --------
+// You can chain together function calls.
+var chained = color.complement().lighten(10);
 
 // Utility Functions
 // -----------------

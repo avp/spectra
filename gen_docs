@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docco -o . spectra.js
+docco -o . -l parallel spectra.js
 mv spectra.html index.html
