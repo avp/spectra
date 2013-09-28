@@ -30,8 +30,8 @@
    * If x is outside the range lower to upper, the closest of lower or upper is used.
    */
   Util.clamp = function(x, lower, upper) {
-    lower = lower || 0;
-    upper = upper || 1;
+    lower = lower !== undefined ? lower : 0;
+    upper = upper !== undefined ? upper : 1;
     return Math.max(lower, Math.min(upper, x));
   };
 
@@ -204,7 +204,7 @@
     }
 
     // If we can't parse it, we throw a TypeError.
-    throw TypeError(css + ' is not a valid CSS string for Spectra.');
+    throw new TypeError(css + ' is not a valid CSS string for Spectra.');
   };
 
   /**
@@ -277,7 +277,7 @@
    */
   Spectra.fn.prototype.red = function(arg) {
     var color = this.color;
-    if (arg) {
+    if (arguments.length) {
       color.r = arg;
       this.color = Util.normalize(color);
       return this;
@@ -287,7 +287,7 @@
   };
   Spectra.fn.prototype.green = function(arg) {
     var color = this.color;
-    if (arg) {
+    if (arguments.length) {
       color.g = arg;
       this.color = Util.normalize(color);
       return this;
@@ -297,7 +297,7 @@
   };
   Spectra.fn.prototype.blue = function(arg) {
     var color = this.color;
-    if (arg) {
+    if (arguments.length) {
       color.b = arg;
       this.color = Util.normalize(color);
       return this;
@@ -307,7 +307,7 @@
   };
   Spectra.fn.prototype.hue = function(arg) {
     var color = Util.rgbToHsv(this.color);
-    if (arg) {
+    if (arguments.length) {
       color.h = arg;
       this.color = Util.normalize({hsv: color, a: this.color.a});
       return this;
@@ -317,7 +317,7 @@
   };
   Spectra.fn.prototype.saturationv = function(arg) {
     var color = Util.rgbToHsv(this.color);
-    if (arg) {
+    if (arguments.length) {
       color.s = arg;
       this.color = Util.normalize({hsv: color, a: this.color.a});
       return this;
@@ -327,7 +327,7 @@
   };
   Spectra.fn.prototype.value = function(arg) {
     var color = Util.rgbToHsv(this.color);
-    if (arg) {
+    if (arguments.length) {
       color.v = arg;
       this.color = Util.normalize({hsv: color, a: this.color.a});
       return this;
@@ -337,7 +337,7 @@
   };
   Spectra.fn.prototype.saturation = function(arg) {
     var color = Util.rgbToHsl(this.color);
-    if (arg) {
+    if (arguments.length) {
       color.s = arg;
       this.color = Util.normalize({hsl: color, a: this.color.a});
       return this;
@@ -347,7 +347,7 @@
   };
   Spectra.fn.prototype.lightness = function(arg) {
     var color = Util.rgbToHsl(this.color);
-    if (arg) {
+    if (arguments.length) {
       color.l = arg;
       this.color = Util.normalize({hsl: color, a: this.color.a});
       return this;
@@ -357,7 +357,7 @@
   };
   Spectra.fn.prototype.alpha = function(arg) {
     var color = this.color;
-    if (arg) {
+    if (arguments.length) {
       color.a = arg;
       return this;
     } else {
@@ -365,7 +365,7 @@
     }
   };
   Spectra.fn.prototype.hex = function(arg) {
-    if (arg) {
+    if (arguments.length) {
       this.color = Util.normalize({css: arg});
     } else {
       var r = this.red();
@@ -401,7 +401,7 @@
     var color1 = this;
     var color2 = other;
 
-    if (!color2) {
+    if (arguments.length < 1) {
       return color1 === color2;
     }
 
@@ -424,7 +424,7 @@
    * Lightens or darkens a color based on a percentage value.
    * Percentage should be passed in as an integer, so 40 would lighten the color 40%.
    */
-  Spectra.fn.prototype.shade = function(percentage) {
+  Spectra.fn.prototype.shade_ = function(percentage) {
     var newColor = new Spectra(this.color);
     newColor.lightness(newColor.lightness() + (percentage / 100));
     return newColor;
@@ -434,14 +434,14 @@
    * Lightens a color based on percentage value from 1 to 100.
    */
   Spectra.fn.prototype.lighten = function(percentage) {
-    return this.shade(percentage);
+    return this.shade_(percentage);
   };
 
   /**
    * Darkens a color based on percentage value from 1 to 100.
    */
   Spectra.fn.prototype.darken = function(percentage) {
-    return this.shade(-percentage);
+    return this.shade_(-percentage);
   };
 
   /**
@@ -502,7 +502,7 @@
    * Returns the color that results from mixing percent of the other color into this color.
    */
   Spectra.fn.prototype.mix = function(other, percentage) {
-    var p = percentage / 100 || 0.5;
+    var p = arguments.length < 2 ? 0.5 : percentage / 100;
     return new Spectra({
       r: this.red() * (1 - p) + other.red() * p,
       g: this.green() * (1 - p) + other.green() * p,

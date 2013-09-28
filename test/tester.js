@@ -48,6 +48,7 @@ describe('Spectra', function() {
       expect(color.hue()).toBe(207);
       expect(color.saturationv()).toBeCloseTo(0.73, 1);
       expect(color.value()).toBeCloseTo(1.000, 1);
+      expect(color.hex()).toBe('#44aaff');
     });
     it('longhand CSS wrapper', function() {
       color = Spectra('#FF194b');
@@ -92,32 +93,25 @@ describe('Spectra', function() {
   });
 
   describe('Color operations', function() {
-    it('complement', function() {
+    it('Color operations', function() {
       expect(color.complement().hex()).toBe('#19ffcd');
-    });
-
-    it('lighten', function() {
       expect(color.lighten(10).hex()).toBe('#ff4c73');
-    });
-
-    it('darken', function() {
       expect(color.darken(10).hex()).toBe('#e50032');
-    });
-
-    it('saturate', function() {
       expect(color.saturate(10).hex()).toBe('#ff194b');
-    });
-
-    it('desaturate', function() {
       expect(color.desaturate(10).hex()).toBe('#f42552');
-    });
-
-    it('luma', function() {
+      expect(color.fadeIn(7).alpha()).toBeCloseTo(0.67, 1);
+      expect(color.fadeOut(5).alpha()).toBeCloseTo(0.55, 1);
       expect(color.luma()).toBeCloseTo(77.5, 1);
+      expect(color.grayscale().hex()).toBe('#8c8c8c');
     });
 
-    it('grayscale', function() {
-      expect(color.grayscale().hex()).toBe('#8c8c8c');
+    it('Mix', function() {
+      var color1 = Spectra('#0f7');
+      var color2 = Spectra('#f87');
+      var mixed1 = color1.mix(color2, 0);
+      expect(mixed1.hex()).toBe('#00ff77');
+      var mixed2 = color1.mix(color2, 20);
+      expect(mixed2.hex()).toBe('#33e777');
     });
   });
 
