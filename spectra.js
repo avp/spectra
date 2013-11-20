@@ -1,4 +1,4 @@
-/**
+/**!
  * Spectra.js
  *
  * Wrapping a value with Spectra() returns a Spectra object.
@@ -521,4 +521,5 @@
 
   // Set the global variable Spectra to the wrapper that we have defined.
   root.Spectra = Spectra;
+
 }).call(this);
