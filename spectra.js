@@ -12,7 +12,7 @@
  * }
  */
 
- (function() {
+(function() {
   'use strict';
 
   // Keep track of the global object.
@@ -253,7 +253,7 @@
     if (arg === null || arg === undefined) {
       throw new TypeError('Spectra argument must be defined.');
     }
-    if (typeof arg == 'object') {
+    if (typeof arg === 'object') {
       if (arg.r !== undefined || arg.red !== undefined) {
         this.color = Util.normalize({r: arg.r, g: arg.g, b: arg.b, a: arg.a});
       }
@@ -263,7 +263,7 @@
       if (arg.l !== undefined || arg.lightness !== undefined) {
         this.color = Util.normalize({hsl: arg, a: arg.a});
       }
-    } else if (typeof arg == 'string') {
+    } else if (typeof arg === 'string') {
       this.color = Util.normalize({css: arg});
     }
     return this;

@@ -21,7 +21,7 @@ The project was created to have a highly functional and lightweight way to deal 
 Installation
 ------------
 
-Simply download [spectra.js](https://github.com/aakpat6/spectra/blob/master/spectra.js) and include it before your source files.
+Simply download [spectra.min.js](https://github.com/aakpat6/spectra/releases/download/v0.1.0-beta.1/spectra.min.js) and include it before your source files.
 
 API Reference
 -------------
@@ -31,7 +31,12 @@ Refer to http://aakpat6.github.io/spectra for reference on how to use Spectra.
 Tests
 -----
 
-There are [Jasmine](https://pivotal.github.io/jasmine) tests included in the `tests` folder. Simply run `grunt test` from the root of the repository to run the tests. Alternatively, run `grunt` to keep watch over source and test files, and automatically rerun the tests when the files change.
+There are [Jasmine](https://pivotal.github.io/jasmine) tests included in the `tests` folder. Simply run `grunt test` from the root of the repository to run the tests. This also checks JSHint. Alternatively, run `grunt` to keep watch over source and test files, and automatically rerun the tests when the files change.
+
+Building
+--------
+
+To minify Spectra, run `grunt build`.
 
 Contributing
 ------------

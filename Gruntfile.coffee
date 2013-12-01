@@ -21,6 +21,19 @@ module.exports = (grunt) ->
         options:
           specs: 'test/**/*.js'
 
+    jshint:
+      all:
+        options:
+          curly: true
+          eqeqeq: true
+          indent: 2
+          undef: true
+          unused: true
+          strict: true
+          trailing: true
+        files:
+          src: 'spectra.js'
+
     watch:
       jasmine:
         files: ['*.js', 'test/**/*.js']
@@ -32,6 +45,8 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-jasmine'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-watch'
+  grunt.loadNpmTasks 'grunt-contrib-jshint'
 
-  grunt.registerTask 'test', ['jasmine:dev', 'uglify', 'jasmine:prod']
-  grunt.registerTask 'default', ['uglify', 'jasmine:dev', 'watch']
+  grunt.registerTask 'test', ['jshint', 'jasmine:dev', 'uglify', 'jasmine:prod']
+  grunt.registerTask 'build', ['uglify', 'jasmine:prod']
+  grunt.registerTask 'default', ['jasmine:dev', 'watch']
