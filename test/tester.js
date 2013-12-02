@@ -11,7 +11,7 @@ describe('Spectra', function() {
         var notText = this.isNot ? ' not' : '';
 
         this.message = function() {
-          return 'Expected ' + actual.rgba() + notText + ' to be equal to color ' + expected.rgba();
+          return 'Expected ' + actual.rgbaString() + notText + ' to be equal to color ' + expected.rgbaString();
         };
 
         return actual.equals(expected);
@@ -49,15 +49,22 @@ describe('Spectra', function() {
       expect(color.saturationv()).toBeCloseTo(0.73, 1);
       expect(color.value()).toBeCloseTo(1.000, 1);
       expect(color.hex()).toBe('#44aaff');
+      expect(color.rgbaString()).toBe('rgba(68,170,255,1)');
+      expect(color.hslString()).toBe('hsl(207,1,0.63)');
+      expect(color.hslaString()).toBe('hsla(207,1,0.63,1)');
+      expect(color.rgbNumber()).toBe(0x44aaff);
     });
+
     it('longhand CSS wrapper', function() {
       color = Spectra('#FF194b');
       expect(color).toEqualColor(Spectra({r: 255, g: 25, b: 75}));
     });
+
     it('rgb CSS wrapper', function() {
       color = Spectra('rgb(255,25, 75)');
       expect(color).toEqualColor(Spectra({r: 255, g: 25, b: 75}));
     });
+
     it('rgba CSS wrapper', function() {
       color = Spectra('rgba(255,25, 75, 0.6)');
       expect(color).toEqualColor(Spectra({r: 255, g: 25, b: 75, a: 0.6}));
@@ -72,6 +79,7 @@ describe('Spectra', function() {
       expect(function() {Spectra('#deadbeef');}).toThrow();
       expect(function() {Spectra(null);}).toThrow();
       expect(function() {Spectra(undefined);}).toThrow();
+      expect(function() {Spectra(true);}).toThrow();
     });
   });
 
@@ -83,6 +91,7 @@ describe('Spectra', function() {
       color.blue(75);
       expect(color).toEqualColor(Spectra({r: 255, g: 25, b: 75, a: 0.6}));
     });
+
     it('HSV get and set', function() {
       color = Spectra({r: 123, g: 192, b: 72, a: 0.6});
       color.hue(347);
@@ -112,6 +121,19 @@ describe('Spectra', function() {
       expect(mixed1.hex()).toBe('#00ff77');
       var mixed2 = color1.mix(color2, 20);
       expect(mixed2.hex()).toBe('#33e777');
+    });
+
+    it('Gradient', function() {
+      var color1 = Spectra('#000000');
+      var color2 = Spectra('#505050');
+      var grad1 = color1.gradient(color2, 6);
+      expect(grad1.length).toBe(6);
+      expect(grad1[0].hex()).toEqual('#000000');
+      expect(grad1[1].hex()).toEqual('#101010');
+      expect(grad1[2].hex()).toEqual('#202020');
+      expect(grad1[3].hex()).toEqual('#303030');
+      expect(grad1[4].hex()).toEqual('#404040');
+      expect(grad1[5].hex()).toEqual('#505050');
     });
   });
 

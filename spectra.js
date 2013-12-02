@@ -265,6 +265,8 @@
       }
     } else if (typeof arg === 'string') {
       this.color = Util.normalize({css: arg});
+    } else {
+      throw new TypeError('Spectra argument ' + arg + ' is invalid.');
     }
     return this;
   };
@@ -364,24 +366,32 @@
       return color.a;
     }
   };
-  Spectra.fn.prototype.hex = function(arg) {
-    if (arguments.length) {
-      this.color = Util.normalize({css: arg});
-    } else {
-      var r = this.red();
-      var g = this.green();
-      var b = this.blue();
 
-      // Pad the strings so that they are all 2 digits long, and concatenate.
-      var rString = ('00' + r.toString(16)).slice(-2);
-      var gString = ('00' + g.toString(16)).slice(-2);
-      var bString = ('00' + b.toString(16)).slice(-2);
-      return '#' + rString + gString + bString;
-    }
+  Spectra.fn.prototype.hex = function() {
+    // Pad the strings so that they are all 2 digits long, and concatenate.
+    var rString = ('00' + this.red().toString(16)).slice(-2);
+    var gString = ('00' + this.green().toString(16)).slice(-2);
+    var bString = ('00' + this.blue().toString(16)).slice(-2);
+    return '#' + rString + gString + bString;
   };
 
-  Spectra.fn.prototype.rgba = function() {
+  Spectra.fn.prototype.rgbaString = function() {
     return 'rgba(' + this.red() + ',' + this.green() + ',' + this.blue() + ',' + this.alpha() + ')';
+  };
+
+  Spectra.fn.prototype.hslString = function() {
+    return 'hsl(' + this.hue() + ',' + this.saturation() + ',' +
+                    (Math.round(this.lightness()*100) / 100) + ')';
+  };
+
+  Spectra.fn.prototype.hslaString = function() {
+    return 'hsla(' + this.hue() + ',' + this.saturation() + ',' +
+                     (Math.round(this.lightness()*100) / 100) + ',' +
+                     this.alpha() + ')';
+  };
+
+  Spectra.fn.prototype.rgbNumber = function() {
+    return (this.red() << 16) | (this.green() << 8) | (this.blue());
   };
 
   /**
@@ -512,11 +522,44 @@
   };
 
   /**
+   * Returns a gradient of colors approximately from this color to the other, consisting of n colors.
+   */
+  Spectra.fn.prototype.gradient = function(other, n) {
+    var gradient = [];
+    var r = this.red();
+    var g = this.green();
+    var b = this.blue();
+    var dr = (other.red() - this.red()) / (n - 1);
+    var dg = (other.green() - this.green()) / (n - 1);
+    var db = (other.blue() - this.blue()) / (n - 1);
+
+    for (var i = 0; i < n; i++) {
+      gradient.push(new Spectra({r: r, g: g, b: b}));
+      r += dr;
+      g += dg;
+      b += db;
+    }
+
+    return gradient;
+  };
+
+  /**
    * Restores the old value of Spectra and returns the wrapper function.
    */
   Spectra.noConflict = function() {
     root.Spectra = oldSpectra;
     return Spectra;
+  };
+
+  /**
+   * Generates a random color.
+   */
+  Spectra.random = function() {
+    return new Spectra({
+      r: Math.floor(Math.random() * 255),
+      g: Math.floor(Math.random() * 255),
+      b: Math.floor(Math.random() * 255)
+    });
   };
 
   // Set the global variable Spectra to the wrapper that we have defined.
