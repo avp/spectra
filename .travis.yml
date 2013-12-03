@@ -4,8 +4,4 @@ node_js:
 notifications:
   email: true
 before_script:
-  - sudo npm install -g grunt
-  - sudo npm install -g grunt-cli
-script:
-  - grunt build
-  - grunt test
+  - npm install -g grunt-cli
