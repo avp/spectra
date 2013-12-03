@@ -563,6 +563,13 @@
   };
 
   // Set the global variable Spectra to the wrapper that we have defined.
-  root.Spectra = Spectra;
+  if (typeof exports !== 'undefined') {
+    if (typeof module !== 'undefined') {
+      exports = module.exports = Spectra;
+    }
+    exports.Spectra = Spectra;
+  } else {
+    root.Spectra = Spectra;
+  }
 
 }).call(this);

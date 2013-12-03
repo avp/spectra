@@ -1,7 +1,9 @@
 {
-  "name": "Spectra",
+  "name": "spectra",
   "description": "Javascript color library.",
   "version": "0.1.0",
+  "author": "Aakash Patel <aakash@avp42.com>",
+  "main": "spectra.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/aakpat6/spectra.git"
@@ -9,11 +11,20 @@
   "bugs": {
     "url": "https://github.com/aakpat6/spectra/issues"
   },
+  "scripts": {
+    "test": "grunt test",
+    "build": "grunt build"
+  },
   "devDependencies": {
     "grunt-contrib-jasmine": "~0.4.0",
     "grunt-contrib-watch": "~0.5.1",
     "grunt": "~0.4.1",
     "grunt-contrib-uglify": "~0.2.7",
     "grunt-contrib-jshint": "~0.7.2"
-  }
+  },
+  "files": [
+    "spectra.js",
+    "spectra.min.js",
+    "LICENSE"
+  ]
 }

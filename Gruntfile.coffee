@@ -31,6 +31,7 @@ module.exports = (grunt) ->
           unused: true
           strict: true
           trailing: true
+          node: true
         files:
           src: 'spectra.js'
 
