@@ -1,4 +1,4 @@
-Spectra
+Spectra [![Build Status](https://travis-ci.org/aakpat6/spectra.png?branch=master)](https://travis-ci.org/aakpat6/spectra)
 =======
 
 Spectra is a Javascript library for quickly manipulating and converting colors.
