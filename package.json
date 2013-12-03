@@ -1,9 +1,10 @@
 {
-  "name": "spectra",
+  "name": "spectra-color",
   "description": "Javascript color library.",
   "version": "0.1.0",
-  "author": "Aakash Patel <aakash@avp42.com>",
+  "author": "Aakash Patel <aakpat6@gmail.com>",
   "main": "spectra.js",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git://github.com/aakpat6/spectra.git"

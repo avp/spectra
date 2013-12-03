@@ -23,6 +23,10 @@ Installation
 
 Simply download [spectra.min.js](https://github.com/aakpat6/spectra/releases/download/v0.1.0-beta.1/spectra.min.js) and include it before your source files.
 
+### Node
+
+This module also works with Node. Simply run `npm install spectra-color` and use `require('spectra-color')` to set it up.
+
 API Reference
 -------------
 
