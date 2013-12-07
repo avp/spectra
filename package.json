@@ -13,8 +13,7 @@
     "url": "https://github.com/aakpat6/spectra/issues"
   },
   "scripts": {
-    "test": "grunt test",
-    "build": "grunt build"
+    "test": "grunt travis"
   },
   "devDependencies": {
     "grunt-contrib-jasmine": "~0.4.0",
