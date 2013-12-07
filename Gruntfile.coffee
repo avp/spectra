@@ -21,6 +21,20 @@ module.exports = (grunt) ->
         options:
           specs: 'test/**/*.js'
 
+    karma:
+      options:
+        configFile: 'karma.conf.js'
+        reporters: ['progress', 'coverage']
+      ci:
+        singleRun: true
+        coverageReporter:
+          type: 'lcov'
+          dir: 'test/coverage/'
+
+    coveralls:
+      options:
+        coverage_dir: 'test/coverage/'
+
     jshint:
       all:
         options:
@@ -47,7 +61,10 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-jshint'
+  grunt.loadNpmTasks 'grunt-karma'
+  grunt.loadNpmTasks 'grunt-karma-coveralls'
 
   grunt.registerTask 'test', ['jshint', 'jasmine:dev', 'uglify', 'jasmine:prod']
   grunt.registerTask 'build', ['uglify', 'jasmine:prod']
   grunt.registerTask 'default', ['jasmine:dev', 'watch']
+  grunt.registerTask 'travis', ['test', 'karma', 'coveralls']
