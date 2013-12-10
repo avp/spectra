@@ -87,25 +87,25 @@
     var s = Util.clamp(Number(hsv.s || 0));
     var v = Util.clamp(Number(hsv.v || 0));
     var chroma = s * v;
-    var hDash = h / 60;
-    var x = chroma * (1 - Math.abs((hDash % 2) - 1));
+    var sector = h / 60; // Sector of the color wheel.
+    var x = chroma * (1 - Math.abs((sector % 2) - 1));
 
-    if(hDash < 1.0) {
+    if(sector < 1.0) {
       rgb.r = chroma;
       rgb.g = x;
-    } else if (hDash < 2) {
+    } else if (sector < 2) {
       rgb.r = x;
       rgb.g = chroma;
-    } else if (hDash < 3) {
+    } else if (sector < 3) {
       rgb.g = chroma;
       rgb.b = x;
-    } else if (hDash < 4) {
+    } else if (sector < 4) {
       rgb.g= x;
       rgb.b = chroma;
-    } else if (hDash < 5) {
+    } else if (sector < 5) {
       rgb.r = x;
       rgb.b = chroma;
-    } else if (hDash <= 6) {
+    } else if (sector <= 6) {
       rgb.r = chroma;
       rgb.b = x;
     }

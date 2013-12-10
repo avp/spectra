@@ -28,6 +28,8 @@ describe('Spectra', function() {
       expect(color.alpha()).toBe(0.6);
       color = Spectra({r: 255, g: 25, b: 75});
       expect(color.alpha()).toBe(1);
+      color = Spectra({r: 0, g: 0, b: 0});
+      expect(color.hue()).toBe(0);
     });
 
     it('HSV wrapper', function() {
