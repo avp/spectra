@@ -72,4 +72,5 @@ var chained = color.complement().lighten(10);
 // You can reset the value of Spectra to what it used to be by using `noConflict`, which returns
 // the Spectra object itself. This is useful for renaming Spectra.
 var newSpectra = Spectra.noConflict();
-
+// You can get a random Spectra object by using `random`.
+var randomColor = Spectra.random();
