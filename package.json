@@ -1,6 +1,6 @@
 {
-  "name": "spectra-color",
-  "description": "Javascript color library.",
+  "name": "spectra",
+  "description": "Javascript color manipulation library.",
   "version": "0.1.0",
   "author": "Aakash Patel <aakpat6@gmail.com>",
   "main": "spectra.js",
