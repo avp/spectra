@@ -106,6 +106,7 @@ describe('Spectra', function() {
   describe('Color operations', function() {
     it('Color operations', function() {
       expect(color.complement().hex()).toBe('#19ffcd');
+      expect(color.negate().hex()).toBe('#00e6b4');
       expect(color.lighten(10).hex()).toBe('#ff4c73');
       expect(color.darken(10).hex()).toBe('#e50032');
       expect(color.saturate(10).hex()).toBe('#ff194b');

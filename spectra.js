@@ -431,6 +431,18 @@
   };
 
   /**
+   * Negates this color.
+   * For a color {R, G, B}, returns a new color {R', G', B'}, where R' = 255 - R and so on.
+   */
+  Spectra.fn.prototype.negate = function() {
+    var newColor = new Spectra(this.color);
+    newColor.red(255 - newColor.red());
+    newColor.green(255 - newColor.green());
+    newColor.blue(255 - newColor.blue());
+    return newColor;
+  };
+
+  /**
    * Lightens or darkens a color based on a percentage value.
    * Percentage should be passed in as an integer, so 40 would lighten the color 40%.
    */
