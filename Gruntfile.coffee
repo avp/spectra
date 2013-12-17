@@ -49,12 +49,18 @@ module.exports = (grunt) ->
         options:
           curly: true
           eqeqeq: true
+          es3: true
+          immed: true
           indent: 2
-          undef: true
-          unused: true
+          latedef: true
+          noarg: true
+          node: true
+          noempty: true
+          nonew: true
           strict: true
           trailing: true
-          node: true
+          undef: true
+          unused: true
         files:
           src: 'spectra.js'
 
