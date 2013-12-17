@@ -8,7 +8,15 @@ module.exports = (grunt) ->
         options:
           mangle:
             except: ['Spectra']
-          report: 'min'
+          report: 'gzip'
+          compress:
+            conditionals: true
+            if_return: true
+            booleans: true
+            evaluate: true
+            sequences: true
+            properties: true
+            join_vars: true
         files:
           'spectra.min.js': ['spectra.js']
 

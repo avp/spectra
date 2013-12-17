@@ -18,14 +18,14 @@
   // Keep track of the global object.
   var root = this;
 
-  // Store the old value of Spectra to reassign in case of noConflict.
+  // Store the old value of Spectra to reassign in case of a call to noConflict.
   var oldSpectra = root.Spectra;
 
   // Utility functions for use in Spectra.
   var Util = {};
 
   /**
-   * Clamps x to be between lower and upper.
+   * Clamps x to be between lower and upper, inclusive.
    * If not specified, lower and upper are 0 and 1 respectively.
    * If x is outside the range lower to upper, the closest of lower or upper is used.
    */
@@ -369,9 +369,9 @@
 
   Spectra.fn.prototype.hex = function() {
     // Pad the strings so that they are all 2 digits long, and concatenate.
-    var rString = ('00' + this.red().toString(16)).slice(-2);
-    var gString = ('00' + this.green().toString(16)).slice(-2);
-    var bString = ('00' + this.blue().toString(16)).slice(-2);
+    var rString = ('0' + this.red().toString(16)).slice(-2);
+    var gString = ('0' + this.green().toString(16)).slice(-2);
+    var bString = ('0' + this.blue().toString(16)).slice(-2);
     return '#' + rString + gString + bString;
   };
 
