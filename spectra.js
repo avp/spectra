@@ -90,7 +90,7 @@
     var sector = h / 60; // Sector of the color wheel.
     var x = chroma * (1 - Math.abs((sector % 2) - 1));
 
-    if(sector < 1.0) {
+    if(sector < 1) {
       rgb.r = chroma;
       rgb.g = x;
     } else if (sector < 2) {

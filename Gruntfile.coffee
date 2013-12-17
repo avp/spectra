@@ -8,6 +8,7 @@ module.exports = (grunt) ->
         options:
           mangle:
             except: ['Spectra']
+          report: 'min'
         files:
           'spectra.min.js': ['spectra.js']
 
@@ -50,12 +51,12 @@ module.exports = (grunt) ->
           src: 'spectra.js'
 
     watch:
+      jshint:
+        files: ['spectra.js']
+        tasks: ['jshint']
       jasmine:
         files: ['*.js', 'test/**/*.js']
         tasks: ['jasmine:dev']
-      uglify:
-        files: ['spectra.js']
-        tasks: ['uglify']
 
   grunt.loadNpmTasks 'grunt-contrib-jasmine'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
