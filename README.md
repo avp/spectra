@@ -3,7 +3,7 @@ Spectra
 [![Build Status](https://travis-ci.org/aakpat6/spectra.png?branch=master)](https://travis-ci.org/aakpat6/spectra)
 [![Coverage Status](https://coveralls.io/repos/aakpat6/spectra/badge.png?branch=master)](https://coveralls.io/r/aakpat6/spectra?branch=master)
 
-Spectra is a Javascript library for quickly manipulating and converting colors.
+A small Javascript library for quickly manipulating and converting colors.
 
 [![NPM](https://nodei.co/npm/spectra.png?downloads=true&stars=true)](https://npmjs.org/package/spectra)
 
