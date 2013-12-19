@@ -6,6 +6,7 @@ Spectra
 A small Javascript library for quickly manipulating and converting colors.
 
 [![NPM](https://nodei.co/npm/spectra.png?downloads=true&stars=true)](https://npmjs.org/package/spectra)
+[![Bower](http://benschwarz.github.io/bower-badges/badge@2x.png)](#bower)
 
 Example
 -------
@@ -26,6 +27,12 @@ Installation
 ------------
 
 Simply download [spectra.min.js](https://github.com/aakpat6/spectra/releases/download/v0.1.0-beta.1/spectra.min.js) and include it before your source files.
+
+### Bower
+
+The bower package is at `spectra-color`.
+
+    bower install spectra-color
 
 ### Node
 
