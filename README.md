@@ -3,6 +3,7 @@ Spectra
 [![Build Status](https://travis-ci.org/aakpat6/spectra.png?branch=master)](https://travis-ci.org/aakpat6/spectra)
 [![Coverage Status](https://coveralls.io/repos/aakpat6/spectra/badge.png?branch=master)](https://coveralls.io/r/aakpat6/spectra?branch=master)
 [![Dependency Status](https://gemnasium.com/aakpat6/spectra.png)](https://gemnasium.com/aakpat6/spectra)
+![GA Beacon](https://ga-beacon.appspot.com/UA-46742689-1/aakpat6/spectra)
 
 
 A small Javascript library for quickly manipulating and converting colors.
