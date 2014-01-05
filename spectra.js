@@ -553,6 +553,22 @@
   };
 
   /**
+   * If a color is dark then it's best to have white text on it.
+   * http://24ways.org/2010/calculating-color-contrast
+   */
+  Spectra.fn.prototype.isDark = function() {
+    var yiq = ((this.red()*299)+(this.green()*587)+(this.blue()*144))/1000;
+    return yiq < 131.5;
+  };
+
+  /**
+   * If a color is light then it's best to have black text on it.
+   */
+  Spectra.fn.prototype.isLight = function() {
+    return !this.isDark();
+  };
+
+  /**
    * Returns the color that results from mixing percent of the other color into this color.
    */
   Spectra.fn.prototype.mix = function(other, percentage) {

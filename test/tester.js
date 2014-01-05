@@ -122,6 +122,9 @@ describe('Spectra', function() {
       expect(color.fadeOut(5).alpha()).toBeCloseTo(0.55, 1);
       expect(color.luma()).toBeCloseTo(77.5, 1);
       expect(color.grayscale().hex()).toBe('#8c8c8c');
+      expect(color.isDark()).toBe(true);
+      expect(color.isLight()).toBe(false);
+      expect(Spectra('#000').isDark()).toBe(true);
     });
 
     it('Mix', function() {
