@@ -8,6 +8,8 @@ var color = Spectra({h: 235, s: 1.000, l: 0.545});
 var color = Spectra('#ff194b');
 var color = Spectra('rgb(255, 25, 75)');
 var color = Spectra('rgba(255, 25, 75, 0.6)');
+// All 17 standard CSS colors are supported.
+var color = Spectra('teal');
 
 // Getting and Setting Values
 // --------------------------
@@ -63,6 +65,9 @@ var luma = color.luma();
 var grayscale = color.grayscale();
 // Mixes the color with another Spectra instance, adding 56% of the other color to this color.
 var mixed = color.mix(other, 56);
+// Tests if the color is light or dark (to decide if you want light or dark text on it).
+var isDark = color.isDark();
+var isLight = color.isLight();
 
 // Chaining
 // --------
