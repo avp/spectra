@@ -73,6 +73,13 @@ describe('Spectra', function() {
       color = Spectra('rgba(255,25, 75, .6)');
       expect(color).toEqualColor(Spectra({r: 255, g: 25, b: 75, a: 0.6}));
     });
+
+    it('predefined colors wrapper', function () {
+      color = Spectra('white');
+      expect(color).toEqualColor(Spectra({r: 255, g: 255, b: 255}));
+      color = Spectra('teal');
+      expect(color).toEqualColor(Spectra("#008080"));
+    });
   });
 
   describe('Invalid inputs', function() {

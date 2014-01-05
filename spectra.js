@@ -24,6 +24,27 @@
   // Utility functions for use in Spectra.
   var Util = {};
 
+  // All official predefined css colors.
+  var predefinedColors = {
+    "white": "#ffffff",
+    "silver": "#c0c0c0",
+    "gray": "#808080",
+    "black": "#000000",
+    "red": "#ff0000",
+    "maroon": "#800000",
+    "yellow": "#ffff00",
+    "olive": "#808000",
+    "lime": "#00ff00",
+    "green": "#008000",
+    "aqua": "#00ffff",
+    "teal": "#008080",
+    "blue": "#0000ff",
+    "navy": "#000080",
+    "fuschia": "#ff00ff",
+    "purple": "#800080",
+    "orange": "#ffa500"
+  };
+
   /**
    * Clamps x to be between lower and upper, inclusive.
    * If not specified, lower and upper are 0 and 1 respectively.
@@ -208,6 +229,14 @@
   };
 
   /**
+   * Converts a predefined color string to a Spectra object
+   * Eg Util.parsePredefinedColor('white') === Spectra('#ffffff') === Spectra('{r: 255, g: 255, b: 255}');
+   */
+  Util.parsePredefinedColor = function (string) {
+    return new Spectra.fn(predefinedColors[string]);
+  };
+
+  /**
    * Performs any conversions necessary to turn the arg into a Spectra object.
    */
   Util.normalize = function(arg) {
@@ -264,6 +293,9 @@
         this.color = Util.normalize({hsl: arg, a: arg.a});
       }
     } else if (typeof arg === 'string') {
+      if (arg.toLowerCase() in predefinedColors) {
+        return Util.parsePredefinedColor(arg);
+      }
       this.color = Util.normalize({css: arg});
     } else {
       throw new TypeError('Spectra argument ' + arg + ' is invalid.');
