@@ -61,6 +61,8 @@ var fadedOut = color.fadeOut(10);
 var luma = color.luma();
 // Returns the grayscale version of the color.
 var grayscale = color.grayscale();
+// Mixes the color with another Spectra instance, adding 56% of the other color to this color.
+var mixed = color.mix(other, 56);
 
 // Chaining
 // --------

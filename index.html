@@ -338,9 +338,11 @@ color1.equals(color2); <span class="comment">// Returns true.</span></pre></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
-              <h2 id="chaining">Chaining</h2>
+              <p>Mixes the color with another Spectra instance, adding 56% of the other color to this color.</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> mixed = color.mix(other, <span class="number">56</span>);</pre></div></div>
             
         </li>
         
@@ -351,11 +353,9 @@ color1.equals(color2); <span class="comment">// Returns true.</span></pre></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
-              <p>You can chain together function calls.</p>
+              <h2 id="chaining">Chaining</h2>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> chained = color.complement().lighten(<span class="number">10</span>);</pre></div></div>
             
         </li>
         
@@ -366,9 +366,11 @@ color1.equals(color2); <span class="comment">// Returns true.</span></pre></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
-              <h2 id="utility-functions">Utility Functions</h2>
+              <p>You can chain together function calls.</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> chained = color.complement().lighten(<span class="number">10</span>);</pre></div></div>
             
         </li>
         
@@ -378,6 +380,19 @@ color1.equals(color2); <span class="comment">// Returns true.</span></pre></div>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <h2 id="utility-functions">Utility Functions</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <p>You can reset the value of Spectra to what it used to be by using <code>noConflict</code>, which returns
 the Spectra object itself. This is useful for renaming Spectra.</p>
@@ -389,11 +404,11 @@ the Spectra object itself. This is useful for renaming Spectra.</p>
         </li>
         
         
-        <li id="section-25">
+        <li id="section-26">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-25">&#182;</a>
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <p>You can get a random Spectra object by using <code>random</code>.</p>
 
