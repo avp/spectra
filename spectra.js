@@ -604,50 +604,6 @@
   };
 
   /**
-   * harmony
-   *
-   * @desc Returns an array of harmonious colors (goo.gl/R3FRlU).
-   * @author Benjamin Fleming (benjamminf)
-   * @since 2014-01-06
-   * @param type (string) - Type of harmony.
-   * @param index (int) - At which point the original color exists on the set harmonies. Since
-   *   some types of color harmonies have inconsistent offsets (eg. rectangle) it's useful to
-   *   note where this original color lies on the set harmony hues.
-   * @return Array of Spectra instances.
-   */
-  Spectra.fn.prototype.harmony = function(type, index) {
-    index = typeof index == 'number' ? Math.abs(parseInt(index)) : 0;
-
-    var colors = [];
-    var hsv = Util.rgbToHsv(this.color);
-    var hues;
-
-    switch (type) {
-      case 'analogous':           hues = [0, 30, 60];       break;
-      case 'triad':               hues = [0, 120, 240];     break;
-      case 'split-complementary': hues = [0, 150, 210];     break;
-      case 'rectangle':           hues = [0, 60, 180, 240]; break;
-      case 'square':              hues = [0, 90, 180, 270]; break;
-      case 'complementary':
-      default:                    hues = [0, 180];          break;
-    }
-
-    var n = hues.length;
-    var offset = hues[index % n];
-
-    for (var i = 0; i < n; i++) {
-      colors.push(Spectra({
-        h: (hsv.h + hues[i] - offset) % 360,
-        s:  hsv.s,
-        v:  hsv.v,
-        a: this.color.a
-      }));
-    }
-
-    return colors;
-  };
-
-  /**
    * Restores the old value of Spectra and returns the wrapper function.
    */
   Spectra.noConflict = function() {
