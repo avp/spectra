@@ -558,7 +558,7 @@
   Spectra.fn.prototype.rgbNumber = function() {
     return (this.red() << 16) | (this.green() << 8) | (this.blue());
   };
-  
+
   /**
    * Use hex string function for toString() operations
    * to allow direct assignment to CSS properties
@@ -722,6 +722,7 @@
    * Returns the color that results from mixing percent of the other color into this color.
    */
   Spectra.fn.prototype.mix = function(other, percentage) {
+    other = new Spectra(other);
     var p = arguments.length < 2 ? 0.5 : percentage / 100;
     return new Spectra({
       r: this.red() * (1 - p) + other.red() * p,
@@ -735,6 +736,7 @@
    * Returns a gradient of colors approximately from this color to the other, consisting of n colors.
    */
   Spectra.fn.prototype.gradient = function(other, n) {
+    other = new Spectra(other);
     var gradient = [];
     var r = this.red();
     var g = this.green();

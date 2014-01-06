@@ -152,6 +152,8 @@ describe('Spectra', function() {
       expect(mixed1.hex()).toBe('#00ff77');
       var mixed2 = color1.mix(color2, 20);
       expect(mixed2.hex()).toBe('#33e777');
+      var mixed3 = color1.mix('#f87', 20);
+      expect(mixed3.hex()).toBe('#33e777');
     });
 
     it('Gradient', function() {
@@ -165,6 +167,8 @@ describe('Spectra', function() {
       expect(grad1[3].hex()).toEqual('#303030');
       expect(grad1[4].hex()).toEqual('#404040');
       expect(grad1[5].hex()).toEqual('#505050');
+      var grad2 = color1.gradient('#505050', 6);
+      expect(grad2).toEqual(grad1);
     });
 
     it('Harmony', function() {
