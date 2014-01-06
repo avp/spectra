@@ -152,6 +152,59 @@ describe('Spectra', function() {
       expect(grad1[4].hex()).toEqual('#404040');
       expect(grad1[5].hex()).toEqual('#505050');
     });
+
+    it('Harmony', function() {
+      var harmonies;
+
+      // Default (should produce the same results as .complement())
+      harmonies = color.harmony(null, null);
+      expect(harmonies.length).toBe(2);
+      expect(harmonies[0].hex()).toEqual('#ff194b');
+      expect(harmonies[1].hex()).toEqual('#19ffcd');
+
+      // Analogous at index 1
+      harmonies = color.harmony('analogous', 1);
+      expect(harmonies.length).toBe(3);
+      expect(harmonies[0].hex()).toEqual('#ff19be');
+      expect(harmonies[1].hex()).toEqual('#ff194b');
+      expect(harmonies[2].hex()).toEqual('#ff5a19');
+
+      // Triad at index 0
+      harmonies = color.harmony('triad', null);
+      expect(harmonies.length).toBe(3);
+      expect(harmonies[0].hex()).toEqual('#ff194b');
+      expect(harmonies[1].hex()).toEqual('#4bff19');
+      expect(harmonies[2].hex()).toEqual('#194bff');
+
+      // Split-complementary at index 2 (abs(-5) mod 3 test)
+      harmonies = color.harmony('triad', -5);
+      expect(harmonies.length).toBe(3);
+      expect(harmonies[0].hex()).toEqual('#4bff19');
+      expect(harmonies[1].hex()).toEqual('#194bff');
+      expect(harmonies[2].hex()).toEqual('#ff194b');
+
+      // Rectangle at index 0
+      harmonies = color.harmony('rectangle');
+      expect(harmonies.length).toBe(4);
+      expect(harmonies[0].hex()).toEqual('#ff194b');
+      expect(harmonies[1].hex()).toEqual('#ffcd19');
+      expect(harmonies[2].hex()).toEqual('#19ffcd');
+      expect(harmonies[3].hex()).toEqual('#194bff');
+
+      // Square at index 0
+      harmonies = color.harmony('square');
+      expect(harmonies.length).toBe(4);
+      expect(harmonies[0].hex()).toEqual('#ff194b');
+      expect(harmonies[1].hex()).toEqual('#beff19');
+      expect(harmonies[2].hex()).toEqual('#19ffcd');
+      expect(harmonies[3].hex()).toEqual('#5a19ff');
+
+      // Invalid inputs (should default to the same results as .complement())
+      harmonies = color.harmony('foo', 'bar');
+      expect(harmonies.length).toBe(2);
+      expect(harmonies[0].hex()).toEqual('#ff194b');
+      expect(harmonies[1].hex()).toEqual('#19ffcd');
+    });
   });
 
   describe('Utility functions', function() {
