@@ -616,38 +616,27 @@
    * @return Array of Spectra instances.
    */
   Spectra.fn.prototype.harmony = function(type, index) {
-    index = typeof index === 'number' ? Math.abs(parseInt(index, 10)) : 0;
+    index = typeof index == 'number' ? Math.abs(parseInt(index)) : 0;
 
     var colors = [];
     var hsv = Util.rgbToHsv(this.color);
-    var hues = [0, 180];
+    var hues;
 
     switch (type) {
-      case 'analogous':
-        hues = [0, 30, 60];
-        break;
-      case 'triad':
-        hues = [0, 120, 240];
-        break;
-      case 'split-complementary':
-        hues = [0, 150, 210];
-        break;
-      case 'rectangle':
-        hues = [0, 60, 180, 240];
-        break;
-      case 'square':
-        hues = [0, 90, 180, 270];
-        break;
+      case 'analogous':           hues = [0, 30, 60];       break;
+      case 'triad':               hues = [0, 120, 240];     break;
+      case 'split-complementary': hues = [0, 150, 210];     break;
+      case 'rectangle':           hues = [0, 60, 180, 240]; break;
+      case 'square':              hues = [0, 90, 180, 270]; break;
       case 'complementary':
-        hues = [0, 180];
-        break;
+      default:                    hues = [0, 180];          break;
     }
 
     var n = hues.length;
     var offset = hues[index % n];
 
     for (var i = 0; i < n; i++) {
-      colors.push(new Spectra({
+      colors.push(Spectra({
         h: (hsv.h + hues[i] - offset) % 360,
         s:  hsv.s,
         v:  hsv.v,
