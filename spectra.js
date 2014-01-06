@@ -659,6 +659,62 @@
   };
 
   /**
+   * multiply
+   *
+   * @desc Multiplies the color with another. The result is a darker picture (goo.gl/f8Gt5D).
+   * @author Benjamin Fleming (benjamminf)
+   * @since 2014-01-06
+   * @param color (Spectra) - The color to dissolve onto.
+   * @return Spectra instance
+   */
+  Spectra.fn.prototype.multiply = function(color) {
+    if(!(color instanceof Spectra.fn)) {
+      color = new Spectra(color);
+    }
+
+    return new Spectra({
+      r: this.red() * color.red() / 255,
+      g: this.green() * color.green() / 255,
+      b: this.blue() * color.blue() / 255,
+      a: color.alpha()
+    });
+  };
+
+  /**
+   * invert
+   *
+   * @desc Inverts the color.
+   * @author Benjamin Fleming (benjamminf)
+   * @since 2014-01-06
+   * @return Spectra instance
+   */
+  Spectra.fn.prototype.invert = function() {
+    return new Spectra({
+      r: 255 - this.red(),
+      g: 255 - this.green(),
+      b: 255 - this.blue(),
+      a: this.alpha()
+    });
+  };
+
+  /**
+   * screen
+   *
+   * @desc Both colors are inverted, multiplied and inverted again (goo.gl/2kSaQq).
+   * @author Benjamin Fleming (benjamminf)
+   * @since 2014-01-06
+   * @param color (Spectra) - The color to dissolve onto.
+   * @return Spectra instance
+   */
+  Spectra.fn.prototype.screen = function(color) {
+    if(!(color instanceof Spectra.fn)) {
+      color = new Spectra(color);
+    }
+
+    return this.invert().multiply(color.invert()).invert();
+  };
+
+  /**
    * Restores the old value of Spectra and returns the wrapper function.
    */
   Spectra.noConflict = function() {
