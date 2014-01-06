@@ -28,7 +28,7 @@ The project was created to have a highly functional and lightweight way to deal 
 Installation
 ------------
 
-Simply download [spectra.min.js](https://github.com/aakpat6/spectra/releases/download/v0.1.0-beta.1/spectra.min.js) and include it before your source files.
+Simply download [spectra.min.js](https://github.com/aakpat6/spectra/releases/) and include it before your source files.
 
 ### Bower
 
