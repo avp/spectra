@@ -48,6 +48,12 @@ describe('Spectra', function() {
       expect(color.alpha()).toEqual(1);
     });
 
+    it('Spectra wrapper', function() {
+      color = Spectra('#fff');
+      color2 = Spectra(color);
+      expect(color2.hex()).toBe('#ffffff');
+    });
+
     it('shorthand CSS wrapper', function() {
       color = Spectra('#4Af');
       expect(color.red()).toBe(68);

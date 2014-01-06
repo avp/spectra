@@ -269,16 +269,11 @@
     }
 
     //  Observer= 2degree, Illuminant= D65
-    xyz.x *=  95.047;
-    xyz.y *= 100.000;
-    xyz.z *= 108.883;
+    xyz.x *=  95.047 / 100;
+    xyz.y *= 100.000 / 100;
+    xyz.z *= 108.883 / 100;
 
     //  XYZ to RGB
-
-    xyz.x /= 100;        //X from 0 to  95.047
-    xyz.y /= 100;        //Y from 0 to 100.000
-    xyz.z /= 100;        //Z from 0 to 108.883
-
     rgb.r = xyz.x *  3.2406 + xyz.y * -1.5372 + xyz.z * -0.4986;
     rgb.g = xyz.x * -0.9689 + xyz.y *  1.8758 + xyz.z *  0.0415;
     rgb.b = xyz.x *  0.0557 + xyz.y * -0.2040 + xyz.z *  1.0570;
@@ -301,13 +296,9 @@
       rgb.b *= 12.92;
     }
 
-    rgb.r *= 255;
-    rgb.g *= 255;
-    rgb.b *= 255;
-
-    rgb.r = Util.clamp(rgb.r, 0, 255);
-    rgb.g = Util.clamp(rgb.g, 0, 255);
-    rgb.b = Util.clamp(rgb.b, 0, 255);
+    rgb.r = Util.clamp(rgb.r * 255, 0, 255);
+    rgb.g = Util.clamp(rgb.g * 255, 0, 255);
+    rgb.b = Util.clamp(rgb.b * 255, 0, 255);
 
     return rgb;
   };
@@ -419,6 +410,9 @@
   Spectra.fn = function(arg) {
     if (arg === null || arg === undefined) {
       throw new TypeError('Spectra argument must be defined.');
+    }
+    if (arg instanceof Spectra.fn) {
+      return arg;
     }
     if (typeof arg === 'object') {
       if (arg.r !== undefined || arg.red !== undefined) {
