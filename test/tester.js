@@ -54,6 +54,8 @@ describe('Spectra', function() {
       expect(color.rgbaString()).toBe('rgba(68,170,255,1)');
       expect(color.hslString()).toBe('hsl(207,1,0.63)');
       expect(color.hslaString()).toBe('hsla(207,1,0.63,1)');
+      expect(color.toString()).toBe('#44aaff');
+      expect('string conversion ' + color).toBe('string conversion #44aaff');
       expect(color.rgbNumber()).toBe(0x44aaff);
     });
 
