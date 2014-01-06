@@ -558,6 +558,12 @@
   Spectra.fn.prototype.rgbNumber = function() {
     return (this.red() << 16) | (this.green() << 8) | (this.blue());
   };
+  
+  /**
+   * Use hex string function for toString() operations
+   * to allow direct assignment to CSS properties
+   */
+  Spectra.fn.prototype.toString = Spectra.fn.prototype.hex;
 
   /**
    * API Functions
