@@ -195,11 +195,11 @@ describe('Spectra', function() {
       expect(harmonies[2].hex()).toEqual('#19ffcd');
       expect(harmonies[3].hex()).toEqual('#5a19ff');
 
-	  // Invalid inputs (should default to the same results as .complement())
-	  harmonies = color.harmony('foo', 'bar');
-	  expect(harmonies.length).toBe(2);
-	  expect(harmonies[0].hex()).toEqual('#ff194b');
-	  expect(harmonies[1].hex()).toEqual('#19ffcd');
+      // Invalid inputs (should default to the same results as .complement())
+      harmonies = color.harmony('foo', 'bar');
+      expect(harmonies.length).toBe(2);
+      expect(harmonies[0].hex()).toEqual('#ff194b');
+      expect(harmonies[1].hex()).toEqual('#19ffcd');
     });
   });
 
