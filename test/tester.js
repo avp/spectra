@@ -42,6 +42,12 @@ describe('Spectra', function() {
       expect(color).toEqualColor(Spectra({r: 255, g: 25, b: 75, a: 0.6}));
     });
 
+    it('Lab wrapper', function() {
+      color = Spectra({l: 80, a: 30, b: 20});
+      expect(color.hex()).toEqual('#ffb0a3');
+      expect(color.alpha()).toEqual(1);
+    });
+
     it('shorthand CSS wrapper', function() {
       color = Spectra('#4Af');
       expect(color.red()).toBe(68);

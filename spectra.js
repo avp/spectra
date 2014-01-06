@@ -178,6 +178,141 @@
   };
 
   /**
+   * Turns an rgb color into a LAB color.
+   */
+  Util.rgbToLab = function(rgb) {
+    // RGB to XYZ
+    var tc = "";
+    rgb = {
+      r: rgb.r / 255,
+      g: rgb.g / 255,
+      b: rgb.b / 255
+    };
+    var xyz  = {};
+
+    for (tc in rgb) {
+      if (rgb[tc] > 0.04045) {
+        rgb[tc] = Math.pow(((rgb[tc] + 0.055) / 1.055), 2.4);
+      } else {
+        rgb[tc] /= 12.92;
+      }
+
+      rgb[tc] = rgb[tc] * 100;
+    }
+
+    xyz = {
+      x: rgb.r * 0.4124 + rgb.g * 0.3576 + rgb.b * 0.1805,
+      y: rgb.r * 0.2126 + rgb.g * 0.7152 + rgb.b * 0.0722,
+      z: rgb.r * 0.0193 + rgb.g * 0.1192 + rgb.b * 0.9505
+    };
+
+    // XYZ to LAB
+
+    tc = '';
+    var xyz2 = {};
+    var white = {
+      x: 95.047,
+      y: 100.000,
+      z: 108.883
+    };
+
+    for (tc in xyz) {
+      xyz2[tc] = xyz[tc] / white[tc];
+
+      if (xyz2[tc] > 0.008856) {
+        xyz2[tc] = Math.pow(xyz2[tc], (1 / 3));
+      } else {
+        xyz2[tc] = (7.787 * xyz2[tc]) + (16 / 116);
+      }
+    }
+
+    var lab = {
+      l: 116 * xyz2.y - 16,
+      a: 500 * (xyz2.x - xyz2.y),
+      b: 200 * (xyz2.y - xyz2.z)
+    };
+
+    return lab;
+  };
+
+  /**
+   * Converts an lab color to rgb.
+   */
+  Util.labToRgb = function(lab, setll){
+    if (setll) {
+      lab.l = setll;
+    }
+    var xyz = {};
+    var rgb = {};
+
+    // LAB to XYZ
+    xyz.y = (lab.l + 16) / 116;
+    xyz.x = lab.a / 500 + xyz.y;
+    xyz.z = xyz.y - lab.b / 200;
+
+    if (Math.pow(xyz.y,3) > 0.008856) {
+      xyz.y = Math.pow(xyz.y,3);
+    } else {
+      xyz.y = (xyz.y - 16 / 116) / 7.787;
+    }
+
+    if (Math.pow(xyz.x,3) > 0.008856) {
+      xyz.x = Math.pow(xyz.x,3);
+    } else {
+      xyz.x = (xyz.x - 16 / 116) / 7.787;
+    }
+
+    if (Math.pow(xyz.z,3) > 0.008856) {
+      xyz.z = Math.pow(xyz.z,3);
+    } else {
+      xyz.z = (xyz.z - 16 / 116) / 7.787;
+    }
+
+    //  Observer= 2degree, Illuminant= D65
+    xyz.x *=  95.047;
+    xyz.y *= 100.000;
+    xyz.z *= 108.883;
+
+    //  XYZ to RGB
+
+    xyz.x /= 100;        //X from 0 to  95.047
+    xyz.y /= 100;        //Y from 0 to 100.000
+    xyz.z /= 100;        //Z from 0 to 108.883
+
+    rgb.r = xyz.x *  3.2406 + xyz.y * -1.5372 + xyz.z * -0.4986;
+    rgb.g = xyz.x * -0.9689 + xyz.y *  1.8758 + xyz.z *  0.0415;
+    rgb.b = xyz.x *  0.0557 + xyz.y * -0.2040 + xyz.z *  1.0570;
+
+    if (rgb.r > 0.0031308) {
+      rgb.r = 1.055 * Math.pow(rgb.r, (1 / 2.4)) - 0.055;
+    } else {
+      rgb.r *= 12.92;
+    }
+
+    if (rgb.g > 0.0031308) {
+      rgb.g = 1.055 * Math.pow(rgb.g, (1 / 2.4)) - 0.055;
+    } else {
+      rgb.g *= 12.92;
+    }
+
+    if (rgb.b > 0.0031308) {
+      rgb.b = 1.055 * Math.pow(rgb.b, (1 / 2.4)) - 0.055;
+    } else {
+      rgb.b *= 12.92;
+    }
+
+    rgb.r *= 255;
+    rgb.g *= 255;
+    rgb.b *= 255;
+
+    rgb.r = Util.clamp(rgb.r, 0, 255);
+    rgb.g = Util.clamp(rgb.g, 0, 255);
+    rgb.b = Util.clamp(rgb.b, 0, 255);
+
+    return rgb;
+  };
+
+  /**
    * Converts from CSS to RGB.
    */
   Util.parseCss = function(css) {
@@ -253,6 +388,9 @@
       color.a = arg.a || 1;
     } else if (color.css !== undefined) {
       color = Util.parseCss(color.css);
+    } else if (color.lab !== undefined) {
+      color = Util.labToRgb(color.lab);
+      color.a = arg.a || 1;
     }
 
     // Convert any full words into the abbreviated versions.
@@ -285,12 +423,13 @@
     if (typeof arg === 'object') {
       if (arg.r !== undefined || arg.red !== undefined) {
         this.color = Util.normalize({r: arg.r, g: arg.g, b: arg.b, a: arg.a});
-      }
-      if (arg.v !== undefined || arg.value !== undefined) {
+      } else if (arg.v !== undefined || arg.value !== undefined) {
         this.color = Util.normalize({hsv: arg, a: arg.a});
-      }
-      if (arg.l !== undefined || arg.lightness !== undefined) {
+      } else if ((arg.l !== undefined || arg.lightness !== undefined) &&
+        (arg.s !== undefined || arg.saturation !== undefined)) {
         this.color = Util.normalize({hsl: arg, a: arg.a});
+      } else if ((arg.l !== undefined || arg.L !== undefined) && (arg.a !== undefined)) {
+        this.color = Util.normalize({lab: arg, a: arg.alpha || 1});
       }
     } else if (typeof arg === 'string') {
       if (arg.toLowerCase() in predefinedColors) {
@@ -615,7 +754,7 @@
   };
 
   /**
-   * harmony
+   * Harmony
    *
    * @desc Returns an array of harmonious colors (goo.gl/R3FRlU).
    * @author Benjamin Fleming (benjamminf)
