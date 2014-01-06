@@ -499,6 +499,17 @@
   };
 
   /**
+   * Lightens or darkens a color based on a random value in the specified range.
+   * Percentage should be passed in as an integer, so 40 would lighten or darken up to 40%.
+   */
+  Spectra.fn.prototype.randomColorRange = function(percentage) {
+    var adjustment = ((Math.random() * 2) - 1) * percentage;
+    var newColor = new Spectra(this.color);
+    newColor = newColor.shade_(adjustment);
+    return newColor;
+  };
+
+  /**
    * Adds saturation to the color based on a percentage value.
    */
   Spectra.fn.prototype.saturate = function(percentage) {
