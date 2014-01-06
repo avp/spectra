@@ -125,6 +125,10 @@ describe('Spectra', function() {
       expect(color.isDark()).toBe(true);
       expect(color.isLight()).toBe(false);
       expect(Spectra('#000').isDark()).toBe(true);
+
+      var color1 = Spectra('green');
+      expect(color1.randomColorRange(20).green()).toBeGreaterThan(25);
+      expect(color1.randomColorRange(20).green()).toBeLessThan(231);
     });
 
     it('Mix', function() {
