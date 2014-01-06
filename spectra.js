@@ -10,6 +10,8 @@ var color = Spectra('rgb(255, 25, 75)');
 var color = Spectra('rgba(255, 25, 75, 0.6)');
 // All 17 standard CSS colors are supported.
 var color = Spectra('teal');
+// You can also use CIE Lab 1976.
+var color = Spectra({l: 80, a: 30, b: 20});
 
 // Getting and Setting Values
 // --------------------------
@@ -63,11 +65,22 @@ var fadedOut = color.fadeOut(10);
 var luma = color.luma();
 // Returns the grayscale version of the color.
 var grayscale = color.grayscale();
-// Mixes the color with another Spectra instance, adding 56% of the other color to this color.
-var mixed = color.mix(other, 56);
 // Tests if the color is light or dark (to decide if you want light or dark text on it).
 var isDark = color.isDark();
 var isLight = color.isLight();
+// Mixes the color with another Spectra instance, adding 56% of the other color to this color.
+var mixed = color.mix(other, 56);
+// [Color harmonies](http://goo.gl/R3FRlU). The second parameter is the index in the harmony you want for `color`.
+// Returns a list of Spectra objects.
+var harmonies = color.harmony('analogous', 0);
+var harmonies = color.harmony('triad', 1);
+var harmonies = color.harmony('complementary', 0);
+var harmonies = color.harmony('split-complementary', 0);
+var harmonies = color.harmony('square', 0);
+var harmonies = color.harmony('rectangle', 0);
+// Gradients. You can generate a list of colors of any length from one color to another.
+var gradient = color.gradient(Spectra('#ffffff'), 10);
+
 
 // Chaining
 // --------
