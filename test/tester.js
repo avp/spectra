@@ -46,12 +46,18 @@ describe('Spectra', function() {
       color = Spectra({l: 80, a: 30, b: 20});
       expect(color.hex()).toEqual('#ffb0a3');
       expect(color.alpha()).toEqual(1);
+
+      color = Spectra({l: 0, a: 0, b: 0});
+      expect(color.hex()).toEqual('#000000');
+      expect(color.alpha()).toEqual(1);
     });
 
     it('Spectra wrapper', function() {
       color = Spectra('#fff');
       color2 = Spectra(color);
       expect(color2.hex()).toBe('#ffffff');
+
+      expect(color.equals()).toBe(false);
     });
 
     it('shorthand CSS wrapper', function() {
@@ -121,6 +127,9 @@ describe('Spectra', function() {
       color.saturationv(0.9020);
       color.value(1.000);
       expect(color).toEqualColor(Spectra({r: 255, g: 25, b: 75, a: 0.6}));
+
+      color = Spectra({r: 255, g: 255, b: 255, a: 1.0});
+      expect(color.hue()).toEqual(0);
     });
   });
 
@@ -180,6 +189,12 @@ describe('Spectra', function() {
       expect(harmonies[0].hex()).toEqual('#ff194b');
       expect(harmonies[1].hex()).toEqual('#19ffcd');
 
+      // Complementary at index 0
+      harmonies = color.harmony('complementary');
+      expect(harmonies.length).toBe(2);
+      expect(harmonies[0].hex()).toEqual('#ff194b');
+      expect(harmonies[1].hex()).toEqual('#19ffcd');
+
       // Analogous at index 1
       harmonies = color.harmony('analogous', 1);
       expect(harmonies.length).toBe(3);
@@ -200,6 +215,13 @@ describe('Spectra', function() {
       expect(harmonies[0].hex()).toEqual('#4bff19');
       expect(harmonies[1].hex()).toEqual('#194bff');
       expect(harmonies[2].hex()).toEqual('#ff194b');
+
+      // Split-complementary at index 0
+      harmonies = color.harmony('split-complementary');
+      expect(harmonies.length).toBe(3);
+      expect(harmonies[0].hex()).toEqual('#ff194b');
+      expect(harmonies[1].hex()).toEqual('#19ff5a');
+      expect(harmonies[2].hex()).toEqual('#19beff');
 
       // Rectangle at index 0
       harmonies = color.harmony('rectangle');
