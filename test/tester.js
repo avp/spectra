@@ -40,16 +40,29 @@ describe('Spectra', function() {
     it('HSL wrapper', function() {
       color = Spectra({h: 347, s: 1.000, l: 0.549, a: 0.6});
       expect(color).toEqualColor(Spectra({r: 255, g: 25, b: 75, a: 0.6}));
+
+      color = Spectra({hue: 347, saturation: 1.000, lightness: 0.549, alpha: 0.6});
+      expect(color).toEqualColor(Spectra({r: 255, g: 25, b: 75, a: 0.6}));
     });
 
     it('Lab wrapper', function() {
-      color = Spectra({l: 80, a: 30, b: 20});
+      color = Spectra({l: 79.0153, a: 27.7678, b: 18.3267});
       expect(color.hex()).toEqual('#ffb0a3');
       expect(color.alpha()).toEqual(1);
 
-      color = Spectra({l: 0, a: 0, b: 0});
+      var lab = color.labObject();
+      expect(lab.l).toBeCloseTo(79.0153, 0);
+      expect(lab.a).toBeCloseTo(27.7678, 0);
+      expect(lab.b).toBeCloseTo(18.3267, 0);
+
+      color = Spectra({L: 0, a: 0, b: 0});
       expect(color.hex()).toEqual('#000000');
       expect(color.alpha()).toEqual(1);
+
+      var lab2 = color.labObject();
+      expect(lab2.l).toBeCloseTo(0, 0);
+      expect(lab2.a).toBeCloseTo(0, 0);
+      expect(lab2.b).toBeCloseTo(0, 0);
     });
 
     it('Spectra wrapper', function() {
@@ -110,6 +123,10 @@ describe('Spectra', function() {
       expect(function() {Spectra(undefined);}).toThrow();
       expect(function() {Spectra(true);}).toThrow();
     });
+
+    it('Invalid Objects', function() {
+      expect(function() {Spectra({dead: 'beef'});}).toThrow();
+    });
   });
 
   describe('Get and set', function() {
@@ -163,6 +180,7 @@ describe('Spectra', function() {
       expect(mixed2.hex()).toBe('#33e777');
       var mixed3 = color1.mix('#f87', 20);
       expect(mixed3.hex()).toBe('#33e777');
+      expect(Spectra('black').mix('white').hex()).toBe('#808080');
     });
 
     it('Gradient', function() {
@@ -252,6 +270,12 @@ describe('Spectra', function() {
       var s = Spectra.noConflict();
       expect(Spectra).toBe(undefined);
       expect(s('#ff194b').red()).toBe(255);
+      Spectra = s;
+    });
+
+    it('random', function() {
+      var c = Spectra.random();
+      expect(c.hex()).toBeTruthy();
     });
   });
 });

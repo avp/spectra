@@ -104,9 +104,9 @@
   Util.hsvToRgb = function(hsv) {
     var rgb = {r: 0, g: 0, b: 0};
 
-    var h = Util.clamp(Number(hsv.h || 0), 0, 360);
-    var s = Util.clamp(Number(hsv.s || 0));
-    var v = Util.clamp(Number(hsv.v || 0));
+    var h = Util.clamp(hsv.h, 0, 360);
+    var s = Util.clamp(hsv.s);
+    var v = Util.clamp(hsv.v);
     var chroma = s * v;
     var sector = h / 60; // Sector of the color wheel.
     var x = chroma * (1 - Math.abs((sector % 2) - 1));
@@ -126,7 +126,7 @@
     } else if (sector < 5) {
       rgb.r = x;
       rgb.b = chroma;
-    } else if (sector <= 6) {
+    } else {
       rgb.r = chroma;
       rgb.b = x;
     }
@@ -166,9 +166,9 @@
    * RGB will have keys r, g, b.
    */
   Util.hslToRgb = function(hsl) {
-    var h = Util.clamp(hsl.h, 0, 360);
-    var s = Util.clamp(hsl.s);
-    var l = Util.clamp(hsl.l);
+    var h = Util.clamp((hsl.h || hsl.hue), 0, 360);
+    var s = Util.clamp(hsl.s || hsl.saturation);
+    var l = Util.clamp(hsl.l || hsl.lightness);
     var hsv = {};
     hsv.h = h;
     s *= (l < 0.5) ? l : 1 - l;
@@ -238,15 +238,12 @@
   /**
    * Converts an lab color to rgb.
    */
-  Util.labToRgb = function(lab, setll){
-    if (setll) {
-      lab.l = setll;
-    }
+  Util.labToRgb = function(lab) {
     var xyz = {};
     var rgb = {};
 
     // LAB to XYZ
-    xyz.y = (lab.l + 16) / 116;
+    xyz.y = ((lab.l || lab.L) + 16) / 116;
     xyz.x = lab.a / 500 + xyz.y;
     xyz.z = xyz.y - lab.b / 200;
 
@@ -373,15 +370,15 @@
     // Perform conversions if necessary.
     if (color.hsv !== undefined) {
       color = Util.hsvToRgb(color.hsv);
-      color.a = arg.a || 1;
+      color.a = arg.a;
     } else if (color.hsl !== undefined) {
       color = Util.hslToRgb(color.hsl);
-      color.a = arg.a || 1;
+      color.a = arg.a;
     } else if (color.css !== undefined) {
       color = Util.parseCss(color.css);
     } else if (color.lab !== undefined) {
       color = Util.labToRgb(color.lab);
-      color.a = arg.a || 1;
+      color.a = arg.a;
     }
 
     // Convert any full words into the abbreviated versions.
@@ -421,9 +418,11 @@
         this.color = Util.normalize({hsv: arg, a: arg.a});
       } else if ((arg.l !== undefined || arg.lightness !== undefined) &&
         (arg.s !== undefined || arg.saturation !== undefined)) {
-        this.color = Util.normalize({hsl: arg, a: arg.a});
+        this.color = Util.normalize({hsl: arg, a: (arg.a || arg.alpha)});
       } else if ((arg.l !== undefined || arg.L !== undefined) && (arg.a !== undefined)) {
-        this.color = Util.normalize({lab: arg, a: arg.alpha || 1});
+        this.color = Util.normalize({lab: arg, a: (arg.a || arg.alpha)});
+      } else {
+        throw new TypeError('Spectra argument ' + arg + ' is invalid.');
       }
     } else if (typeof arg === 'string') {
       if (arg.toLowerCase() in predefinedColors) {
@@ -557,6 +556,10 @@
 
   Spectra.fn.prototype.rgbNumber = function() {
     return (this.red() << 16) | (this.green() << 8) | (this.blue());
+  };
+
+  Spectra.fn.prototype.labObject = function() {
+    return Util.rgbToLab(this.color);
   };
 
   /**
