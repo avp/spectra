@@ -736,6 +736,17 @@
   };
 
   /**
+   * Returns a number from 0 to 1 representing the color contrast between the two colors.
+   */
+  Spectra.fn.prototype.contrast = function(other) {
+    other = new Spectra(other);
+    var diff = Math.max(this.red(), other.red()) - Math.min(this.red(), other.red()) +
+               Math.max(this.green(), other.green()) - Math.min(this.green(), other.green()) +
+               Math.max(this.blue(), other.blue()) - Math.min(this.blue(), other.blue());
+    return diff / 765;
+  };
+
+  /**
    * Returns a gradient of colors approximately from this color to the other, consisting of n colors.
    */
   Spectra.fn.prototype.gradient = function(other, n) {
