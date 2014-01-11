@@ -183,6 +183,12 @@ describe('Spectra', function() {
       expect(Spectra('black').mix('white').hex()).toBe('#808080');
     });
 
+    it('Contrast', function() {
+      expect(color.contrast('black')).toBeCloseTo(0.4641, 4);
+      expect(color.contrast('white')).toBeCloseTo(0.5359, 4);
+      expect(color.contrast(color)).toBe(0);
+    });
+
     it('Gradient', function() {
       var color1 = Spectra('#000000');
       var color2 = Spectra('#505050');
