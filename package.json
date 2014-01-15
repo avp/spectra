@@ -23,15 +23,15 @@
     "grunt-contrib-jshint": "~0.8.0",
     "grunt-karma": "~0.6.2",
     "grunt-karma-coveralls": "~2.3.0",
-    "karma": "~0.10.8",
+    "karma": "~0.10.9",
     "karma-script-launcher": "~0.1.0",
     "karma-html2js-preprocessor": "~0.1.0",
     "karma-jasmine": "~0.1.5",
-    "karma-coffee-preprocessor": "~0.1.1",
-    "karma-requirejs": "~0.2.0",
+    "karma-coffee-preprocessor": "~0.1.2",
+    "karma-requirejs": "~0.2.1",
     "karma-phantomjs-launcher": "~0.1.1",
     "karma-coverage": "~0.1.4",
-    "requirejs": "~2.1.9"
+    "requirejs": "~2.1.10"
   },
   "files": [
     "spectra.js",
