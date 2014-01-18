@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/aakpat6/spectra.png?label=ready)](https://waffle.io/aakpat6/spectra)
 Spectra
 =======
 [![Build Status](https://travis-ci.org/aakpat6/spectra.png?branch=master)](https://travis-ci.org/aakpat6/spectra)
