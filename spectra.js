@@ -1,3 +1,9 @@
+// Download
+// --------
+// To download, check out the [Github](https://github.com/aakpat6/spectra) page.
+//
+// Minified releases are on the [releases](https://github.com/aakpat6/spectra) page.
+
 // Getting Started
 // ---------------
 // To start using Spectra, just wrap your representation of a color with `Spectra`.
