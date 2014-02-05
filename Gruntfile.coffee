@@ -37,6 +37,7 @@ module.exports = (grunt) ->
 
     coveralls:
       options:
+        force: true
         coverage_dir: 'test/coverage/'
 
     jshint:
