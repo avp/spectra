@@ -4,6 +4,6 @@ _SpecRunner.html
 
 .DS_Store
 *.sublime-workspace
-spectra.min.js
+/spectra.min.js
 
 coverage/
