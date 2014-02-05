@@ -2,7 +2,7 @@ Spectra
 =======
 [![Build Status](https://travis-ci.org/aakpat6/spectra.png?branch=master)](https://travis-ci.org/aakpat6/spectra)
 [![Coverage Status](https://coveralls.io/repos/aakpat6/spectra/badge.png?branch=master)](https://coveralls.io/r/aakpat6/spectra?branch=master)
-[![Dependency Status](https://gemnasium.com/aakpat6/spectra.png)](https://gemnasium.com/aakpat6/spectra)
+[![devDependency Status](https://david-dm.org/aakpat6/spectra/dev-status.png)](https://david-dm.org/aakpat6/spectra#info=devDependencies)
 [![NPM version](https://badge.fury.io/js/spectra.png)](http://badge.fury.io/js/spectra)
 [![Stories in Ready](https://badge.waffle.io/aakpat6/spectra.png?label=ready)](https://waffle.io/aakpat6/spectra)
 ![GA Beacon](https://ga-beacon.appspot.com/UA-46742689-1/aakpat6/spectra?pixel)
