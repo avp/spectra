@@ -72,4 +72,4 @@ module.exports = (grunt) ->
   grunt.registerTask 'test', ['jshint', 'karma:ci', 'uglify', 'karma:prod']
   grunt.registerTask 'build', ['uglify', 'karma:prod']
   grunt.registerTask 'default', ['jshint', 'karma:dev', 'watch']
-  grunt.registerTask 'travis', ['test', 'karma:ci', 'karma:prod', 'coveralls']
+  grunt.registerTask 'travis', ['test', 'coveralls']

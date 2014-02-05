@@ -3,7 +3,7 @@ module.exports = function(config) {
     basePath: './',
     frameworks: ['jasmine'],
     files: ['spectra.min.js', 'test/*.js'],
-    reporters: ['progress', 'coverage'],
+    reporters: ['progress'],
     colors: true,
     browsers: ['PhantomJS'],
     plugins: [
