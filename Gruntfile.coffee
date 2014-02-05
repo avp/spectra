@@ -21,8 +21,6 @@ module.exports = (grunt) ->
           'spectra.min.js': ['spectra.js']
 
     karma:
-      options:
-        reporters: ['progress', 'coverage']
       ci:
         singleRun: true
         configFile: 'karma-dev.conf.js'
@@ -32,9 +30,6 @@ module.exports = (grunt) ->
       dev:
         singleRun: false
         configFile: 'karma-dev.conf.js'
-        coverageReporter:
-          type: 'lcov'
-          dir: 'test/coverage/'
         autoWatch: true
       prod:
         singleRun: true
