@@ -151,6 +151,26 @@ describe('Spectra', function() {
   });
 
   describe('Color operations', function() {
+    it('Near', function() {
+      expect(color.near(color)).toBe(true);
+      expect(color.near(color, 0)).toBe(true);
+      expect(color.near(color, 100)).toBe(true);
+      expect(color.near(color, -50)).toBe(true);
+
+      color1 = Spectra({r: 0, g: 25, b: 75, a: 0.6});
+      expect(color.near(color1)).toBe(false);
+      expect(color.near(color1, 100)).toBe(true);
+      expect(color.near(color1, 99)).toBe(false);
+
+      color1 = Spectra({r: 225, g: 0, b: 50, a: 0.6});
+      expect(color.near(color1, 0)).toBe(false);
+      expect(color.near(color1, 12)).toBe(true);
+
+      color1 = Spectra({r: 255, g: 25, b: 75, a: 1.0});
+      expect(color.near(color1, 0)).toBe(false);
+      expect(color.near(color1, 40)).toBe(true);
+    });
+
     it('Color operations', function() {
       expect(color.complement().hex()).toBe('#19ffcd');
       expect(color.negate().hex()).toBe('#00e6b4');
