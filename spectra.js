@@ -599,19 +599,13 @@
     var color1 = this;
     var color2 = other;
 
-    if (arguments.length < 2) {
-      return color1.red() === color2.red() &&
-             color1.green() === color2.green() &&
-             color1.blue() === color2.blue() &&
-             color1.alpha() === color2.alpha();
-    }
-
-    percentage = Math.abs(percentage);
+    percentage = Math.abs(percentage || 0);
     var adjustment = 255 * (percentage / 100);
 
     return (Math.abs(color2.red() - color1.red()) <= adjustment) &&
            (Math.abs(color2.green() - color1.green()) <= adjustment) &&
-           (Math.abs(color2.blue() - color1.blue()) <= adjustment);
+           (Math.abs(color2.blue() - color1.blue()) <= adjustment) &&
+           (Math.abs(color2.alpha() - color1.alpha()) <= (percentage / 100));
   };
 
   /**
