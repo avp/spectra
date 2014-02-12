@@ -10,8 +10,6 @@ Spectra
 
 A small Javascript library for quickly manipulating and converting colors.
 
-[![NPM](https://nodei.co/npm/spectra.png?downloads=true&stars=true)](https://npmjs.org/package/spectra)
-
 Example
 -------
 
