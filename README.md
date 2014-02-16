@@ -3,7 +3,6 @@ Spectra
 [![Build Status](https://travis-ci.org/avp/spectra.png?branch=master)](https://travis-ci.org/avp/spectra)
 [![Coverage Status](https://coveralls.io/repos/avp/spectra/badge.png?branch=master)](https://coveralls.io/r/avp/spectra?branch=master)
 [![devDependency Status](https://david-dm.org/avp/spectra/dev-status.png)](https://david-dm.org/avp/spectra#info=devDependencies)
-[![NPM version](https://badge.fury.io/js/spectra.png)](http://badge.fury.io/js/spectra)
 [![Stories in Ready](https://badge.waffle.io/avp/spectra.png?label=ready)](https://waffle.io/avp/spectra)
 ![GA Beacon](https://ga-beacon.appspot.com/UA-46742689-1/avp/spectra?pixel)
 
