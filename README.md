@@ -1,11 +1,11 @@
 Spectra
 =======
-[![Build Status](https://travis-ci.org/aakpat6/spectra.png?branch=master)](https://travis-ci.org/aakpat6/spectra)
-[![Coverage Status](https://coveralls.io/repos/aakpat6/spectra/badge.png?branch=master)](https://coveralls.io/r/aakpat6/spectra?branch=master)
-[![devDependency Status](https://david-dm.org/aakpat6/spectra/dev-status.png)](https://david-dm.org/aakpat6/spectra#info=devDependencies)
+[![Build Status](https://travis-ci.org/avp/spectra.png?branch=master)](https://travis-ci.org/avp/spectra)
+[![Coverage Status](https://coveralls.io/repos/avp/spectra/badge.png?branch=master)](https://coveralls.io/r/avp/spectra?branch=master)
+[![devDependency Status](https://david-dm.org/avp/spectra/dev-status.png)](https://david-dm.org/avp/spectra#info=devDependencies)
 [![NPM version](https://badge.fury.io/js/spectra.png)](http://badge.fury.io/js/spectra)
-[![Stories in Ready](https://badge.waffle.io/aakpat6/spectra.png?label=ready)](https://waffle.io/aakpat6/spectra)
-![GA Beacon](https://ga-beacon.appspot.com/UA-46742689-1/aakpat6/spectra?pixel)
+[![Stories in Ready](https://badge.waffle.io/avp/spectra.png?label=ready)](https://waffle.io/avp/spectra)
+![GA Beacon](https://ga-beacon.appspot.com/UA-46742689-1/avp/spectra?pixel)
 
 
 A small Javascript library for quickly manipulating and converting colors.
@@ -28,7 +28,7 @@ The project was created to have a highly functional and lightweight way to deal 
 Installation
 ------------
 
-Simply download [spectra.min.js](https://github.com/aakpat6/spectra/releases/) and include it before your source files.
+Simply download [spectra.min.js](https://github.com/avp/spectra/releases/) and include it before your source files.
 
 ### Bower
 
@@ -43,7 +43,7 @@ This module also works with Node. Simply run `npm install spectra` and use `var 
 API Reference
 -------------
 
-Refer to http://aakpat6.github.io/spectra for reference on how to use Spectra.
+Refer to http://avp.github.io/spectra for reference on how to use Spectra.
 
 Tests
 -----
