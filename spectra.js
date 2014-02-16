@@ -1,8 +1,8 @@
 // Download
 // --------
-// To download, check out the [Github](https://github.com/aakpat6/spectra) page.
+// To download, check out the [Github](https://github.com/avp/spectra) page.
 //
-// Minified releases are on the [releases](https://github.com/aakpat6/spectra) page.
+// Minified releases are on the [releases](https://github.com/avp/spectra/releases) page.
 
 // Getting Started
 // ---------------
