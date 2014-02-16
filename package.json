@@ -7,10 +7,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/aakpat6/spectra.git"
+    "url": "git://github.com/avp/spectra.git"
   },
   "bugs": {
-    "url": "https://github.com/aakpat6/spectra/issues"
+    "url": "https://github.com/avp/spectra/issues"
   },
   "scripts": {
     "test": "grunt travis"
