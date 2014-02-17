@@ -5,16 +5,18 @@ describe('Spectra', function() {
   beforeEach(function() {
     color = Spectra({r: 255, g: 25, b: 75, a: 0.6});
 
-    this.addMatchers({
-      toEqualColor: function(expected) {
-        var actual = this.actual;
-        var notText = this.isNot ? ' not' : '';
-
-        this.message = function() {
-          return 'Expected ' + actual.rgbaString() + notText + ' to be equal to color ' + expected.rgbaString();
+    jasmine.addMatchers({
+      toEqualColor: function() {
+        return {
+          compare: function(actual, expected) {
+            var result = {
+              pass: actual.equals(expected)
+            };
+            result.message = actual.rgbaString() + ' is ' + (result.pass ? '' : 'not ') +
+                            'equal to ' + expected.rgbaString();
+            return result;
+          }
         };
-
-        return actual.equals(expected);
       }
     });
   });
