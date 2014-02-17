@@ -50,6 +50,8 @@ color.lightness([arg]);
 var color1 = Spectra({r: 255, g: 25, b: 75});
 var color2 = Spectra('#ff194b');
 color1.equals(color2); // Returns true.
+// You can check if colors are close to each other too.
+color1.near(color2, 10); // Returns true if two colors are within 10% of each other.
 
 // Color Operations
 // ----------------
