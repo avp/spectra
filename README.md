@@ -31,9 +31,9 @@ Simply download [spectra.min.js](https://github.com/avp/spectra/releases/) and i
 
 ### Bower
 
-The bower package is at `spectra-color`.
+The bower package is at `spectrajs`.
 
-    bower install spectra-color
+    bower install spectrajs
 
 ### Node
 
