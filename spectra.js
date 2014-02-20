@@ -44,6 +44,17 @@ color.hue([arg]);
 color.saturation([arg]);
 color.lightness([arg]);
 
+// Strings
+// -------
+// You can also turn any color into a string.
+color.hex();
+color.rgbString();
+color.rgbaString();
+color.hslString();
+color.hslaString();
+// Also, you can get an rgb number: 0xRRGGBB
+color.rgbNumber();
+
 // Equality
 // --------
 // You can compare colors by using `equals`.
