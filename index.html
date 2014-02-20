@@ -24,10 +24,10 @@
         <li id="section-1">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h2>Download</h2>
+              <h2 id="download">Download</h2>
 
             </div>
             
@@ -42,7 +42,6 @@
               </div>
               <p>To download, check out the <a href="https://github.com/avp/spectra">Github</a> page.</p>
 <p>Minified releases are on the <a href="https://github.com/avp/spectra/releases">releases</a> page.</p>
-<h2>Getting Started</h2>
 
             </div>
             
@@ -55,17 +54,9 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>To start using Spectra, just wrap your representation of a color with <code>Spectra</code>.</p>
+              <h2 id="getting-started">Getting Started</h2>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> color = Spectra({r: <span class="number">255</span>, g: <span class="number">25</span>, b: <span class="number">75</span>});
-<span class="keyword">var</span> color = Spectra({r: <span class="number">255</span>, g: <span class="number">25</span>, b: <span class="number">75</span>, a: <span class="number">0.6</span>});
-<span class="keyword">var</span> color = Spectra({h: <span class="number">235</span>, s: <span class="number">0.632</span>, v: <span class="number">0.85</span>});
-<span class="keyword">var</span> color = Spectra({h: <span class="number">235</span>, s: <span class="number">1.000</span>, l: <span class="number">0.545</span>});
-<span class="keyword">var</span> color = Spectra(<span class="string">'#ff194b'</span>);
-<span class="keyword">var</span> color = Spectra(<span class="string">'rgb(255, 25, 75)'</span>);
-<span class="keyword">var</span> color = Spectra(<span class="string">'rgba(255, 25, 75, 0.6)'</span>);</pre></div></div>
             
         </li>
         
@@ -76,11 +67,17 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>All 17 standard CSS colors are supported.</p>
+              <p>To start using Spectra, just wrap your representation of a color with <code>Spectra</code>.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> color = Spectra(<span class="string">'teal'</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> color = Spectra({r: <span class="hljs-number">255</span>, g: <span class="hljs-number">25</span>, b: <span class="hljs-number">75</span>});
+<span class="hljs-keyword">var</span> color = Spectra({r: <span class="hljs-number">255</span>, g: <span class="hljs-number">25</span>, b: <span class="hljs-number">75</span>, a: <span class="hljs-number">0.6</span>});
+<span class="hljs-keyword">var</span> color = Spectra({h: <span class="hljs-number">235</span>, s: <span class="hljs-number">0.632</span>, v: <span class="hljs-number">0.85</span>});
+<span class="hljs-keyword">var</span> color = Spectra({h: <span class="hljs-number">235</span>, s: <span class="hljs-number">1.000</span>, l: <span class="hljs-number">0.545</span>});
+<span class="hljs-keyword">var</span> color = Spectra(<span class="hljs-string">'#ff194b'</span>);
+<span class="hljs-keyword">var</span> color = Spectra(<span class="hljs-string">'rgb(255, 25, 75)'</span>);
+<span class="hljs-keyword">var</span> color = Spectra(<span class="hljs-string">'rgba(255, 25, 75, 0.6)'</span>);</pre></div></div>
             
         </li>
         
@@ -91,11 +88,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>You can also use CIE Lab 1976.</p>
+              <p>All 17 standard CSS colors are supported.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> color = Spectra({l: <span class="number">80</span>, a: <span class="number">30</span>, b: <span class="number">20</span>});</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> color = Spectra(<span class="hljs-string">'teal'</span>);</pre></div></div>
             
         </li>
         
@@ -103,12 +100,14 @@
         <li id="section-6">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <h2>Getting and Setting Values</h2>
+              <p>You can also use CIE Lab 1976.</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> color = Spectra({l: <span class="hljs-number">80</span>, a: <span class="hljs-number">30</span>, b: <span class="hljs-number">20</span>});</pre></div></div>
             
         </li>
         
@@ -119,14 +118,9 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <p>To get and set values, just use their respective functions.</p>
+              <h2 id="getting-and-setting-values">Getting and Setting Values</h2>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> color = Spectra({r: <span class="number">255</span>, g: <span class="number">25</span>, b: <span class="number">75</span>});
-color.red(); <span class="comment">// Returns 255.</span>
-color.red(<span class="number">234</span>);
-color.red(); <span class="comment">// Returns 234.</span></pre></div></div>
             
         </li>
         
@@ -137,13 +131,14 @@ color.red(); <span class="comment">// Returns 234.</span></pre></div></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-              <p>You can also get and set values in different formats.</p>
+              <p>To get and set values, just use their respective functions.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>color.hex(); <span class="comment">// Returns '#ff194b'</span>
-color.hex(<span class="string">'#0123f4'</span>);
-color.red(); <span class="comment">// Returns 1.</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> color = Spectra({r: <span class="hljs-number">255</span>, g: <span class="hljs-number">25</span>, b: <span class="hljs-number">75</span>});
+color.red(); <span class="hljs-comment">// Returns 255.</span>
+color.red(<span class="hljs-number">234</span>);
+color.red(); <span class="hljs-comment">// Returns 234.</span></pre></div></div>
             
         </li>
         
@@ -153,6 +148,23 @@ color.red(); <span class="comment">// Returns 1.</span></pre></div></div>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>You can also get and set values in different formats.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>color.hex(); <span class="hljs-comment">// Returns '#ff194b'</span>
+color.hex(<span class="hljs-string">'#0123f4'</span>);
+color.red(); <span class="hljs-comment">// Returns 1.</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <p>Get and set RGB values.</p>
 
@@ -165,11 +177,11 @@ color.blue([arg]);</pre></div></div>
         </li>
         
         
-        <li id="section-10">
+        <li id="section-11">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
+                <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
               <p>Get and set HSV values.</p>
 
@@ -182,11 +194,11 @@ color.value([arg]);</pre></div></div>
         </li>
         
         
-        <li id="section-11">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <p>Get and set HSL values.</p>
 
@@ -199,24 +211,24 @@ color.lightness([arg]);</pre></div></div>
         </li>
         
         
-        <li id="section-12">
+        <li id="section-13">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-12">&#182;</a>
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
-              <h2>Strings</h2>
+              <h2 id="strings">Strings</h2>
 
             </div>
             
         </li>
         
         
-        <li id="section-13">
+        <li id="section-14">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
+                <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <p>You can also turn any color into a string.</p>
 
@@ -231,11 +243,11 @@ color.hslaString();</pre></div></div>
         </li>
         
         
-        <li id="section-14">
+        <li id="section-15">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
+                <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
               <p>Also, you can get an rgb number: 0xRRGGBB</p>
 
@@ -246,32 +258,15 @@ color.hslaString();</pre></div></div>
         </li>
         
         
-        <li id="section-15">
-            <div class="annotation">
-              
-              <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-15">&#182;</a>
-              </div>
-              <h2>Equality</h2>
-
-            </div>
-            
-        </li>
-        
-        
         <li id="section-16">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
-              <p>You can compare colors by using <code>equals</code>.</p>
+              <h2 id="equality">Equality</h2>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> color1 = Spectra({r: <span class="number">255</span>, g: <span class="number">25</span>, b: <span class="number">75</span>});
-<span class="keyword">var</span> color2 = Spectra(<span class="string">'#ff194b'</span>);
-color1.equals(color2); <span class="comment">// Returns true.</span></pre></div></div>
             
         </li>
         
@@ -282,11 +277,13 @@ color1.equals(color2); <span class="comment">// Returns true.</span></pre></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
-              <p>You can check if colors are close to each other too.</p>
+              <p>You can compare colors by using <code>equals</code>.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>color1.near(color2, <span class="number">10</span>); <span class="comment">// Returns true if two colors are within 10% of each other.</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> color1 = Spectra({r: <span class="hljs-number">255</span>, g: <span class="hljs-number">25</span>, b: <span class="hljs-number">75</span>});
+<span class="hljs-keyword">var</span> color2 = Spectra(<span class="hljs-string">'#ff194b'</span>);
+color1.equals(color2); <span class="hljs-comment">// Returns true.</span></pre></div></div>
             
         </li>
         
@@ -294,12 +291,14 @@ color1.equals(color2); <span class="comment">// Returns true.</span></pre></div>
         <li id="section-18">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
-              <h2>Color Operations</h2>
+              <p>You can check if colors are close to each other too.</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre>color1.near(color2, <span class="hljs-number">10</span>); <span class="hljs-comment">// Returns true if two colors are within 10% of each other.</span></pre></div></div>
             
         </li>
         
@@ -310,11 +309,9 @@ color1.equals(color2); <span class="comment">// Returns true.</span></pre></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
-              <p>Find the complement of a color.</p>
+              <h2 id="color-operations">Color Operations</h2>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> complement = color.complement();</pre></div></div>
             
         </li>
         
@@ -325,11 +322,11 @@ color1.equals(color2); <span class="comment">// Returns true.</span></pre></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
-              <p>Lightens color by 20%.</p>
+              <p>Find the complement of a color.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> lighter = color.lighten(<span class="number">20</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> complement = color.complement();</pre></div></div>
             
         </li>
         
@@ -340,11 +337,11 @@ color1.equals(color2); <span class="comment">// Returns true.</span></pre></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
-              <p>Darkens color by 25%.</p>
+              <p>Lightens color by 20%.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> darker = color.darken(<span class="number">25</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> lighter = color.lighten(<span class="hljs-number">20</span>);</pre></div></div>
             
         </li>
         
@@ -355,11 +352,11 @@ color1.equals(color2); <span class="comment">// Returns true.</span></pre></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
-              <p>Saturates color by 8%.</p>
+              <p>Darkens color by 25%.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> saturated = color.saturate(<span class="number">8</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> darker = color.darken(<span class="hljs-number">25</span>);</pre></div></div>
             
         </li>
         
@@ -370,11 +367,11 @@ color1.equals(color2); <span class="comment">// Returns true.</span></pre></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
-              <p>Desaturates color by 10%.</p>
+              <p>Saturates color by 8%.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> desaturated = color.desaturate(<span class="number">10</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> saturated = color.saturate(<span class="hljs-number">8</span>);</pre></div></div>
             
         </li>
         
@@ -385,11 +382,11 @@ color1.equals(color2); <span class="comment">// Returns true.</span></pre></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
-              <p>Makes color 10% more opaque.</p>
+              <p>Desaturates color by 10%.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> fadedIn = color.fadeIn(<span class="number">10</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> desaturated = color.desaturate(<span class="hljs-number">10</span>);</pre></div></div>
             
         </li>
         
@@ -400,11 +397,11 @@ color1.equals(color2); <span class="comment">// Returns true.</span></pre></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
-              <p>Makes color 10% less opaque.</p>
+              <p>Makes color 10% more opaque.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> fadedOut = color.fadeOut(<span class="number">10</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> fadedIn = color.fadeIn(<span class="hljs-number">10</span>);</pre></div></div>
             
         </li>
         
@@ -415,11 +412,11 @@ color1.equals(color2); <span class="comment">// Returns true.</span></pre></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
-              <p>Returns the luma of the color, how bright it is on a screen.</p>
+              <p>Makes color 10% less opaque.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> luma = color.luma();</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> fadedOut = color.fadeOut(<span class="hljs-number">10</span>);</pre></div></div>
             
         </li>
         
@@ -430,11 +427,11 @@ color1.equals(color2); <span class="comment">// Returns true.</span></pre></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
-              <p>Returns the grayscale version of the color.</p>
+              <p>Returns the luma of the color, how bright it is on a screen.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> grayscale = color.grayscale();</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> luma = color.luma();</pre></div></div>
             
         </li>
         
@@ -445,12 +442,11 @@ color1.equals(color2); <span class="comment">// Returns true.</span></pre></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
-              <p>Tests if the color is light or dark (to decide if you want light or dark text on it).</p>
+              <p>Returns the grayscale version of the color.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> isDark = color.isDark();
-<span class="keyword">var</span> isLight = color.isLight();</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> grayscale = color.grayscale();</pre></div></div>
             
         </li>
         
@@ -461,11 +457,12 @@ color1.equals(color2); <span class="comment">// Returns true.</span></pre></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
-              <p>Mixes the color with another Spectra instance, adding 56% of the other color to this color.</p>
+              <p>Tests if the color is light or dark (to decide if you want light or dark text on it).</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> mixed = color.mix(other, <span class="number">56</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> isDark = color.isDark();
+<span class="hljs-keyword">var</span> isLight = color.isLight();</pre></div></div>
             
         </li>
         
@@ -476,17 +473,11 @@ color1.equals(color2); <span class="comment">// Returns true.</span></pre></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
-              <p><a href="http://goo.gl/R3FRlU">Color harmonies</a>. The second parameter is the index in the harmony you want for <code>color</code>.
-Returns a list of Spectra objects.</p>
+              <p>Mixes the color with another Spectra instance, adding 56% of the other color to this color.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> harmonies = color.harmony(<span class="string">'analogous'</span>, <span class="number">0</span>);
-<span class="keyword">var</span> harmonies = color.harmony(<span class="string">'triad'</span>, <span class="number">1</span>);
-<span class="keyword">var</span> harmonies = color.harmony(<span class="string">'complementary'</span>, <span class="number">0</span>);
-<span class="keyword">var</span> harmonies = color.harmony(<span class="string">'split-complementary'</span>, <span class="number">0</span>);
-<span class="keyword">var</span> harmonies = color.harmony(<span class="string">'square'</span>, <span class="number">0</span>);
-<span class="keyword">var</span> harmonies = color.harmony(<span class="string">'rectangle'</span>, <span class="number">0</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> mixed = color.mix(other, <span class="hljs-number">56</span>);</pre></div></div>
             
         </li>
         
@@ -497,11 +488,17 @@ Returns a list of Spectra objects.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-31">&#182;</a>
               </div>
-              <p>Gradients. You can generate a list of colors of any length from one color to another.</p>
+              <p><a href="http://goo.gl/R3FRlU">Color harmonies</a>. The second parameter is the index in the harmony you want for <code>color</code>.
+Returns a list of Spectra objects.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> gradient = color.gradient(Spectra(<span class="string">'#ffffff'</span>), <span class="number">10</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> harmonies = color.harmony(<span class="hljs-string">'analogous'</span>, <span class="hljs-number">0</span>);
+<span class="hljs-keyword">var</span> harmonies = color.harmony(<span class="hljs-string">'triad'</span>, <span class="hljs-number">1</span>);
+<span class="hljs-keyword">var</span> harmonies = color.harmony(<span class="hljs-string">'complementary'</span>, <span class="hljs-number">0</span>);
+<span class="hljs-keyword">var</span> harmonies = color.harmony(<span class="hljs-string">'split-complementary'</span>, <span class="hljs-number">0</span>);
+<span class="hljs-keyword">var</span> harmonies = color.harmony(<span class="hljs-string">'square'</span>, <span class="hljs-number">0</span>);
+<span class="hljs-keyword">var</span> harmonies = color.harmony(<span class="hljs-string">'rectangle'</span>, <span class="hljs-number">0</span>);</pre></div></div>
             
         </li>
         
@@ -509,12 +506,14 @@ Returns a list of Spectra objects.</p>
         <li id="section-32">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-32">&#182;</a>
               </div>
-              <h2>Chaining</h2>
+              <p>Gradients. You can generate a list of colors of any length from one color to another.</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> gradient = color.gradient(Spectra(<span class="hljs-string">'#ffffff'</span>), <span class="hljs-number">10</span>);</pre></div></div>
             
         </li>
         
@@ -525,11 +524,9 @@ Returns a list of Spectra objects.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-33">&#182;</a>
               </div>
-              <p>You can chain together function calls.</p>
+              <h2 id="chaining">Chaining</h2>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> chained = color.complement().lighten(<span class="number">10</span>);</pre></div></div>
             
         </li>
         
@@ -537,12 +534,14 @@ Returns a list of Spectra objects.</p>
         <li id="section-34">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-34">&#182;</a>
               </div>
-              <h2>Utility Functions</h2>
+              <p>You can chain together function calls.</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> chained = color.complement().lighten(<span class="hljs-number">10</span>);</pre></div></div>
             
         </li>
         
@@ -553,12 +552,9 @@ Returns a list of Spectra objects.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-35">&#182;</a>
               </div>
-              <p>You can reset the value of Spectra to what it used to be by using <code>noConflict</code>, which returns
-the Spectra object itself. This is useful for renaming Spectra.</p>
+              <h2 id="utility-functions">Utility Functions</h2>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> newSpectra = Spectra.noConflict();</pre></div></div>
             
         </li>
         
@@ -569,11 +565,27 @@ the Spectra object itself. This is useful for renaming Spectra.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-36">&#182;</a>
               </div>
+              <p>You can reset the value of Spectra to what it used to be by using <code>noConflict</code>, which returns
+the Spectra object itself. This is useful for renaming Spectra.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> newSpectra = Spectra.noConflict();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-37">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-37">&#182;</a>
+              </div>
               <p>You can get a random Spectra object by using <code>random</code>.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> randomColor = Spectra.random();</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> randomColor = Spectra.random();</pre></div></div>
             
         </li>
         
