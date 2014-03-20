@@ -21,7 +21,7 @@
     "grunt-contrib-jshint": "~0.8.0",
     "grunt-karma": "~0.7.2",
     "grunt-karma-coveralls": "~2.4.0",
-    "karma": "~0.11.14",
+    "karma": "~0.12.1",
     "karma-script-launcher": "~0.1.0",
     "karma-html2js-preprocessor": "~0.1.0",
     "karma-jasmine": "~0.2.1",
