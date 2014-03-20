@@ -1,8 +1,9 @@
 Spectra
 =======
-[![Build Status](https://travis-ci.org/avp/spectra.png?branch=master)](https://travis-ci.org/avp/spectra)
-[![Coverage Status](https://coveralls.io/repos/avp/spectra/badge.png?branch=master)](https://coveralls.io/r/avp/spectra?branch=master)
+[![Build Status](http://img.shields.io/travis/avp/spectra.svg)](https://travis-ci.org/avp/spectra)
+[![Coverage Status](http://img.shields.io/coveralls/avp/spectra.svg)](https://coveralls.io/r/avp/spectra?branch=master)
 [![devDependency Status](https://david-dm.org/avp/spectra/dev-status.png)](https://david-dm.org/avp/spectra#info=devDependencies)
+[![npm Version](http://img.shields.io/npm/v/spectra.svg)](http://npmjs.org/package/spectra)
 [![Stories in Ready](https://badge.waffle.io/avp/spectra.png?label=ready)](https://waffle.io/avp/spectra)
 ![GA Beacon](https://ga-beacon.appspot.com/UA-46742689-1/avp/spectra?pixel)
 
