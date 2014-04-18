@@ -32,6 +32,8 @@ describe('Spectra', function() {
       expect(color.alpha()).toBe(1);
       color = Spectra({r: 0, g: 0, b: 0});
       expect(color.hue()).toBe(0);
+      expect(color.saturation()).toBe(0);
+      expect(color.lightness()).toBe(0);
     });
 
     it('HSV wrapper', function() {
@@ -45,6 +47,10 @@ describe('Spectra', function() {
 
       color = Spectra({hue: 347, saturation: 1.000, lightness: 0.549, alpha: 0.6});
       expect(color).toEqualColor(Spectra({r: 255, g: 25, b: 75, a: 0.6}));
+
+      color = Spectra({h: 0, s: 1, l: 0.4});
+      expect(color).toEqualColor(Spectra({r: 204, g: 0, b: 0}));
+      expect(color.hex()).toBe('#cc0000');
     });
 
     it('Lab wrapper', function() {
@@ -149,6 +155,13 @@ describe('Spectra', function() {
 
       color = Spectra({r: 255, g: 255, b: 255, a: 1.0});
       expect(color.hue()).toEqual(0);
+    });
+
+    it('HSL get and set', function() {
+      color = Spectra('red');
+      color.lightness(0.4);
+      expect(color.lightness()).toBe(0.4);
+      expect(color.blue()).toBe(0);
     });
   });
 

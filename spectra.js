@@ -51,6 +51,7 @@
    * If x is outside the range lower to upper, the closest of lower or upper is used.
    */
   Util.clamp = function(x, lower, upper) {
+    x = x || 0;
     lower = lower !== undefined ? lower : 0;
     upper = upper !== undefined ? upper : 1;
     return Math.max(lower, Math.min(upper, x));
@@ -104,9 +105,9 @@
   Util.hsvToRgb = function(hsv) {
     var rgb = {r: 0, g: 0, b: 0};
 
-    var h = Util.clamp(hsv.h, 0, 360);
-    var s = Util.clamp(hsv.s);
-    var v = Util.clamp(hsv.v);
+    var h = Util.clamp((hsv.h || hsv.hue), 0, 360);
+    var s = Util.clamp((hsv.s || hsv.saturation), 0, 1);
+    var v = Util.clamp(hsv.v || hsv.value);
     var chroma = s * v;
     var sector = h / 60; // Sector of the color wheel.
     var x = chroma * (1 - Math.abs((sector % 2) - 1));
@@ -157,6 +158,10 @@
     hsl.s = hsv.s * hsv.v;
     hsl.s /= (hsl.l <= 1) ? (hsl.l) : (2 - hsl.l);
     hsl.l /= 2;
+
+    if (isNaN(hsl.s)) {
+      hsl.s = 0;
+    }
     return hsl;
   };
 
@@ -635,7 +640,8 @@
    */
   Spectra.fn.prototype.shade_ = function(percentage) {
     var newColor = new Spectra(this.color);
-    newColor.lightness(newColor.lightness() + (percentage / 100));
+    var l = Util.clamp(newColor.lightness() + (percentage / 100), 0, 1);
+    newColor.lightness(l);
     return newColor;
   };
 
