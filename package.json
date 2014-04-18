@@ -1,7 +1,7 @@
 {
   "name": "spectra",
   "description": "Javascript color manipulation library.",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "author": "Aakash Patel <aakpat6@gmail.com>",
   "main": "spectra.js",
   "license": "MIT",
