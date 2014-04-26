@@ -635,10 +635,9 @@
   };
 
   /**
-   * Lightens or darkens a color based on a percentage value.
-   * Percentage should be passed in as an integer, so 40 would lighten the color 40%.
+   * Lightens a color based on percentage value from 1 to 100.
    */
-  Spectra.fn.prototype.shade_ = function(percentage) {
+  Spectra.fn.prototype.lighten = function(percentage) {
     var newColor = new Spectra(this.color);
     var l = Util.clamp(newColor.lightness() + (percentage / 100), 0, 1);
     newColor.lightness(l);
@@ -646,17 +645,10 @@
   };
 
   /**
-   * Lightens a color based on percentage value from 1 to 100.
-   */
-  Spectra.fn.prototype.lighten = function(percentage) {
-    return this.shade_(percentage);
-  };
-
-  /**
    * Darkens a color based on percentage value from 1 to 100.
    */
   Spectra.fn.prototype.darken = function(percentage) {
-    return this.shade_(-percentage);
+    return this.lighten(-percentage);
   };
 
   /**
@@ -666,7 +658,7 @@
   Spectra.fn.prototype.randomColorRange = function(percentage) {
     var adjustment = ((Math.random() * 2) - 1) * percentage;
     var newColor = new Spectra(this.color);
-    newColor = newColor.shade_(adjustment);
+    newColor = newColor.lighten(adjustment);
     return newColor;
   };
 
