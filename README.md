@@ -58,3 +58,9 @@ Building
 --------
 
 To minify Spectra, run `grunt build`.
+
+Contributing
+------------
+
+View `CONTRIBUTING.md` for guidelines on how to contribute.
+
