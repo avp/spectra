@@ -62,5 +62,5 @@ To minify Spectra, run `grunt build`.
 Contributing
 ------------
 
-View [https://github.com/avp/spectra/blob/master/CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute.
+View [CONTRIBUTING.md](https://github.com/avp/spectra/blob/master/CONTRIBUTING.md) for guidelines on how to contribute.
 
