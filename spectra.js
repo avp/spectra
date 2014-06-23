@@ -193,8 +193,9 @@
       b: rgb.b / 255
     };
     var xyz  = {};
+    var tc;
 
-    for (var tc in rgb) {
+    for (tc in rgb) {
       if (rgb[tc] > 0.04045) {
         rgb[tc] = Math.pow(((rgb[tc] + 0.055) / 1.055), 2.4);
       } else {
@@ -219,7 +220,7 @@
       z: 108.883
     };
 
-    for (var tc in xyz) {
+    for (tc in xyz) {
       xyz2[tc] = xyz[tc] / white[tc];
 
       if (xyz2[tc] > 0.008856) {
