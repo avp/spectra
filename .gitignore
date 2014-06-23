@@ -7,3 +7,5 @@ _SpecRunner.html
 /spectra.min.js
 
 coverage/
+
+.idea/
