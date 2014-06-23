@@ -187,7 +187,6 @@
    */
   Util.rgbToLab = function(rgb) {
     // RGB to XYZ
-    var tc = "";
     rgb = {
       r: rgb.r / 255,
       g: rgb.g / 255,
@@ -195,7 +194,7 @@
     };
     var xyz  = {};
 
-    for (tc in rgb) {
+    for (var tc in rgb) {
       if (rgb[tc] > 0.04045) {
         rgb[tc] = Math.pow(((rgb[tc] + 0.055) / 1.055), 2.4);
       } else {
@@ -213,7 +212,6 @@
 
     // XYZ to LAB
 
-    tc = '';
     var xyz2 = {};
     var white = {
       x: 95.047,
@@ -221,7 +219,7 @@
       z: 108.883
     };
 
-    for (tc in xyz) {
+    for (var tc in xyz) {
       xyz2[tc] = xyz[tc] / white[tc];
 
       if (xyz2[tc] > 0.008856) {
@@ -347,7 +345,7 @@
         r: parseInt(rgbaMatch[1], 10),
         g: parseInt(rgbaMatch[2], 10),
         b: parseInt(rgbaMatch[3], 10),
-        a: parseFloat(rgbaMatch[4], 10)
+        a: parseFloat(rgbaMatch[4])
       };
       return Util.normalize(color);
     }
