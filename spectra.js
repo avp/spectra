@@ -1,6 +1,6 @@
 // Download
 // --------
-// To download, check out the [Github](https://github.com/avp/spectra) page.
+// To download, check out the [GitHub](https://github.com/avp/spectra) page.
 //
 // Minified releases are on the [releases](https://github.com/avp/spectra/releases) page.
 
