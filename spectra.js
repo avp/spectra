@@ -192,8 +192,8 @@
       g: rgb.g / 255,
       b: rgb.b / 255
     };
-    var xyz  = {};
-    var tc;
+
+    var xyz, tc;
 
     for (tc in rgb) {
       if (rgb[tc] > 0.04045) {
@@ -230,13 +230,11 @@
       }
     }
 
-    var lab = {
+    return {
       l: 116 * xyz2.y - 16,
       a: 500 * (xyz2.x - xyz2.y),
       b: 200 * (xyz2.y - xyz2.z)
     };
-
-    return lab;
   };
 
   /**
