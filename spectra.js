@@ -196,13 +196,15 @@
     var xyz, tc;
 
     for (tc in rgb) {
-      if (rgb[tc] > 0.04045) {
-        rgb[tc] = Math.pow(((rgb[tc] + 0.055) / 1.055), 2.4);
-      } else {
-        rgb[tc] /= 12.92;
-      }
+      if (rgb.hasOwnProperty(tc)) {
+        if (rgb[tc] > 0.04045) {
+          rgb[tc] = Math.pow(((rgb[tc] + 0.055) / 1.055), 2.4);
+        } else {
+          rgb[tc] /= 12.92;
+        }
 
-      rgb[tc] = rgb[tc] * 100;
+        rgb[tc] = rgb[tc] * 100;
+      }
     }
 
     xyz = {
@@ -221,12 +223,14 @@
     };
 
     for (tc in xyz) {
-      xyz2[tc] = xyz[tc] / white[tc];
+      if (xyz.hasOwnProperty(tc)) {
+        xyz2[tc] = xyz[tc] / white[tc];
 
-      if (xyz2[tc] > 0.008856) {
-        xyz2[tc] = Math.pow(xyz2[tc], (1 / 3));
-      } else {
-        xyz2[tc] = (7.787 * xyz2[tc]) + (16 / 116);
+        if (xyz2[tc] > 0.008856) {
+          xyz2[tc] = Math.pow(xyz2[tc], (1 / 3));
+        } else {
+          xyz2[tc] = (7.787 * xyz2[tc]) + (16 / 116);
+        }
       }
     }
 
