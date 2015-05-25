@@ -51,6 +51,11 @@ describe('Spectra', function() {
       color = Spectra({h: 0, s: 1, l: 0.4});
       expect(color).toEqualColor(Spectra({r: 204, g: 0, b: 0}));
       expect(color.hex()).toBe('#cc0000');
+
+      color = Spectra({r: 0, g: 255, b: 0});
+      expect(color.hue()).toBe(120);
+      expect(color.saturation()).toBe(1);
+      expect(color.lightness()).toBe(0.5);
     });
 
     it('Lab wrapper', function() {
@@ -75,7 +80,7 @@ describe('Spectra', function() {
 
     it('Spectra wrapper', function() {
       color = Spectra('#fff');
-      color2 = Spectra(color);
+      var color2 = Spectra(color);
       expect(color2.hex()).toBe('#ffffff');
 
       expect(color.equals()).toBe(false);
@@ -167,6 +172,8 @@ describe('Spectra', function() {
 
   describe('Color operations', function() {
     it('Near', function() {
+      var color1;
+
       expect(color.near(color)).toBe(true);
       expect(color.near(color, 0)).toBe(true);
       expect(color.near(color, 100)).toBe(true);
