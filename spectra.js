@@ -112,7 +112,7 @@
     var sector = h / 60; // Sector of the color wheel.
     var x = chroma * (1 - Math.abs((sector % 2) - 1));
 
-    if(sector < 1) {
+    if (sector < 1) {
       rgb.r = chroma;
       rgb.g = x;
     } else if (sector < 2) {
@@ -122,7 +122,7 @@
       rgb.g = chroma;
       rgb.b = x;
     } else if (sector < 4) {
-      rgb.g= x;
+      rgb.g = x;
       rgb.b = chroma;
     } else if (sector < 5) {
       rgb.r = x;
@@ -253,33 +253,24 @@
     xyz.x = lab.a / 500 + xyz.y;
     xyz.z = xyz.y - lab.b / 200;
 
-    if (Math.pow(xyz.y,3) > 0.008856) {
-      xyz.y = Math.pow(xyz.y,3);
-    } else {
-      xyz.y = (xyz.y - 16 / 116) / 7.787;
+    for (var c in xyz) {
+      if (xyz.hasOwnProperty(c)) {
+        if (Math.pow(xyz[c], 3) > 0.008856) {
+          xyz[c] = Math.pow(xyz[c], 3);
+        } else {
+          xyz[c] = (xyz[c] - 16 / 116) / 7.787;
+        }
+      }
     }
 
-    if (Math.pow(xyz.x,3) > 0.008856) {
-      xyz.x = Math.pow(xyz.x,3);
-    } else {
-      xyz.x = (xyz.x - 16 / 116) / 7.787;
-    }
-
-    if (Math.pow(xyz.z,3) > 0.008856) {
-      xyz.z = Math.pow(xyz.z,3);
-    } else {
-      xyz.z = (xyz.z - 16 / 116) / 7.787;
-    }
-
-    //  Observer= 2degree, Illuminant= D65
-    xyz.x *=  95.047 / 100;
+    xyz.x *= 95.047 / 100;
     xyz.y *= 100.000 / 100;
     xyz.z *= 108.883 / 100;
 
-    //  XYZ to RGB
-    rgb.r = xyz.x *  3.2406 + xyz.y * -1.5372 + xyz.z * -0.4986;
-    rgb.g = xyz.x * -0.9689 + xyz.y *  1.8758 + xyz.z *  0.0415;
-    rgb.b = xyz.x *  0.0557 + xyz.y * -0.2040 + xyz.z *  1.0570;
+    // XYZ to RGB
+    rgb.r = xyz.x * 3.2406 + xyz.y * -1.5372 + xyz.z * -0.4986;
+    rgb.g = xyz.x * -0.9689 + xyz.y * 1.8758 + xyz.z * 0.0415;
+    rgb.b = xyz.x * 0.0557 + xyz.y * -0.2040 + xyz.z * 1.0570;
 
     if (rgb.r > 0.0031308) {
       rgb.r = 1.055 * Math.pow(rgb.r, (1 / 2.4)) - 0.055;
@@ -325,9 +316,9 @@
     var longhandMatch = css.match(longhandRegex);
     if (longhandMatch) {
       color = {
-        r: parseInt(css.slice(1,3), 16),
-        g: parseInt(css.slice(3,5), 16),
-        b: parseInt(css.slice(5,7), 16)
+        r: parseInt(css.slice(1, 3), 16),
+        g: parseInt(css.slice(3, 5), 16),
+        b: parseInt(css.slice(5, 7), 16)
       };
       return Util.normalize(color);
     }
@@ -361,7 +352,7 @@
    * Converts a predefined color string to a Spectra object
    * Eg Util.parsePredefinedColor('white') === Spectra('#ffffff') === Spectra('{r: 255, g: 255, b: 255}');
    */
-  Util.parsePredefinedColor = function (string) {
+  Util.parsePredefinedColor = function(string) {
     return new Spectra.fn(predefinedColors[string]);
   };
 
@@ -551,13 +542,13 @@
 
   Spectra.fn.prototype.hslString = function() {
     return 'hsl(' + this.hue() + ',' + this.saturation() + ',' +
-                    (Math.round(this.lightness()*100) / 100) + ')';
+      (Math.round(this.lightness() * 100) / 100) + ')';
   };
 
   Spectra.fn.prototype.hslaString = function() {
     return 'hsla(' + this.hue() + ',' + this.saturation() + ',' +
-                     (Math.round(this.lightness()*100) / 100) + ',' +
-                     this.alpha() + ')';
+      (Math.round(this.lightness() * 100) / 100) + ',' +
+      this.alpha() + ')';
   };
 
   Spectra.fn.prototype.rgbNumber = function() {
@@ -609,9 +600,9 @@
     var adjustment = 255 * (percentage / 100);
 
     return (Math.abs(color2.red() - color1.red()) <= adjustment) &&
-           (Math.abs(color2.green() - color1.green()) <= adjustment) &&
-           (Math.abs(color2.blue() - color1.blue()) <= adjustment) &&
-           (Math.abs(color2.alpha() - color1.alpha()) <= (percentage / 100));
+      (Math.abs(color2.green() - color1.green()) <= adjustment) &&
+      (Math.abs(color2.blue() - color1.blue()) <= adjustment) &&
+      (Math.abs(color2.alpha() - color1.alpha()) <= (percentage / 100));
   };
 
   /**
@@ -722,7 +713,7 @@
    * http://24ways.org/2010/calculating-color-contrast
    */
   Spectra.fn.prototype.isDark = function() {
-    var yiq = ((this.red()*299)+(this.green()*587)+(this.blue()*144))/1000;
+    var yiq = ((this.red() * 299) + (this.green() * 587) + (this.blue() * 144)) / 1000;
     return yiq < 131.5;
   };
 
@@ -753,8 +744,8 @@
   Spectra.fn.prototype.contrast = function(other) {
     other = new Spectra(other);
     var diff = Math.max(this.red(), other.red()) - Math.min(this.red(), other.red()) +
-               Math.max(this.green(), other.green()) - Math.min(this.green(), other.green()) +
-               Math.max(this.blue(), other.blue()) - Math.min(this.blue(), other.blue());
+      Math.max(this.green(), other.green()) - Math.min(this.green(), other.green()) +
+      Math.max(this.blue(), other.blue()) - Math.min(this.blue(), other.blue());
     return diff / 765;
   };
 
@@ -827,8 +818,8 @@
     for (var i = 0; i < n; i++) {
       colors.push(new Spectra({
         h: (hsv.h + hues[i] - offset) % 360,
-        s:  hsv.s,
-        v:  hsv.v,
+        s: hsv.s,
+        v: hsv.v,
         a: this.color.a
       }));
     }
