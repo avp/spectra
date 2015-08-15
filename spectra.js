@@ -242,7 +242,7 @@
   };
 
   /**
-   * Converts an lab color to rgb.
+   * Converts a lab color to rgb.
    */
   Util.labToRgb = function(lab) {
     var xyz = {};
