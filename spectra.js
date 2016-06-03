@@ -51,7 +51,7 @@
    * If x is outside the range lower to upper, the closest of lower or upper is used.
    */
   Util.clamp = function(x, lower, upper) {
-    x = x || 0;
+    x = (x === undefined) ? 0 : x;
     lower = lower !== undefined ? lower : 0;
     upper = upper !== undefined ? upper : 1;
     return Math.max(lower, Math.min(upper, x));
@@ -64,9 +64,9 @@
    */
   Util.rgbToHsv = function(rgb) {
     var hsv = {};
-    var r = Number(rgb.r || 0) / 255;
-    var g = Number(rgb.g || 0) / 255;
-    var b = Number(rgb.b || 0) / 255;
+    var r = Number((rgb.r === undefined) ? 0 : rgb.r) / 255;
+    var g = Number((rgb.g === undefined) ? 0 : rgb.g) / 255;
+    var b = Number((rgb.b === undefined) ? 0 : rgb.b) / 255;
     var max = Math.max(r, g, b);
     var min = Math.min(r, g, b);
     var delta = max - min;
@@ -360,7 +360,7 @@
    * Performs any conversions necessary to turn the arg into a Spectra object.
    */
   Util.normalize = function(arg) {
-    arg.a = arg.a || 1;
+    arg.a = (arg.a === undefined) ? 1 : arg.a;
 
     var color = arg;
 
@@ -596,7 +596,7 @@
     var color1 = this;
     var color2 = other;
 
-    percentage = Math.abs(percentage || 0);
+    percentage = Math.abs((percentage === undefined) ? 0 : percentage);
     var adjustment = 255 * (percentage / 100);
 
     return (Math.abs(color2.red() - color1.red()) <= adjustment) &&

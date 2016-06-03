@@ -170,6 +170,14 @@ describe('Spectra', function() {
     });
   });
 
+  describe('Falsy arguments', function () {
+    it('colors', function () {
+      var color1 = Spectra({r: 0, g: 0, b: 0, a: 0});
+      expect(color1.rgbaString()).toBe('rgba(0,0,0,0)');
+      expect(color1.hslaString()).toBe('hsla(0,0,0,0)');
+    });
+  });
+
   describe('Color operations', function() {
     it('Near', function() {
       var color1;
