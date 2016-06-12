@@ -21,6 +21,9 @@
   // Store the old value of Spectra to reassign in case of a call to noConflict.
   var oldSpectra = root.Spectra;
 
+  // Declare local Spectra.
+  var Spectra;
+
   // Utility functions for use in Spectra.
   var Util = {};
 
@@ -397,7 +400,7 @@
    * Constructor for Spectra object.
    * @constructor
    */
-  var Spectra = function(arg) {
+  Spectra = function(arg) {
     return new Spectra.fn(arg);
   };
 
