@@ -7,17 +7,3 @@ cache:
     - node_modules
 before_script:
   - npm install -g grunt-cli
-env:
-  global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
-   - secure: "dJSuyZNFXEaHxcLWjZ68agTszXPCwBv4ulA78fTmO3El9f1niaSz27NoOw5xO3SHY+FSvV5+OUxLO48RJq+ZbnGPyGkqTQIHUOrKhkUcY4etmwuwIu0dPIpZzTlaNg+tcPstGahjCMV4qov8fFAcC5umnB+nT7t3mqplqX5kVE4="
-addons:
-  coverity_scan:
-    project:
-      name: "avp/spectra"
-      description: "Build submitted via Travis CI"
-    notification_email: spectra@avp42.com
-    build_command_prepend: ""
-    build_command: "grunt travis"
-    branch_pattern: coverity_scan
