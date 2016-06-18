@@ -4,6 +4,7 @@ Spectra
 [![Coverage Status](http://img.shields.io/coveralls/avp/spectra.svg?style=flat)](https://coveralls.io/r/avp/spectra?branch=master)
 [![devDependency Status](http://img.shields.io/david/dev/avp/spectra.svg?style=flat)](https://david-dm.org/avp/spectra#info=devDependencies)
 [![npm Version](http://img.shields.io/npm/v/spectra.svg?style=flat)](http://npmjs.org/package/spectra)
+[![Coverity Status](https://img.shields.io/coverity/scan/9204.svg)](https://scan.coverity.com/projects/avp-spectra)
 ![GA Beacon](https://ga-beacon.appspot.com/UA-46742689-1/avp/spectra?pixel)
 
 
