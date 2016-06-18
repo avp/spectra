@@ -34,6 +34,15 @@ describe('Spectra', function() {
       expect(color.hue()).toBe(0);
       expect(color.saturation()).toBe(0);
       expect(color.lightness()).toBe(0);
+
+      var color1 = Spectra({r: 0, g: 0, b: 0, a: 0});
+      expect(color1.red()).toBe(0);
+      expect(color1.green()).toBe(0);
+      expect(color1.blue()).toBe(0);
+      expect(color1.alpha()).toBe(0);
+      expect(color1.hex()).toBe('#000000');
+      expect(color1.rgbaString()).toBe('rgba(0,0,0,0)');
+      expect(color1.hslaString()).toBe('hsla(0,0,0,0)');
     });
 
     it('HSV wrapper', function() {
@@ -82,8 +91,8 @@ describe('Spectra', function() {
       color = Spectra('#fff');
       var color2 = Spectra(color);
       expect(color2.hex()).toBe('#ffffff');
-
       expect(color.equals()).toBe(false);
+      expect(color.equals(color2)).toBe(true);
     });
 
     it('shorthand CSS wrapper', function() {
@@ -167,14 +176,6 @@ describe('Spectra', function() {
       color.lightness(0.4);
       expect(color.lightness()).toBe(0.4);
       expect(color.blue()).toBe(0);
-    });
-  });
-
-  describe('Falsy arguments', function () {
-    it('colors', function () {
-      var color1 = Spectra({r: 0, g: 0, b: 0, a: 0});
-      expect(color1.rgbaString()).toBe('rgba(0,0,0,0)');
-      expect(color1.hslaString()).toBe('hsla(0,0,0,0)');
     });
   });
 
