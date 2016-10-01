@@ -47,7 +47,7 @@ Refer to http://avp.github.io/spectra for reference on how to use Spectra.
 Tests
 -----
 
-There are [Jasmine](https://pivotal.github.io/jasmine) tests included in the `tests` folder. Simply run `grunt test` from the root of the repository to run the tests. This also checks JSHint. Alternatively, run `grunt` to keep watch over source and test files, and automatically rerun the tests when the files change.
+There are [Jasmine](https://jasmine.github.io) tests included in the `tests` folder. Simply run `grunt test` from the root of the repository to run the tests. This also checks JSHint. Alternatively, run `grunt` to keep watch over source and test files, and automatically rerun the tests when the files change.
 
 ### Coverage
 
