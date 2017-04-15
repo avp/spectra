@@ -255,6 +255,18 @@ describe('Spectra', function() {
       expect(grad2).toEqual(grad1);
     });
 
+    it('Lerp', function() {
+      var color1 = Spectra('#000000');
+      var color2 = Spectra('#222222');
+      var lerp1 = color1.lerp(color2, 0.5);
+      expect(lerp1.hex()).toEqual('#111111');
+      var lerp2 = color1.lerp(color2, 0.0);
+      expect(lerp2.hex()).toEqual('#000000');
+      var lerp3 = color1.lerp(color2, 1.0);
+      expect(lerp3.hex()).toEqual('#222222');
+      
+    });
+
     it('Harmony', function() {
       var harmonies;
 

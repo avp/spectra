@@ -776,6 +776,18 @@
   };
 
   /**
+   * Returns a single color that has been linearly interpolated between this color and the other color.
+   */
+  Spectra.fn.prototype.lerp = function(other, n) {
+    other = new Spectra(other);
+    var r = (this.red() * (1-n)) + (other.red() * n);
+    var g = (this.green() * (1-n)) + (other.green() * n);
+    var b = (this.blue() * (1-n)) + (other.blue() * n);
+
+    return new Spectra({r: r, g: g, b: b});
+  };
+
+  /**
    * Harmony
    *
    * @desc Returns an array of harmonious colors (goo.gl/R3FRlU).
