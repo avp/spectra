@@ -7,7 +7,7 @@ module.exports = (grunt) ->
       prod:
         options:
           mangle:
-            except: ['Spectra']
+            reserved: ['Spectra']
           report: 'gzip'
           compress:
             conditionals: true
