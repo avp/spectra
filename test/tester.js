@@ -320,6 +320,45 @@ describe('Spectra', function() {
       expect(harmonies[0].hex()).toEqual('#ff194b');
       expect(harmonies[1].hex()).toEqual('#19ffcd');
     });
+
+    it('Multiply', function() {
+      var multiplied;
+      var color1 = Spectra('#0f7');
+      var color2 = Spectra('#f87');
+
+      // General case
+      multiplied = color1.multiply(color2);
+      expect(multiplied.hex()).toEqual('#008838');
+
+      // Multiplying with Spectra-compatible inputs
+      multiplied = color1.multiply('#f87');
+      expect(multiplied.hex()).toEqual('#008838');
+
+      // Invalid inputs
+      expect(function() {color1.multiply(null)}).toThrow();
+    });
+
+    it('Invert', function() {
+      var inverted = color.invert();
+      expect(inverted.hex()).toEqual('#00e6b4');
+    });
+
+    it('Screen', function() {
+      var screened;
+      var color1 = Spectra('#0f7');
+      var color2 = Spectra('#f87');
+
+      // General case
+      screened = color1.screen(color2);
+      expect(screened.hex()).toEqual('#ffffb6');
+
+      // Multiplying with Spectra-compatible inputs
+      screened = color1.screen('#f87');
+      expect(screened.hex()).toEqual('#ffffb6');
+
+      // Invalid inputs
+      expect(function() {color1.screen(null)}).toThrow();
+    });
   });
 
   describe('Utility functions', function() {
