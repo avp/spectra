@@ -2,9 +2,7 @@ Spectra
 =======
 [![Build Status](http://img.shields.io/travis/avp/spectra.svg?style=flat)](https://travis-ci.org/avp/spectra)
 [![Coverage Status](http://img.shields.io/coveralls/avp/spectra.svg?style=flat)](https://coveralls.io/r/avp/spectra?branch=master)
-[![devDependency Status](http://img.shields.io/david/dev/avp/spectra.svg?style=flat)](https://david-dm.org/avp/spectra#info=devDependencies)
 [![npm Version](http://img.shields.io/npm/v/spectra.svg?style=flat)](http://npmjs.org/package/spectra)
-![GA Beacon](https://ga-beacon.appspot.com/UA-46742689-1/avp/spectra?pixel)
 
 
 A small Javascript library for quickly manipulating and converting colors.
